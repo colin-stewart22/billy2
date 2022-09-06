@@ -84,8 +84,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_144254) do
     t.integer "total_amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "table_order_id", null: false
-    t.index ["table_order_id"], name: "index_table_customers_on_table_order_id"
   end
 
   create_table "table_orders", force: :cascade do |t|
@@ -133,7 +131,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_144254) do
   add_foreign_key "restaurant_servers", "restaurants"
   add_foreign_key "restaurant_servers", "users"
   add_foreign_key "restaurants", "users"
-  add_foreign_key "table_customers", "table_orders"
   add_foreign_key "table_orders", "tables"
   add_foreign_key "table_orders", "users"
   add_foreign_key "tables", "restaurants"

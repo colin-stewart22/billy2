@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_06_140925) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_09_06_144254) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +53,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_140925) do
     t.datetime "updated_at", null: false
     t.index ["menu_item_id"], name: "index_order_items_on_menu_item_id"
     t.index ["table_customer_id"], name: "index_order_items_on_table_customer_id"
+  end
+
+  create_table "restaurant_servers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "restaurant_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["restaurant_id"], name: "index_restaurant_servers_on_restaurant_id"
+    t.index ["user_id"], name: "index_restaurant_servers_on_user_id"
   end
 
   create_table "restaurants", force: :cascade do |t|
@@ -122,6 +130,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_140925) do
   add_foreign_key "menus", "restaurants"
   add_foreign_key "order_items", "menu_items"
   add_foreign_key "order_items", "table_customers"
+  add_foreign_key "restaurant_servers", "restaurants"
+  add_foreign_key "restaurant_servers", "users"
   add_foreign_key "restaurants", "users"
   add_foreign_key "table_customers", "table_orders"
   add_foreign_key "table_orders", "tables"

@@ -15,25 +15,26 @@ Restaurant.destroy_all
 User.destroy_all
 Table.destroy_all
 
-puts "Create new database..."
+puts "Create User database..."
 
 owner = User.create!(
   email: "owner@lewagon.com",
   password: "lewagon",
-  # first_name: "owner",
-  # last_name: "lewagon",
-  # is_owner: true
+  first_name: "owner",
+  last_name: "lewagon",
+  is_owner: true
 )
 
 server = User.create!(
   email: "server@lewagon.com",
   password: "lewagon",
-  # first_name: "server",
-  # last_name: "lewagon",
-  # is_owner: false
+  first_name: "server",
+  last_name: "lewagon",
+  is_owner: false
 )
 
 2.times do
+  puts "Create Restaurant database..."
   restaurant = Restaurant.create!(
     name: Faker::Restaurant.name,
     address: "204 Brick Lane Shoreditch, London, E1 6SA, England",
@@ -42,18 +43,22 @@ server = User.create!(
     user_id: owner.id
   )
   3.times do
+    puts "Create Menu database..."
     menu = Menu.create!(
       name: ["Summer", "Holiday", "Winter"].sample,
       restaurant_id: restaurant.id
     )
     10.times do
+      puts "Create MenuItem database..."
       menu_item = MenuItem.create!(
         name: Faker::Food.dish,
         category: ["Breakfast", "Lunch", "Dinner", "Starters", "Mains", "Desserts", "Drinks"].sample,
         description: Faker::Food.description,
         price: rand(1..50),
-        prepare_time: rand(5..30)
+        prepare_time: rand(5..30),
+        restaurant_id: restaurant.id
       )
+      puts "Create JoinMenu database..."
       JoinMenu.create!(
         menu_id: menu.id,
         menu_item_id: menu_item.id

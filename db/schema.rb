@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_05_164052) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_06_094032) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,18 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_05_164052) do
     t.index ["restaurant_id"], name: "index_menus_on_restaurant_id"
   end
 
+  create_table "order_items", force: :cascade do |t|
+    t.time "created_time"
+    t.integer "estimated_serving_time"
+    t.boolean "is_served"
+    t.bigint "menu_item_id", null: false
+    t.bigint "table_customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["menu_item_id"], name: "index_order_items_on_menu_item_id"
+    t.index ["table_customer_id"], name: "index_order_items_on_table_customer_id"
+  end
+
   create_table "restaurants", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -58,6 +70,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_05_164052) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["restaurant_id"], name: "index_servers_on_restaurant_id"
+  end
+
+  create_table "table_customers", force: :cascade do |t|
+    t.string "name"
+    t.boolean "is_captain"
+    t.boolean "is_paid"
+    t.integer "amount_due"
+    t.integer "tip_amount"
+    t.integer "total_amount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tables", force: :cascade do |t|
@@ -84,6 +107,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_05_164052) do
   add_foreign_key "join_menus", "menu_items"
   add_foreign_key "join_menus", "menus"
   add_foreign_key "menus", "restaurants"
+  add_foreign_key "order_items", "menu_items"
+  add_foreign_key "order_items", "table_customers"
   add_foreign_key "restaurants", "users"
   add_foreign_key "servers", "restaurants"
   add_foreign_key "tables", "restaurants"

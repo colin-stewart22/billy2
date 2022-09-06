@@ -11,9 +11,10 @@ JoinMenu.destroy_all
 Menu.destroy_all
 MenuItem.destroy_all
 TableCustomer.destroy_all
+Table.destroy_all
+RestaurantServer.destroy_all
 Restaurant.destroy_all
 User.destroy_all
-Table.destroy_all
 
 puts "Create User database..."
 
@@ -35,6 +36,7 @@ server = User.create!(
 
 2.times do
   puts "Create Restaurant database..."
+
   restaurant = Restaurant.create!(
     name: Faker::Restaurant.name,
     address: "204 Brick Lane Shoreditch, London, E1 6SA, England",
@@ -44,12 +46,14 @@ server = User.create!(
   )
   3.times do
     puts "Create Menu database..."
+
     menu = Menu.create!(
       name: ["Summer", "Holiday", "Winter"].sample,
       restaurant_id: restaurant.id
     )
     10.times do
       puts "Create MenuItem database..."
+
       menu_item = MenuItem.create!(
         name: Faker::Food.dish,
         category: ["Breakfast", "Lunch", "Dinner", "Starters", "Mains", "Desserts", "Drinks"].sample,
@@ -59,12 +63,22 @@ server = User.create!(
         restaurant_id: restaurant.id
       )
       puts "Create JoinMenu database..."
+
       JoinMenu.create!(
         menu_id: menu.id,
         menu_item_id: menu_item.id
       )
     end
   end
+end
+
+puts "Create RestaurantServer database..."
+
+Restaurant.all.each do |restaurant|
+  RestaurantServer.create!(
+    restaurant_id: restaurant.id,
+    user_id: server.id
+  )
 end
 
 puts "Completed!"

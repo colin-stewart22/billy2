@@ -1,5 +1,5 @@
 class ChangeColumnDefault < ActiveRecord::Migration[7.0]
   def change
-    t.boolean :is_served, default: false
+    change_column_default :order_items, :is_served, false
   end
 end

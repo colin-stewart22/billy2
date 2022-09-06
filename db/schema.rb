@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_06_105608) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_09_06_110658) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -76,15 +75,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_105608) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "table_customers", force: :cascade do |t|
-    t.string "name"
-    t.boolean "is_captain"
-    t.boolean "is_paid"
-    t.integer "amount_due"
-    t.integer "tip_amount"
-    t.integer "total_amount"
+  create_table "table_orders", force: :cascade do |t|
+    t.boolean "is_active"
+    t.integer "total_price"
+    t.string "payment_option"
+    t.string "group_url"
+    t.bigint "table_customer_id", null: false
+    t.bigint "table_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["table_customer_id"], name: "index_table_orders_on_table_customer_id"
+    t.index ["table_id"], name: "index_table_orders_on_table_id"
+    t.index ["user_id"], name: "index_table_orders_on_user_id"
   end
 
   create_table "tables", force: :cascade do |t|
@@ -113,5 +116,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_105608) do
   add_foreign_key "order_items", "menu_items"
   add_foreign_key "order_items", "table_customers"
   add_foreign_key "restaurants", "users"
+  add_foreign_key "table_orders", "table_customers"
+  add_foreign_key "table_orders", "tables"
+  add_foreign_key "table_orders", "users"
   add_foreign_key "tables", "restaurants"
 end

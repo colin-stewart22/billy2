@@ -1,0 +1,13 @@
+<div class="flex my-5">
+  <div>
+    <%= link_to "Back", restaurant_menus_path(@restaurant), class: "p-3 border mr-3" %>
+  </div>
+  <div>
+    <%= link_to "Edit", edit_restaurant_menu_path(@restaurant, @menu), class: "p-3 border mr-3"%>
+  </div>
+  <div>
+    <%= link_to "Delete", restaurant_menu_path(@restaurant, @menu), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "p-3 border"%>
+  </div>
+</div>
+
+<h1><%= @menu.name %></h1>

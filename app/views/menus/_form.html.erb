@@ -1,0 +1,8 @@
+<%= simple_form_for [@restaurant, @menu] do |f| %>
+  <div>
+    <%= f.input :name %>
+  </div>
+  <div>
+    <%= f.submit @menu.id.nil? ? "Add" : "Edit", class: "p-3 border" %>
+  </div>
+<% end %>

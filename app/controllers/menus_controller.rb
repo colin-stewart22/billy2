@@ -1,9 +1,12 @@
 class MenusController < ApplicationController
-  before_action :set_restaurant, only: %i[new create edit updates]
-  before_action :set_menu, only: %i[edit update destroy]
+  before_action :set_restaurant, only: %i[index show new create edit update destroy]
+  before_action :set_menu, only: %i[show edit update destroy]
 
   def index
     @menus = Menu.all
+  end
+
+  def show
   end
 
   def new
@@ -13,15 +16,11 @@ class MenusController < ApplicationController
   def create
     @menu = Menu.new(menu_params)
     @menu.restaurant = @restaurant
-    # if @menu.save
-    #   redirect_to new_restaurant_menu_path(@restaurant)
-    # else
-    #   render :new, status: :unprocessable_entity
-    # end
-  end
-
-  def show
-    @menu = Menu.find(params[:id])
+    if @menu.save
+      redirect_to restaurant_menus_path(@restaurant)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -30,12 +29,12 @@ class MenusController < ApplicationController
 
   def update
     @menu.update(menu_params)
-    # redirect_to new_restaurant_menu_path(@restaurant)
+    redirect_to restaurant_menu_path(@restaurant, @menu)
   end
 
   def destroy
     @menu.destroy
-    # redirect_to host_restaurant_path(@menu.restaurant), status: :see_other
+    redirect_to restaurant_menus_path(@menu.restaurant), status: :see_other
   end
 
   private

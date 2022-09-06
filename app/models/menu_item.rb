@@ -10,5 +10,5 @@ class MenuItem < ApplicationRecord
   validates :prepare_time, presence: true
 
   # Max characters for description is 100
-  validates :description, length: { maximum: 100 }
+  validates :description, length: { maximum: 1000 }
 end

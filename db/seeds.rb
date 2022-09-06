@@ -5,3 +5,55 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+
+puts "Destroy all database..."
+JoinMenu.destroy_all
+Menu.destroy_all
+MenuItem.destroy_all
+TableCustomer.destroy_all
+Restaurant.destroy_all
+User.destroy_all
+Table.destroy_all
+
+puts "Create new database..."
+
+owner = User.create!(
+  email: "owner@lewagon.com",
+  password: "lewagon"
+)
+
+server = User.create!(
+  email: "server@lewagon.com",
+  password: "lewagon"
+)
+
+2.times do
+  restaurant = Restaurant.create!(
+    name: Faker::Restaurant.name,
+    address: "204 Brick Lane Shoreditch, London, E1 6SA, England",
+    phone_number: Faker::PhoneNumber.cell_phone_in_e164,
+    theme_color: "blue",
+    user_id: owner.id
+  )
+  3.times do
+    menu = Menu.create!(
+      name: ["Summer", "Holiday", "Winter"].sample,
+      restaurant_id: restaurant.id
+    )
+    10.times do
+      menu_item = MenuItem.create!(
+        name: Faker::Food.dish,
+        category: ["Breakfast", "Lunch", "Dinner", "Starters", "Mains", "Desserts", "Drinks"].sample,
+        description: Faker::Food.description,
+        price: rand(1..50),
+        prepare_time: rand(5..30)
+      )
+      JoinMenu.create!(
+        menu_id: menu.id,
+        menu_item_id: menu_item.id
+      )
+    end
+  end
+end
+
+puts "Completed!"

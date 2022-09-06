@@ -15,21 +15,17 @@ class JoinMenusController < ApplicationController
       end
       redirect_to
     end
-
   rescue ActiveRecord::RecordInvalid
     render_new
   end
 
   def edit
-
   end
 
   def update
-
   end
 
   def destroy
-
   end
 
   private

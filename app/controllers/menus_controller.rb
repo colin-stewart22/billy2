@@ -3,7 +3,7 @@ class MenusController < ApplicationController
   before_action :set_menu, only: %i[edit update destroy]
 
   def index
-    @menus = Menus.all
+    @menus = Menu.all
   end
 
   def new

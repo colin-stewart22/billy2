@@ -7,7 +7,6 @@ class MenuItem < ApplicationRecord
   validates :category, presence: true
   validates :description, presence: true
   validates :price, presence: true
-  validates :prepare_time, presence: true
 
   # Max characters for description is 100
   validates :description, length: { maximum: 1000 }

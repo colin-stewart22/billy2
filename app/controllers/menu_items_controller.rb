@@ -9,11 +9,11 @@ class MenuItemsController < ApplicationController
   end
 
   def new
-    @menu_item = Menu.new
+    @menu_item = MenuItem.new
   end
 
   def create
-    @menu_item = Menu.new(menu_item_params)
+    @menu_item = MenuItem.new(menu_item_params)
     # if @menu.save
     #   redirect_to new_restaurant_menu_path(@restaurant)
     # else

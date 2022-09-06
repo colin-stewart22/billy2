@@ -3,6 +3,7 @@ class MenuItemsController < ApplicationController
 
   def index
     # We might need this not sure yet
+    @menu_item = MenuItem.all
   end
 
   def show

@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_06_113419) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_09_06_113552) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,7 +44,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_113419) do
   create_table "order_items", force: :cascade do |t|
     t.time "created_time"
     t.integer "estimated_serving_time"
-    t.boolean "is_served"
+    t.boolean "is_served", default: false
     t.bigint "menu_item_id", null: false
     t.bigint "table_customer_id", null: false
     t.datetime "created_at", null: false
@@ -67,8 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_06_113419) do
 
   create_table "table_customers", force: :cascade do |t|
     t.string "name"
-    t.boolean "is_captain"
-    t.boolean "is_paid"
+    t.boolean "is_captain", default: false
+    t.boolean "is_paid", default: false
     t.integer "amount_due"
     t.integer "tip_amount"
     t.integer "total_amount"

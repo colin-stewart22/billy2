@@ -1,3 +1,10 @@
-<% @menus.each do |item| %>
-<%= item.name %>
+<h1>Menus</h1>
+<% @menus.each do |menu| %>
+  <li>
+    <%= link_to menu.name, restaurant_menu_path(@restaurant, menu) %>
+  </li>
 <% end %>
+
+<div class="mt-5">
+  <%= link_to "Add New Menu", new_restaurant_menu_path(@restaurant), class: "p-3 border" %>
+</div>

@@ -19,12 +19,18 @@ puts "Create new database..."
 
 owner = User.create!(
   email: "owner@lewagon.com",
-  password: "lewagon"
+  password: "lewagon",
+  # first_name: "owner",
+  # last_name: "lewagon",
+  # is_owner: true
 )
 
 server = User.create!(
   email: "server@lewagon.com",
-  password: "lewagon"
+  password: "lewagon",
+  # first_name: "server",
+  # last_name: "lewagon",
+  # is_owner: false
 )
 
 2.times do

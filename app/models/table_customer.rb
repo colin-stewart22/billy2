@@ -1,6 +1,6 @@
 class TableCustomer < ApplicationRecord
   has_many :order_items
-  has_many :table_orders
+  belongs_to :table_order
 
   validates :name, presence: true
 end

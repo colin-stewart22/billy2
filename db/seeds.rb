@@ -44,6 +44,7 @@ server = User.create!(
     theme_color: "blue",
     user_id: owner.id
   )
+
   3.times do
     puts "Create Menu database..."
 
@@ -51,6 +52,7 @@ server = User.create!(
       name: ["Summer", "Holiday", "Winter"].sample,
       restaurant_id: restaurant.id
     )
+
     10.times do
       puts "Create MenuItem database..."
 
@@ -62,6 +64,7 @@ server = User.create!(
         prepare_time: rand(5..30),
         restaurant_id: restaurant.id
       )
+
       puts "Create JoinMenu database..."
 
       JoinMenu.create!(
@@ -69,6 +72,18 @@ server = User.create!(
         menu_item_id: menu_item.id
       )
     end
+  end
+
+  5.times do
+    puts "Create Table database..."
+
+    table = Table.create!
+
+    table_order = TableOrder.create!(
+      status: true,
+      total_price: 0,
+      table_id: table.id
+    )
   end
 end
 

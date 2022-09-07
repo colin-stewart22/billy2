@@ -5,7 +5,7 @@ class JoinMenusController < ApplicationController
   end
 
   def create
-    @menu_items = MenuItem.where(id: params.dig(:join_menu, :menu_item))
+    @menu_items = MenuItem.where(id: params.dig(:join_menu, :menu_items))
     return render_new if @menu_items.empty?
 
     ActiveRecord::Base.transaction do

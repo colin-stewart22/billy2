@@ -26,14 +26,7 @@ owner = User.create!(
   is_owner: true
 )
 
-server = User.create!(
-  email: "server@lewagon.com",
-  password: "lewagon",
-  first_name: "server",
-  last_name: "lewagon",
-  is_owner: false
-)
-
+i = 1
 2.times do
   puts "Create Restaurant database..."
 
@@ -44,6 +37,58 @@ server = User.create!(
     theme_color: "blue",
     user_id: owner.id
   )
+
+  5.times do
+    puts "Create Table database..."
+
+    server = User.create!(
+      email: "server#{i}@lewagon.com",
+      password: "lewagon",
+      first_name: "server",
+      last_name: "lewagon",
+      is_owner: false
+    )
+
+    i += 1
+
+    table = Table.create!(
+      restaurant_id: restaurant.id
+    )
+
+    table_order = TableOrder.create!(
+      is_active: true,
+      total_price: 0,
+      table_id: table.id,
+      user_id: server.id
+    )
+
+    table_captain = TableCustomer.create!(
+      name: "Captain",
+      is_captain: true,
+      table_order_id: table_order.id
+    )
+
+    table_customer1 = TableCustomer.create!(
+      name: "Customer1",
+      table_order_id: table_order.id,
+    )
+
+    table_customer2 = TableCustomer.create!(
+      name: "Customer2",
+      table_order_id: table_order.id,
+    )
+
+    table_customer3 = TableCustomer.create!(
+      name: "Customer3",
+      table_order_id: table_order.id,
+    )
+
+    puts "Create RestaurantServer database..."
+      RestaurantServer.create!(
+        restaurant_id: restaurant.id,
+        user_id: server.id
+      )
+  end
 
   3.times do
     puts "Create Menu database..."
@@ -73,27 +118,6 @@ server = User.create!(
       )
     end
   end
-
-  5.times do
-    puts "Create Table database..."
-
-    table = Table.create!
-
-    table_order = TableOrder.create!(
-      status: true,
-      total_price: 0,
-      table_id: table.id
-    )
-  end
-end
-
-puts "Create RestaurantServer database..."
-
-Restaurant.all.each do |restaurant|
-  RestaurantServer.create!(
-    restaurant_id: restaurant.id,
-    user_id: server.id
-  )
 end
 
 puts "Completed!"

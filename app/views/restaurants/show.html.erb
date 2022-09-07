@@ -1,6 +1,21 @@
-<img src=<%= "https://source.unsplash.com/random/400x380/?restaurant-#{@restaurant.name}" %> class="d-block rounded-2xl" alt="restaurant image">
-<h1><%= @restaurant.name %></h1>
+<div>
+  <h1 class="text-2xl">The name of the restaurant</h1>
+  <img src=<%= "https://source.unsplash.com/random/400x380/?restaurant-#{@restaurant.name}" %> class="d-block rounded-2xl" alt="restaurant image">
+  <h1><%= @restaurant.name %></h1>
 
-<p>This page should show details about the restaurant, including the address, phone number, all the menu-items, all the menus, the ability to add menu items, the ability to add menus, and ability to change the theme.</p>
+  <p>This page should show details about the restaurant, including the address, phone number, all the menu-items, all the menus, the ability to add menu items, the ability to add menus, and ability to change the theme.</p>
+</div>
 
+<div class="mt-5">
+  <h1>The list of menus section</h1>
+  <% @restaurant.menus.each do |item| %>
+  <li> <%=  item.name %> </li>
+  <% end %>
+</div>
 
+<div class="mt-5">
+  <h1>The list of all menu items</h1>
+  <% @restaurant.menu_items.each do |item| %>
+  <%= item.name %>
+  <% end %>
+</div>

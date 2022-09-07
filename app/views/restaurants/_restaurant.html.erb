@@ -1,2 +1,2 @@
 <img src=<%= "https://source.unsplash.com/random/400x380/?restaurant-#{restaurant.name}" %> class="d-block rounded-2xl" alt="restaurant image">
-<%= restaurant.name %>
+<h1><%= link_to restaurant.name, restaurant_path(restaurant) %></h1>

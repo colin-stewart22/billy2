@@ -1,5 +1,10 @@
 class JoinMenusController < ApplicationController
   before_action :set_menu, only: %i[new create edit update]
+  def show
+    @menu = Menu.find(params[:menu_id])
+    @join_menus = JoinMenu.where(menu_id: @menu.id)
+  end
+
   def new
     @join_menu = JoinMenu.new
   end

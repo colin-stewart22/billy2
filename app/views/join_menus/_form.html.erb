@@ -1,0 +1,9 @@
+<%= simple_form_for [@restaurant, @menu, @join_menu] do |f| %>
+  <div>
+    <%= f.association :menu_item, as: :check_boxes, input_html: { multiple: true } %>
+  </div>
+  <div>
+    <%= f.submit "Add", class: "p-3 border" %>
+  </div>
+
+<% end %>

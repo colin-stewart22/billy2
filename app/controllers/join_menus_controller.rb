@@ -1,6 +1,6 @@
 class JoinMenusController < ApplicationController
-  before_action :set_restaurant, only: %i[new create destroy]
-  before_action :set_menu, only: %i[show new create destroy]
+  before_action :set_restaurant, only: %i[new create]
+  before_action :set_menu, only: %i[show new create]
   def show
     @join_menus = JoinMenu.where(menu_id: @menu.id)
   end
@@ -27,8 +27,9 @@ class JoinMenusController < ApplicationController
 
   def destroy
     @join_menu = JoinMenu.find(params[:id])
+    session[:return_to] ||= request.referer
     @join_menu.destroy
-    redirect_to new_restaurant_menu_join_menu_path(@restaurant, @menu), status: :see_other
+    redirect_to session.delete(:return_to), status: :see_other
   end
 
   private

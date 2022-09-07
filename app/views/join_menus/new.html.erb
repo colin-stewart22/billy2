@@ -7,27 +7,14 @@
     <%= render "join_menus/form", restaurant: @restaurant, menu: @menu, join_menu: @join_menu %>
   </div>
   <div style="width: 50%;">
-    <div class="text-2xl my-3">
-      <%= @menu.name %>
+    <div class="flex">
+      <div class="text-2xl my-3 mr-5">
+        <%= @menu.name %>
+      </div>
+      <div class="mt-5">
+        <%= link_to "Finish", restaurant_menu_path(@restaurant, @menu), class: "border py-2 px-3" %>
+      </div>
     </div>
-    <div>
-      <% @menu.menu_items.each do |item| %>
-        <div class="flex justify-between border my-3 mr-3">
-          <div class="my-1 ml-2">
-            <%= item.name %>
-            <%= item.price %>
-            <p>
-              <%= item.category %>
-            </p>
-            <p>
-              <%= item.description %>
-            </p>
-          </div>
-          <div class="mt-1 mr-2">
-            <%= link_to "X", join_menu_path(item.join_menus.where(menu_id: @menu.id).first.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
-          </div>
-        </div>
-      <% end %>
-    </div>
+    <%= render "join_menus/item", menu: @menu %>
   </div>
 </div>

@@ -78,3 +78,6 @@ group :test do
 end
 
 gem "faker"
+
+# QR code gem
+gem 'rqrcode'

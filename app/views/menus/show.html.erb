@@ -10,4 +10,10 @@
   </div>
 </div>
 
-<h1><%= @menu.name %></h1>
+
+
+<div>
+<h1 class="text-2xl">Display Menu name and menu items</h1>
+
+<%= render 'join_menus/show', menu: @menu, join_menus: @join_menus %>
+<div>

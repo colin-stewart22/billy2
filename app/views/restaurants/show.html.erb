@@ -9,7 +9,7 @@
 <div class="mt-5">
   <h1>The list of menus section</h1>
   <% @restaurant.menus.each do |item| %>
-  <li> <%=  item.name %> </li>
+  <li> <%=link_to  item.name, restaurant_menu_path(@restaurant, item)%> </li>
   <% end %>
 </div>
 
@@ -17,5 +17,7 @@
   <h1>The list of all menu items</h1>
   <% @restaurant.menu_items.each do |item| %>
   <%= item.name %>
+  <%= item.category %>
+  <%= item.price %>
   <% end %>
 </div>

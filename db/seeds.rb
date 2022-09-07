@@ -27,7 +27,7 @@ Restaurant.destroy_all
 puts "Destroy User database..."
 User.destroy_all
 
-puts "Create User database..."
+puts "Create owner database..."
 
 owner = User.create!(
   email: "owner@lewagon.com",
@@ -36,6 +36,7 @@ owner = User.create!(
   last_name: "lewagon",
   is_owner: true
 )
+
 i = 1
 
 4.times do
@@ -79,7 +80,7 @@ i = 1
   end
 
   5.times do
-    puts "Create Table database..."
+    puts "Create Server database..."
 
     server = User.create!(
       email: "server#{i}@lewagon.com",
@@ -89,11 +90,14 @@ i = 1
       is_owner: false
     )
 
+    puts "Create Table database..."
     table = Table.create!(
       restaurant_id: restaurant.id,
       table_number: i
     )
 
+
+    puts "Create TableOrder database..."
     table_order = TableOrder.create!(
       is_active: true,
       total_price: 0,
@@ -101,6 +105,7 @@ i = 1
       user_id: server.id
     )
 
+    puts "Create Table_captain database..."
     table_captain = TableCustomer.create!(
       name: "Captain",
       is_captain: true,
@@ -108,7 +113,7 @@ i = 1
     )
 
     3.times do
-
+      puts "Create Table_captain OrderItem database..."
       OrderItem.create!(
         created_time: Time.now,
         estimated_serving_time: (5..60).to_a.select { |num| (num % 5).zero? }.sample,
@@ -117,12 +122,14 @@ i = 1
       )
     end
 
+    puts "Create Table_customer1 database..."
     table_customer1 = TableCustomer.create!(
       name: "Customer1",
       table_order_id: table_order.id
     )
 
     3.times do
+      puts "Create Table_customer1 OrderItem database..."
       OrderItem.create!(
         created_time: Time.now,
         estimated_serving_time: (5..60).to_a.select { |num| (num % 5).zero? }.sample,
@@ -131,12 +138,14 @@ i = 1
       )
     end
 
+    puts "Create Table_customer2 database..."
     table_customer2 = TableCustomer.create!(
       name: "Customer2",
       table_order_id: table_order.id
     )
 
     3.times do
+      puts "Create Table_customer2 OrderItem database..."
       OrderItem.create!(
         created_time: Time.now,
         estimated_serving_time: (5..60).to_a.select { |num| (num % 5).zero? }.sample,
@@ -145,12 +154,14 @@ i = 1
       )
     end
 
+    puts "Create Table_customer3 database..."
     table_customer3 = TableCustomer.create!(
       name: "Customer3",
       table_order_id: table_order.id
     )
 
     3.times do
+      puts "Create Table_customer3 OrderItem database..."
       OrderItem.create!(
         created_time: Time.now,
         estimated_serving_time: (5..60).to_a.select { |num| (num % 5).zero? }.sample,
@@ -168,7 +179,5 @@ i = 1
     i += 1
   end
 end
-
-puts "Create Order database..."
 
 puts "Completed!"

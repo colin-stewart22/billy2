@@ -27,7 +27,7 @@ owner = User.create!(
 )
 
 i = 1
-2.times do
+4.times do
   puts "Create Restaurant database..."
 
   restaurant = Restaurant.create!(

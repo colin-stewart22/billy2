@@ -7,6 +7,7 @@ class MenusController < ApplicationController
   end
 
   def show
+    @join_menus = @menu.join_menus
   end
 
   def new

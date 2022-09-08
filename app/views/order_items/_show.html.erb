@@ -1,0 +1,13 @@
+<div class="flex justify-center font-semibold text-lg">
+  <%= MenuItem.find(item.menu_item_id).name %>
+</div>
+<div class="flex justify-center mb-2">
+  <%= item.table.table_number %>
+</div>
+<div class="flex justify-center border p-10">
+  <%= item.note %>
+</div>
+<div class="flex justify-center">
+  <p class="border my-3 px-3 py-2">Mark as done</p>
+  <%# <%= button_to "Mark as done", { controller: :restaurants, action: 'prepared!'}, method: :get %>
+</div>

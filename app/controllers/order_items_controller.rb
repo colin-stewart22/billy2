@@ -1,5 +1,8 @@
 class OrderItemsController < ApplicationController
-  before_action :set_order_item, only: %i[new create update destroy]
+  before_action :set_order_item, only: %i[new create update destroy prepared!]
+
+  def show
+  end
 
   def new
     @order_item = OrderItem.new
@@ -14,9 +17,16 @@ class OrderItemsController < ApplicationController
     # end
   end
 
+  def update
+  end
+
   def destroy
     @order_item.destroy
     # redirect_to host_restaurant_path(@order_item.restaurant), status: :see_other
+  end
+
+  def prepared!
+    @order_item.update(is_prepared: true)
   end
 
   private
@@ -26,6 +36,6 @@ class OrderItemsController < ApplicationController
   end
 
   def set_order_item
-    @menu_item = MenuItem.find(params[:id])
+    @order_item = OrderItem.find(params[:id])
   end
 end

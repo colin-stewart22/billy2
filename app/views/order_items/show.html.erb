@@ -1,0 +1,12 @@
+<div>
+  <%= MenuItem.find(item.menu_item_id).name %>
+</div>
+<div>
+  <%= item.table.table_number %>
+</div>
+<div>
+  <%= item.note %>
+</div>
+<div>
+  <%= button_to "Mark as done", { controller: :order_items, action: 'prepared!'}, method: :get  %>
+</div>

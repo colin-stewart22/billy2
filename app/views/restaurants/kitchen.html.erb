@@ -1,12 +1,7 @@
-<h1>This is a kitchen page</h1>
-<% @restaurant.order_items.each do |item| %>
-  <div>
-    <div>
-      <%= MenuItem.find(item.menu_item_id).name %>
+<div class="flex flex-wrap justify-around p-3">
+  <% @restaurant.order_items.each do |item| %>
+    <div style="width:20%" class="border py-1 px-3 mr-2 mb-3">
+      <%= render "order_items/show", item: item %>
     </div>
-      <%= item.table.table_number %>
-    <div>
-      <%=  %>
-    </div>
-  </div>
-<% end %>
+  <% end %>
+</div>

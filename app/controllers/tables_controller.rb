@@ -46,7 +46,7 @@ class TablesController < ApplicationController
     #   module_size: 2
     # )
     if @table.save
-      redirect_to restaurant_table_path(@restaurant, @table)
+      redirect_to restaurant_path(@restaurant)
     else
       render :new, status: :unprocessable_entity
     end

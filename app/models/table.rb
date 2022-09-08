@@ -1,4 +1,7 @@
 class Table < ApplicationRecord
   belongs_to :restaurant
-  # has one attached photo/ qr code
+  
+  has_many :table_orders
+  has_many :table_customers, through: :table_orders
+  has_many :order_items, through: :table_customers
 end

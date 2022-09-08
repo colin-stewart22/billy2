@@ -35,6 +35,10 @@ class OrderItemsController < ApplicationController
     redirect_to restaurant_table_table_orders_path(@order_item.restaurant, @order_item.table)
   end
 
+  def bool_to_ready(value)
+    "<span class='bg-red-500 px-3 py-2 text-white text-sm rounded-lg'>Ready</span>".html_safe if value
+  end
+
   private
 
   def order_item_params

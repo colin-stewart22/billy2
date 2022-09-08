@@ -1,5 +1,5 @@
 class OrderItemsController < ApplicationController
-  before_action :set_order_item, only: %i[new create update destroy prepared!]
+  before_action :set_order_item, only: %i[new create update destroy prepared! served!]
 
   def show
   end
@@ -27,13 +27,18 @@ class OrderItemsController < ApplicationController
 
   def prepared!
     @order_item.update(is_prepared: true)
-    redirect_to kitchen_path(@order_item.restaurant)
+    redirect_to :back
+  end
+
+  def served!
+    @order_item.update(is_served: true)
+    redirect_to restaurant_table_table_orders_path(@order_item.restaurant, @order_item.table)
   end
 
   private
 
   def order_item_params
-    params.require(:order_item).permit(:created_time, :estimated_serving_time, :is_served)
+    params.require(:order_item).permit(:estimated_serving_time)
   end
 
   def set_order_item

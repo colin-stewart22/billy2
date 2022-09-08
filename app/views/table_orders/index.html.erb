@@ -1,3 +1,17 @@
+<div class="flex justify-end mr-5">
+  <div>
+    <% if user_signed_in? %>
+            <li class="nav-item dropdown">
+                <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <%= link_to "Login", new_user_session_path, class: "nav-link px-4" %>
+            </li>
+          <% end %>
+  </div>
+</div>
+
 <div class="restaurant-container">
   <h2 class="text-center text-xl"><%= current_user.first_name %></h2>
   <% current_user.table_orders.each do |table_order| %>
@@ -10,13 +24,13 @@
         <div class="w-2/12 font-bold">Time Until Ready</div>
         <div class="w-2/12 font-bold"></div>
       </div>
-      <% table_order.order_items.each do |order_item| %>
+      <% table_order.order_items.select { |item| item.is_served == false}.each do |order_item| %>
         <div class="flex mt-4" data-controller="restaurant-server">
           <div class="w-4/12 flex items-center"><%= order_item.menu_item.name %></div>
           <div class="w-2/12 flex items-center"><%= order_item.table_customer.name %></div>
           <div class="w-2/12 flex items-center" data-restaurant-server-target="ordered"><%= ((Time.now - order_item.created_at) / 60).round %></div>
           <div class="w-2/12 flex items-center"><%= order_item.menu_item.prepare_time - ((Time.now - order_item.created_at) / 60).round %></div>
-          <div class="w-2/12 flex items-center flex justify-end"><button class="bg-gray-900 px-10 py-2 text-white rounded-lg">Mark as done</button></div>
+          <div class="w-2/12 flex items-center flex justify-end"><%= link_to "Mark as done", served_path(order_item.table, order_item), class: "bg-gray-900 px-10 py-2 text-white rounded-lg" %></div>
         </div>
       <% end %>
     </div>

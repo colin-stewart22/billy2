@@ -116,7 +116,6 @@ i = 1
     3.times do
       puts "Create Table_captain OrderItem database..."
       OrderItem.create!(
-        created_time: Time.now,
         estimated_serving_time: (5..60).to_a.select { |num| (num % 5).zero? }.sample,
         menu_item_id: Menu.all[i - 1].menu_items.sample.id,
         table_customer_id: table_captain.id
@@ -132,7 +131,6 @@ i = 1
     3.times do
       puts "Create Table_customer1 OrderItem database..."
       OrderItem.create!(
-        created_time: Time.now,
         estimated_serving_time: (5..60).to_a.select { |num| (num % 5).zero? }.sample,
         menu_item_id: Menu.all[i - 1].menu_items.sample.id,
         table_customer_id: table_customer1.id
@@ -148,7 +146,6 @@ i = 1
     3.times do
       puts "Create Table_customer2 OrderItem database..."
       OrderItem.create!(
-        created_time: Time.now,
         estimated_serving_time: (5..60).to_a.select { |num| (num % 5).zero? }.sample,
         menu_item_id: Menu.all[i - 1].menu_items.sample.id,
         table_customer_id: table_customer2.id
@@ -164,7 +161,6 @@ i = 1
     3.times do
       puts "Create Table_customer3 OrderItem database..."
       OrderItem.create!(
-        created_time: Time.now,
         estimated_serving_time: (5..60).to_a.select { |num| (num % 5).zero? }.sample,
         menu_item_id: Menu.all[i - 1].menu_items.sample.id,
         table_customer_id: table_customer3.id

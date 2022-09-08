@@ -1,127 +1,19 @@
 <div class="restaurant-container mt-8">
-
-  <div class="flex justify-between">
-    <div class="my-auto w-4/12">
-      <img src=<%= "https://source.unsplash.com/random/320x320/?restaurant-#{@restaurant.name}" %> class="d-block rounded-xl" alt="restaurant image">
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+    <li class="nav-item" role="presentation">
+      <button class="nav-link active" id="pills-restaurant-tab" data-bs-toggle="pill" data-bs-target="#pills-restaurant" type="button" role="tab" aria-controls="pills-restaurant" aria-selected="true">RESTAURANT INFO</button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button class="nav-link" id="pills-menu-tab" data-bs-toggle="pill" data-bs-target="#pills-menu" type="button" role="tab" aria-controls="pills-menu" aria-selected="false">MENU INFO</button>
+    </li>
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-restaurant" role="tabpanel" aria-labelledby="pills-restaurant-tab">
+      <%= render "restaurants/info", restaurant: @restaurant %>
     </div>
-
-    <div class="flex flex-col w-8/12">
-      <div class="w-full bg-white rounded-lg p-8">
-        <h2 class="text-xl">Info</h2>
-        <div class="flex mt-3">
-          <h4 class="font-bold">Name</h4>
-          <p class="ml-5"><%= @restaurant.name %></p>
-        </div>
-        <div class="flex mt-3">
-          <h4 class="font-bold">Phone</h4>
-          <p class="ml-5"><%= @restaurant.phone_number %></p>
-        </div>
-        <div class="flex mt-3">
-          <h4 class="font-bold">Address</h4>
-          <p class="ml-5"><%= @restaurant.address %></p>
-        </div>
-      </div>
-
-      <div class="flex mt-8">
-        <div class="w-52 bg-blue-300 rounded-l-lg">
-          <h2 class="text-xl z-10 m-8">Theme</h2>
-        </div>
-        <div class="w-52 bg-blue-500"></div>
-        <div class="w-52 bg-blue-700"></div>
-        <div class="w-52 bg-blue-900 rounded-r-lg"></div>
-      </div>
+    <div class="tab-pane fade" id="pills-menu" role="tabpanel" aria-labelledby="pills-menu-tab">
+      <%= render "menus/index", restaurant: @restaurant, menus: @restaurant.menus %>
     </div>
   </div>
 
-  <div class="mt-8 flex justify-between w-full bg-white rounded-lg">
-
-    <div class="w-full m-8">
-      <h2 class="text-xl">Tables</h2>
-
-      <div class=" mt-3 flex flex-col flex-wrap h-24 w-full justify-between content-start">
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">1</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">2</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">3</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">4</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">5</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">6</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">7</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">8</h4>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex justify-center items-center bg-white rounded-tr-lg rounded-br-lg p-8 border-l border-black z-10">
-      <div class="flex justify-center items-center w-10 h-10 rounded-full bg-black">
-        <i class="fa-solid fa-plus text-white"></i>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="mt-8 flex justify-between w-full bg-white rounded-lg">
-
-    <div class="m-8">
-      <h2 class="text-xl">Servers</h2>
-
-      <div class="mt-3 flex flex-col flex-wrap h-20 w-full justify-between content-start">
-        <div class="flex justify-center items-center h-8 rounded-lg border border-black p-3 mr-3">
-          <h4 class="font-bold">Caledonia</h4>
-        </div>
-        <div class="flex justify-center items-center h-8 rounded-lg border border-black p-3 mr-3">
-          <h4 class="font-bold">Ann</h4>
-        </div>
-        <div class="flex justify-center items-center h-8 rounded-lg border border-black p-3 mr-3">
-          <h4 class="font-bold">Sara</h4>
-        </div>
-        <div class="flex justify-center items-center h-8 rounded-lg border border-black p-3 mr-3">
-          <h4 class="font-bold">Alex</h4>
-        </div>
-        <div class="flex justify-center items-center h-8 rounded-lg border border-black p-3 mr-3">
-          <h4 class="font-bold">Robin</h4>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="flex justify-center items-center bg-white rounded-tr-lg rounded-br-lg p-8 border-l border-black z-10">
-      <div class="flex justify-center items-center w-10 h-10 rounded-full bg-black">
-        <i class="fa-solid fa-plus text-white"></i>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-
-<div class="mt-5">
-  <h1>The list of menus section</h1>
-  <% @restaurant.menus.each do |item| %>
-  <li> <%=link_to  item.name, restaurant_menu_path(@restaurant, item)%> </li>
-  <% end %>
-</div>
-
-<div class="mt-5">
-  <h1>The list of all menu items</h1>
-  <% @restaurant.menu_items.each do |item| %>
-  <%= item.name %>
-  <%= item.category %>
-  <%= item.price %>
-  <% end %>
 </div>

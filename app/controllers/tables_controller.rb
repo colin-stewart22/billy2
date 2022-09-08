@@ -30,6 +30,7 @@ class TablesController < ApplicationController
 
   def new
     @table = Table.new
+    @table_number = Table.last.id + 1
   end
 
   def create

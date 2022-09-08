@@ -5,7 +5,6 @@ class CreateTableOrders < ActiveRecord::Migration[7.0]
       t.integer :total_price
       t.string :payment_option
       t.string :group_url
-      t.references :table_customer, null: false, foreign_key: true
       t.references :table, null: false, foreign_key: true
       t.references :user, null: false, foreign_key: true
 

@@ -1,6 +1,6 @@
 class JoinMenusController < ApplicationController
-  before_action :set_restaurant, only: %i[new create edit update]
-  before_action :set_menu, only: %i[show new create edit update]
+  before_action :set_restaurant, only: %i[new create]
+  before_action :set_menu, only: %i[show new create]
   def show
     @join_menus = JoinMenu.where(menu_id: @menu.id)
   end
@@ -16,22 +16,20 @@ class JoinMenusController < ApplicationController
 
     ActiveRecord::Base.transaction do
       @menu_items.each do |item|
-        join_menu = JoinMenu.new(menu: @menu, menu_item: item)
-        join_menu.save!
+        @join_menu = JoinMenu.new(menu: @menu, menu_item: item)
+        @join_menu.save!
       end
-      redirect_to restaurant_menu_path(@restaurant, @menu)
+      redirect_to new_restaurant_menu_join_menu_path(@restaurant, @menu, @join_menu)
     end
   rescue ActiveRecord::RecordInvalid
     render_new
   end
 
-  def edit
-  end
-
-  def update
-  end
-
   def destroy
+    @join_menu = JoinMenu.find(params[:id])
+    session[:return_to] ||= request.referer
+    @join_menu.destroy
+    redirect_to session.delete(:return_to), status: :see_other
   end
 
   private

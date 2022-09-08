@@ -1,6 +1,6 @@
 <div class="flex flex-wrap justify-around p-3">
-  <% @restaurant.order_items.each do |item| %>
-    <div style="width:20%" class="border py-1 px-3 mr-2 mb-3">
+  <% @restaurant.order_items.select { |item| item.is_prepared == false }.each do |item| %>
+    <div style="width:25%" class="border py-1 px-3 mr-1 mb-3">
       <%= render "order_items/show", item: item %>
     </div>
   <% end %>

@@ -1,8 +1,11 @@
-<% @qr_codes.each do |k, v| %>
-<p> Table number <%= k %> </p>
-<%= v.html_safe %>
-<% end %>
 
+
+<div class="qr-container flex flex-wrap">
+  <% @qr_codes.each do |k, v| %>
+  <p> Table number <%= k %> </p>
+  <%= v.html_safe %>
+  <% end %>
+</div>
 
 
 

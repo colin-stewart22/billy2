@@ -1,3 +1,12 @@
-<% @tables.each do |code| %>
-<%= code.qr_code %>
+<% @qr_codes.each do |k, v| %>
+<p> Table number <%= k %> </p>
+<%= v.html_safe %>
 <% end %>
+
+
+
+
+
+<%# <% @qr_codes.each do |code| %>
+<%# <%= code.html_safe%>
+<%# <% end %>

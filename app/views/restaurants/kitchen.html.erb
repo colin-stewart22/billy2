@@ -1,0 +1,12 @@
+<h1>This is a kitchen page</h1>
+<% @restaurant.order_items.each do |item| %>
+  <div>
+    <div>
+      <%= MenuItem.find(item.menu_item_id).name %>
+    </div>
+      <%= item.table.table_number %>
+    <div>
+      <%=  %>
+    </div>
+  </div>
+<% end %>

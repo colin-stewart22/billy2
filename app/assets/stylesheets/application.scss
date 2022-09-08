@@ -11,6 +11,8 @@
 @import "components/index";
 @import "pages/index";
 
+@import "restaurants/index";
+
 body {
   background: #F4F4F4
 }
@@ -18,9 +20,5 @@ body {
 .restaurant-container {
   width: 86%;
   margin: 0 auto;
-  background-color: orange;
-}
-
-.hidden {
-  display: none;
+  // background-color: orange;
 }

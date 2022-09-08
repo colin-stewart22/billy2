@@ -1,37 +1,54 @@
 <div class="flex gap-5">
-  <div class="w-2/3 bg-white rounded-lg p-8">
-    <h2 class="text-xl font-bold">Menu Items</h2>
+  <div class="w-2/3 bg-white rounded-lg h-min">
+    <div class="m-8">
+      <h2 class="text-xl font-bold mb-3">Menu Items</h2>
 
-    <div class="flex flex-wrap content-start">
-      <% restaurant.menu_items.each do |item| %>
-        <div class="w-6/12 flex items-center mt-4">
-          <div class="mr-5">
-            <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-#{item.name}" %> class="d-block rounded-lg" alt="restaurant image">
+      <div class="flex flex-wrap content-start overflow-auto height666">
+        <% restaurant.menu_items.each do |item| %>
+          <div class="w-6/12 flex items-center mt-4">
+            <div class="mr-5">
+              <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-#{item.name}" %> class="d-block rounded-lg" alt="restaurant image">
+            </div>
+            <div>
+              <p class="font-bold text-sm"><%= item.name %></p>
+              <p class="text-sm">$<%= item.price %></p>
+            </div>
           </div>
-          <div>
-            <p class="font-bold text-sm"><%= item.name %></p>
-            <p class="text-sm">$<%= item.price %></p>
-          </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="flex justify-center items-center bg-white rounded-bl-lg rounded-br-lg p-8 border border-black z-10">
+      <div class="flex justify-center items-center w-10 h-10 rounded-full bg-black">
+        <i class="fa-solid fa-plus text-white"></i>
+      </div>
     </div>
   </div>
 
-  <div class="w-1/3 bg-white rounded-lg p-8">
-    <h2 class="text-xl font-bold">Menus</h2>
+  <div class="w-1/3 bg-white rounded-lg h-min">
+    <div class="m-8">
+      <h2 class="text-xl font-bold mb-3">Menus</h2>
 
-    <% menus.each do |menu| %>
-      <div class="mt-4">
-        <%= link_to restaurant_menu_path(restaurant, menu) do  %>
-          <div>
-            <img src=<%= "https://source.unsplash.com/random/400x150/?restaurant-#{menu.id}" %> class="d-block rounded-lg" alt="restaurant image">
+      <div class="flex-wrap content-start overflow-auto height666">
+        <% menus.each do |menu| %>
+          <div class="mt-4">
+            <%= link_to restaurant_menu_path(restaurant, menu) do  %>
+              <div>
+                <img src=<%= "https://source.unsplash.com/random/400x150/?restaurant-#{menu.id}" %> class="d-block rounded-lg" alt="restaurant image">
+              </div>
+              <p class="text-right text-lg font-bold mt-1"><%= menu.name %></p>
+            <% end %>
           </div>
-          <p class="text-right text-lg font-bold mt-1"><%= menu.name %></p>
         <% end %>
       </div>
-    <% end %>
-    <div class="mt-5">
-      <%= link_to "Add New Menu", new_restaurant_menu_path(restaurant), class: "p-3 border" %>
+    </div>
+
+    <div class="flex justify-center items-center bg-white rounded-bl-lg rounded-br-lg p-8 border border-black z-10">
+      <%= link_to new_restaurant_menu_path(restaurant) do %>
+        <div class="flex justify-center items-center w-10 h-10 rounded-full bg-black">
+          <i class="fa-solid fa-plus text-white"></i>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

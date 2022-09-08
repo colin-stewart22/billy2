@@ -1,5 +1,5 @@
 <h1>New Menu</h1>
 <div class="my-5">
-  <%= link_to "Back", restaurant_menus_path(@restaurant), class: "p-3 border" %>
+  <%= link_to "Back", restaurant_path(@restaurant), class: "p-3 border" %>
 </div>
 <%= render "menus/form", restaurant: @restaurant, menu: @menu %>

@@ -1,0 +1,20 @@
+.btn.btn-outline-dark {
+  color: black;
+  &:hover {
+    color: white;
+    background: black;
+  }
+}
+
+.btn-outline-dark.active {
+  color: white;
+  background: black;
+  &:hover {
+    color: white;
+    background: black;
+  }
+}
+
+.height666 {
+  height: 666px;
+}

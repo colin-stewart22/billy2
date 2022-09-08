@@ -38,30 +38,11 @@
       <h2 class="text-xl font-bold">Tables</h2>
 
       <div class=" mt-3 flex flex-col flex-wrap h-24 w-full justify-between content-start">
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">1</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">2</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">3</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">4</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">5</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">6</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">7</h4>
-        </div>
-        <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
-          <h4 class="font-bold">8</h4>
-        </div>
+        <% restaurant.tables.each do |table| %>
+          <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
+            <h4 class="font-bold"><%= table.table_number %></h4>
+          </div>
+        <% end %>
       </div>
     </div>
 
@@ -81,6 +62,13 @@
       <h2 class="text-xl font-bold">Servers</h2>
 
       <div class="mt-3 flex flex-col flex-wrap h-20 w-full justify-between content-start">
+
+        <% restaurant.users.each do |user| %>
+          <div class="flex justify-center items-center h-8 rounded-lg border border-black p-3 mr-3">
+            <h4 class="font-bold"><%= user.first_name %></h4>
+          </div>
+        <% end %>
+
         <div class="flex justify-center items-center h-8 rounded-lg border border-black p-3 mr-3">
           <h4 class="font-bold">Caledonia</h4>
         </div>

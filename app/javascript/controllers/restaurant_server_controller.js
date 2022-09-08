@@ -16,4 +16,6 @@ export default class extends Controller {
   updateUntilReady() {
     this.readyTarget.innerHTML = (parseInt(this.readyTarget.innerHTML, 10) - 1) + " min"
   }
+
+
 }

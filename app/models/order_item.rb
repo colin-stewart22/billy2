@@ -6,6 +6,5 @@ class OrderItem < ApplicationRecord
   has_one :restaurant, through: :table
   has_one :user, through: :table_order
 
-  validates :created_time, presence: true
   validates :estimated_serving_time, presence: true
 end

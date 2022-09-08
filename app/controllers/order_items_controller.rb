@@ -27,7 +27,7 @@ class OrderItemsController < ApplicationController
 
   def prepared!
     @order_item.update(is_prepared: true)
-    redirect_to :back
+    redirect_to kitchen_path(@order_item.restaurant)
   end
 
   def served!
@@ -38,7 +38,7 @@ class OrderItemsController < ApplicationController
   private
 
   def order_item_params
-    params.require(:order_item).permit(:estimated_serving_time)
+    params.require(:order_item).permit(:estimated_serving_time, :note)
   end
 
   def set_order_item

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get "/restaurants/:id/kitchen", to: "restaurants#kitchen", as: "kitchen"
   get "order_items/:id", to: "order_items#prepared!", as: "prepared"
-  get "order_items/:id", to: "order_items#served!", as: "served"
+  get "tables/:table_id/order_items/:id", to: "order_items#served!", as: "served"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

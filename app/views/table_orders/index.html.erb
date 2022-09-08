@@ -1,5 +1,24 @@
 <div class="restaurant-container">
-  <% @table_orders.each do |table_order| %>
-    <p><%= table_order.table.table_number %></p>
+  <h2 class="text-center text-xl"><%= current_user.first_name %></h2>
+  <% current_user.table_orders.each do |table_order| %>
+    <div class="bg-white p-4">
+      <h3 class="text-2xl">Table <%= table_order.table.table_number %></h3>
+      <div class="flex mt-3">
+        <div class="w-4/12 font-bold">Food Name</div>
+        <div class="w-2/12 font-bold">Customer Name</div>
+        <div class="w-2/12 font-bold">Time Since Ordered</div>
+        <div class="w-2/12 font-bold">Time Until Ready</div>
+        <div class="w-2/12 font-bold"></div>
+      </div>
+      <% table_order.order_items.each do |order_item| %>
+        <div class="flex mt-4" data-controller="restaurant-server">
+          <div class="w-4/12 flex items-center"><%= order_item.menu_item.name %></div>
+          <div class="w-2/12 flex items-center"><%= order_item.table_customer.name %></div>
+          <div class="w-2/12 flex items-center" data-restaurant-server-target="ordered"><%= ((Time.now - order_item.created_at) / 60).round %></div>
+          <div class="w-2/12 flex items-center"><%= order_item.menu_item.prepare_time - ((Time.now - order_item.created_at) / 60).round %></div>
+          <div class="w-2/12 flex items-center flex justify-end"><button class="bg-gray-900 px-10 py-2 text-white rounded-lg">Mark as done</button></div>
+        </div>
+      <% end %>
+    </div>
   <% end %>
 </div>

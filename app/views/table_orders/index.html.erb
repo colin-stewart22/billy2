@@ -6,17 +6,17 @@
       <div class="flex mt-3">
         <div class="w-4/12 font-bold">Food Name</div>
         <div class="w-2/12 font-bold">Customer Name</div>
-        <div class="w-2/12 font-bold">Time Since Ordered</div>
-        <div class="w-2/12 font-bold">Time Until Ready</div>
+        <div class="w-2/12 font-bold">Since Ordered</div>
+        <div class="w-2/12 font-bold">Until Ready</div>
         <div class="w-2/12 font-bold"></div>
       </div>
       <% table_order.order_items.each do |order_item| %>
         <div class="flex mt-4" data-controller="restaurant-server">
           <div class="w-4/12 flex items-center"><%= order_item.menu_item.name %></div>
           <div class="w-2/12 flex items-center"><%= order_item.table_customer.name %></div>
-          <div class="w-2/12 flex items-center" data-restaurant-server-target="ordered"><%= ((Time.now - order_item.created_at) / 60).round %></div>
-          <div class="w-2/12 flex items-center"><%= order_item.menu_item.prepare_time - ((Time.now - order_item.created_at) / 60).round %></div>
-          <div class="w-2/12 flex items-center flex justify-end"><button class="bg-gray-900 px-10 py-2 text-white rounded-lg">Mark as done</button></div>
+          <div class="w-2/12 flex items-center" data-restaurant-server-target="ordered"><%= ((Time.now - order_item.created_at) / 60).round %> mins</div>
+          <div class="w-2/12 flex items-center" data-restaurant-server-target="ready"><%= order_item.menu_item.prepare_time - ((Time.now - order_item.created_at) / 60).round %> mins</div>
+          <div class="w-2/12 flex items-center flex justify-end"><button class="bg-gray-900 px-8 py-3 text-white text-sm rounded-lg">Mark as done</button></div>
         </div>
       <% end %>
     </div>

@@ -2,7 +2,9 @@
 
   <div class="flex justify-between items-center">
     <div class="flex justify-start w-20">
-      <i class="fa-solid fa-chevron-left text-black"></i>
+      <%= link_to restaurants_path do %>
+        <i class="fa-solid fa-chevron-left text-black"></i>
+      <% end %>
     </div>
     <div class="flex justify-center items-center">
       <ul class="nav nav-pills" id="pills-tab" role="tablist">

@@ -27,6 +27,7 @@ class OrderItemsController < ApplicationController
 
   def prepared!
     @order_item.update(is_prepared: true)
+    redirect_to kitchen_path(@order_item.restaurant)
   end
 
   private

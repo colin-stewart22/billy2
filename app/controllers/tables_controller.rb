@@ -22,6 +22,7 @@ class TablesController < ApplicationController
   def create
     @table = Table.new(table_params)
     @table.restaurant = @restaurant
+    @table = @qr_code = RQRCode::QRCode.new(@table.qr_code)
     if @table.save
       redirect_to restaurant_table_path(@restaurant, @table)
     else

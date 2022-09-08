@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_08_112514) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_08_134501) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,7 +44,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_08_112514) do
   end
 
   create_table "order_items", force: :cascade do |t|
-    t.time "created_time"
     t.integer "estimated_serving_time"
     t.boolean "is_served", default: false
     t.bigint "menu_item_id", null: false

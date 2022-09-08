@@ -5,13 +5,32 @@
 
       <div class="flex flex-wrap content-start overflow-auto height682">
         <% restaurant.menu_items.each do |item| %>
-          <div class="w-6/12 flex items-center mt-4">
+          <div class="w-6/12 flex items-center mt-4" type="button" data-bs-toggle="modal" data-bs-target=<%= "#exampleModal#{item.name}" %>>
             <div class="mr-5">
               <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-#{item.name}" %> class="d-block rounded-lg" alt="restaurant image">
             </div>
             <div>
               <p class="font-bold text-sm"><%= item.name %></p>
               <p class="text-sm">$<%= item.price %></p>
+            </div>
+          </div>
+
+        <!-- Modal -->
+          <div class="modal fade" id=<%= "exampleModal#{item.name}" %> tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content flex flex-col justify-center items-center rounded-2xl py-12">
+                <div>
+                  <img src=<%= "https://source.unsplash.com/random/150x150/?restaurant-#{item.name}" %> class="d-block rounded-lg" alt="restaurant image">
+                </div>
+                <div class="w-7/12 mt-3">
+                  <h5 class="text-center text-xl font-bold" id="exampleModalLabel"><%= item.name %></h5>
+                  <p class="text-center mt-2"><%= item.description %></p>
+                  <p class="text-center text-xl font-bold mt-2">$<%= item.price %></p>
+                </div>
+                <div>
+                  <button type="button" class="bg-black px-5 py-2 text-white rounded-lg mt-3" data-bs-dismiss="modal">Close</button>
+                </div>
+              </div>
             </div>
           </div>
         <% end %>

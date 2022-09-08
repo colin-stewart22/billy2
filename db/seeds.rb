@@ -93,7 +93,8 @@ i = 1
     puts "Create Table database..."
     table = Table.create!(
       restaurant_id: restaurant.id,
-      table_number: i
+      table_number: i,
+      qr_code: ""
     )
 
 

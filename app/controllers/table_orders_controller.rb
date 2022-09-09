@@ -39,7 +39,7 @@ class TableOrdersController < ApplicationController
   private
 
   def set_table_order
-    @table_order = table_order.find(params[:id])
+    @table_order = TableOrder.find(params[:id])
   end
 
   def table_order_params

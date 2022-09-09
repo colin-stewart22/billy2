@@ -1,5 +1,6 @@
 .btn.btn-outline-dark {
   color: black;
+  border-radius: 4px;
   &:hover {
     color: white;
     background: black;
@@ -15,6 +16,6 @@
   }
 }
 
-.height666 {
-  height: 666px;
+.scroll-container {
+  height: 670px;
 }

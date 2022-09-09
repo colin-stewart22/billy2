@@ -1,15 +1,22 @@
 <div class="page-container pt-8">
-  <div class="flex">
-    <div class="p-3 border mr-3">
-      <%= link_to "Back", restaurant_path(@restaurant) %>
-    </div>
-    <div class="p-3 border mr-3">
-      <%= link_to "Edit", edit_restaurant_menu_path(@restaurant, @menu) %>
-    </div>
-    <div class="p-3 border">
-      <%= link_to "Delete", restaurant_menu_path(@restaurant, @menu), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+  <div class="flex items-center justify-between">
+    <div class="w-48 bg-orange-300">
+      <%= link_to restaurant_path(@restaurant) do %>
+        <i class="fa-solid fa-chevron-left"></i>
+      <% end %>
     </div>
 
+    <h2><%= @menu.name %></h2>
+
+    <div class="flex justify-end w-48 bg-orange-300">
+      <div class="p-3 border mr-3">
+        <%= link_to "Edit", edit_restaurant_menu_path(@restaurant, @menu) %>
+      </div>
+      <div class="p-3 border">
+        <%= link_to "Delete", restaurant_menu_path(@restaurant, @menu), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      </div>
+    </div>
   </div>
+
   <%= render "join_menus/item", menu: @menu %>
 </div>

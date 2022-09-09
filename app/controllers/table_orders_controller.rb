@@ -43,6 +43,7 @@ class TableOrdersController < ApplicationController
   end
 
   def table_order_params
-    params.require(:table_order).permit(:name, :address, :phone_number, :theme_color)
+    # Needs work
+    params.require(:table_order).permit(:is_active)
   end
 end

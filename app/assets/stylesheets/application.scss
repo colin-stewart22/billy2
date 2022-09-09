@@ -17,7 +17,7 @@ body {
   background: #F4F4F4
 }
 
-.restaurant-container {
+.page-container {
   width: 86%;
   margin: 0 auto;
   // background-color: orange;
@@ -27,7 +27,14 @@ body {
 
 }
 
-.active {
-  border: 1px solid black;
-  border-radius: 5px;
+// .active {
+//   border: 1px solid black;
+//   border-radius: 5px;
+// }
+
+
+.background-landing {
+  background-image: image-url("landing-page-image.png");
+  background-size: cover;
+  filter: brightness(50%);
 }

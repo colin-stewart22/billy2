@@ -1,13 +1,20 @@
-<div class="restaurant-container">
-  <div class="flex my-5">
-    <div>
-      <%= link_to "Back", restaurant_menus_path(@restaurant), class: "p-3 border mr-3" %>
+<div class="page-container pt-8">
+  <div class="flex items-center justify-between">
+    <div class="w-48 bg-orange-300">
+      <%= link_to restaurant_path(@restaurant) do %>
+        <i class="fa-solid fa-chevron-left"></i>
+      <% end %>
     </div>
-    <div>
-      <%= link_to "Edit", edit_restaurant_menu_path(@restaurant, @menu), class: "p-3 border mr-3"%>
-    </div>
-    <div>
-      <%= link_to "Delete", restaurant_menu_path(@restaurant, @menu), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: "p-3 border"%>
+
+    <h2><%= @menu.name %></h2>
+
+    <div class="flex justify-end w-48 bg-orange-300">
+      <div class="p-3 border mr-3">
+        <%= link_to "Edit", edit_restaurant_menu_path(@restaurant, @menu) %>
+      </div>
+      <div class="p-3 border">
+        <%= link_to "Delete", restaurant_menu_path(@restaurant, @menu), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } %>
+      </div>
     </div>
   </div>
 
@@ -19,4 +26,5 @@
   </div>
 
   <%= render "menu_items/index", menu_items: @menu.menu_items %>
+
 </div>

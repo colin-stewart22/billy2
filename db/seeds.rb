@@ -97,7 +97,6 @@ i = 1
       qr_code: ""
     )
 
-
     puts "Create TableOrder database..."
     table_order = TableOrder.create!(
       is_active: true,

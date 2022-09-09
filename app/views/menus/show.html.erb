@@ -15,6 +15,7 @@
     </div>
   </div>
 
+///
   <%= render "join_menus/item", menu: @menu %>
 
   <div class="flex justify-center mt-8">
@@ -24,4 +25,15 @@
       </div>
      <% end %>
   </div>
+///
+  <div class="flex items-center">
+    <h1 class="text-3xl font-bold"><%= @menu.name %></h1>
+    <div>
+      <%= link_to "Activate Menu", activated_path(@restaurant, @menu), class: "p-3 border ml-6"%>
+    </div>
+  </div>
+
+  <%= render "menu_items/index", menu_items: @menu.menu_items %>
+
+///
 </div>

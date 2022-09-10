@@ -6,6 +6,14 @@ class TableOrdersController < ApplicationController
   end
 
   def show
+        @qr_code = RQRCode::QRCode.new(@table.qr_code)
+    @svg = @qr_code.as_svg(
+      offset: 0,
+      color: '000',
+      shape_rendering: 'crispEdges',
+      standalone: true,
+      module_size: 2
+    )
   end
 
   def new
@@ -40,6 +48,14 @@ class TableOrdersController < ApplicationController
 
   def set_table_order
     @table_order = TableOrder.find(params[:id])
+  end
+
+  def set_table
+    @table = Table.find(params[:table_id])
+  end
+
+  def set_restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
   end
 
   def table_order_params

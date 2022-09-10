@@ -36,8 +36,7 @@ class TablesController < ApplicationController
   def create
     @table = Table.new(table_params)
     @table.restaurant = @restaurant
-    # @table.qr_code = RQRCode::QRCode.new(@table.qr_code)
-    # raise
+    @table.qr_code = RQRCode::QRCode.new(@table.qr_code)
     # @svg = @qr_code.as_svg(
     #   offset: 0,
     #   color: '000',

@@ -1,5 +1,9 @@
-<%= simple_form_for [@restaurant, @table] do |f| %>
-  <%= f.input :table_number %>
-  <%= f.input :qr_code, input_html: {value: "http://127.0.0.1:3000/restaurants/1/tables/#{@table_number}"} %>
-  <%= f.submit %>
-<% end %>
+    <%= simple_form_for [@restaurant, @table] do |f| %>
+    <%= f.input :table_number %>
+    <%# Remember to interpolate restaurant id in qr_code URL later %>
+    <%= f.input :qr_code, input_html: {value: "http://127.0.0.1:3000/restaurants/1/tables/#{@table_number}/table_orders/new" } %>
+    <%= f.submit %>
+    <% end %>
+
+    <%# 1. Clean up submit link to link back to restaurant info page %>
+    <%# 2. Create form in table_orders/new and make sure the form submit button redirects to the table_customers/new path %>

@@ -1,8 +1,8 @@
-<%= simple_form_for [@restaurant, @menu] do |f| %>
+<%= simple_form_for [restaurant, menu] do |f| %>
   <div>
     <%= f.input :name %>
   </div>
   <div>
-    <%= f.submit @menu.id.nil? ? "Add" : "Save", class: "p-3 border" %>
+    <%= f.submit menu.id.nil? ? "Create" : "Save", class: "p-3 border" %>
   </div>
 <% end %>

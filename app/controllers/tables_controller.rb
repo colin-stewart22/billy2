@@ -1,6 +1,7 @@
 class TablesController < ApplicationController
   before_action :set_table, only: [:show, :edit, :update, :destroy]
   before_action :set_restaurant, only: [:new, :create]
+
   def index
     @tables = Table.all
     @qr_codes = {}
@@ -36,6 +37,7 @@ class TablesController < ApplicationController
   def create
     @table = Table.new(table_params)
     @table.restaurant = @restaurant
+
     @table.qr_code = RQRCode::QRCode.new(@table.qr_code)
     # @svg = @qr_code.as_svg(
     #   offset: 0,

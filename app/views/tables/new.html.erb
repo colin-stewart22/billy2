@@ -1,7 +1,7 @@
     <%= simple_form_for [@restaurant, @table] do |f| %>
     <%= f.input :table_number %>
     <%# Remember to interpolate restaurant id in qr_code URL later %>
-    <%= f.input :qr_code, input_html: {value: "http://127.0.0.1:3000/restaurants/1/tables/#{@table_number}/table_orders/new" } %>
+    <%= f.input :qr_code, input_html: {value: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table_number}/table_orders/new" } %>
     <%= f.submit %>
     <% end %>
 

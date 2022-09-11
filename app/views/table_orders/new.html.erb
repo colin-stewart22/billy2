@@ -1,1 +1,6 @@
-
+<h1>This is the landing page</h1>
+    <%= simple_form_for [@restaurant, @table, @table_order] do |f| %>
+    <%= f.input :is_active %>
+    <%# Remember to interpolate restaurant id in qr_code URL later %>
+    <%= f.submit %>
+    <% end %>

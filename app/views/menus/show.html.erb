@@ -1,6 +1,11 @@
 <div class="page-container pt-8">
+<<<<<<< HEAD
   <div class="flex items-center justify-between mb-4">
     <div class="flex items-center gap-4">
+=======
+  <div class="flex items-center justify-between mb-8">
+    <div class="w-48">
+>>>>>>> master
       <%= link_to restaurant_path(@restaurant) do %>
         <i class="fa-solid fa-chevron-left"></i>
       <% end %>
@@ -29,13 +34,20 @@
     </div>
   </div>
 
-  <%= render "join_menus/item", menu: @menu %>
+  <div class="w-full height666 bg-white rounded-lg">
 
-  <div class="flex justify-center mt-8">
-    <%= link_to new_restaurant_menu_join_menu_path(@restaurant, @menu) do %>
-      <div class="flex justify-center items-center w-10 h-10 rounded-full bg-black">
-        <i class="fa-solid fa-plus text-white"></i>
-      </div>
-     <% end %>
+    <div class="p-8">
+      <h2 class="text-xl font-bold mb-3"><%= @menu.name %></h2>
+      <%= render "join_menus/menu_show_items", menu: @menu %>
+    </div>
+
+    <div class="flex justify-center items-center bg-white rounded-bl-lg rounded-br-lg p-8 border-t border-black z-10">
+      <%= link_to new_restaurant_menu_join_menu_path(@restaurant, @menu) do %>
+        <div class="flex justify-center items-center h-10 rounded-lg bg-black">
+          <h2 class="text-xl font-bold mx-8 text-white">Add Items</h2>
+        </div>
+      <% end %>
+    </div>
+
   </div>
 </div>

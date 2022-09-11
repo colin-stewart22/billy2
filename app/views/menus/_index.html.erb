@@ -12,7 +12,7 @@
                   <img src=<%= "https://source.unsplash.com/random/400x150/?restaurant-1" %> class="d-block rounded-lg" alt="restaurant image">
                 </div>
                 <div class="flex justify-between items-center">
-                  <div class="bg-green-400 text-sm text-white rounded-lg px-3 py-0.5">Active</div>
+                  <div class="bg-green-500 text-sm text-white rounded-lg px-3 py-0.5">Active</div>
                   <p class="text-right text-lg font-bold mt-1"><%= active_menu.name %></p>
                 </div>
               </div>
@@ -21,17 +21,18 @@
       <% menus.each do |menu| %>
         <div class="mt-4">
           <%# if is_active is false %>
-          <%= link_to restaurant_menu_path(restaurant, menu) do  %>
-            <div>
-              <img src=<%= "https://source.unsplash.com/random/400x150/?restaurant-#{menu.id}" %> class="d-block rounded-lg" alt="restaurant image">
-            </div>
-            <p class="text-right text-lg font-bold mt-1"><%= menu.name %></p>
+          <% if menu.is_active == false %>
+            <%= link_to restaurant_menu_path(restaurant, menu) do  %>
+              <div>
+                <img src=<%= "https://source.unsplash.com/random/400x150/?restaurant-#{menu.id}" %> class="d-block rounded-lg" alt="restaurant image">
+              </div>
+              <p class="text-right text-lg font-bold mt-1"><%= menu.name %></p>
+            <% end %>
           <% end %>
         </div>
       <% end %>
     </div>
   </div>
-
   <div class="flex justify-center items-center bg-white rounded-bl-lg rounded-br-lg p-8 border-t border-black z-10">
     <%= link_to new_restaurant_menu_path(restaurant) do %>
       <div class="flex justify-center items-center w-10 h-10 rounded-full bg-black">

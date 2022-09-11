@@ -9,12 +9,13 @@
         <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
       </div>
     </div>
+    <% active_menu = Menu.find_by(is_active: true) %>
     <div>
-      <h1 class="text-3xl font-bold mt-3">Restaurant Menu</h1>
+      <h1 class="text-3xl font-bold mt-3"><%= active_menu.name %></h1>
     </div>
     <div class="flex gap-2 mt-4 text-sm">
       <%# .each here %>
-      <h5 class="px-2 py-1 active">All</h5>
+      <h5 class="px-2 py-1 active1">All</h5>
       <h5 class="px-2 py-1">Starter</h5>
       <h5 class="px-2 py-1">Main Course</h5>
       <h5 class="px-2 py-1">Dessert</h5>
@@ -23,35 +24,17 @@
   <div class="p-3">
     <h2 class="mt-2 text-lg font-bold">Starter</h2>
       <%# .each here %>
-    <div class="w-full flex items-center mt-2">
-      <div class="mr-5">
-        <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-1" %> class="d-block rounded-lg" alt="restaurant image">
-      </div>
-      <div>
-        <p class="font-bold text-sm">This is a Food Item</p>
-        <p class="text-sm">$10</p>
-      </div>
-    </div>
-
-    <div class="w-full flex items-center mt-2">
-        <div class="mr-5">
-          <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-2" %> class="d-block rounded-lg" alt="restaurant image">
-        </div>
-        <div>
-          <p class="font-bold text-sm">This is a Food Item</p>
-          <p class="text-sm">$10</p>
-        </div>
-      </div>
-
+    <% active_menu.menu_items.each do |menu_item| %>
       <div class="w-full flex items-center mt-2">
         <div class="mr-5">
-          <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-3" %> class="d-block rounded-lg" alt="restaurant image">
+          <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-#{menu_item.name}" %> class="d-block rounded-lg" alt="restaurant image">
         </div>
         <div>
-          <p class="font-bold text-sm">This is a Food Item</p>
-          <p class="text-sm">$10</p>
+          <p class="font-bold text-sm"><%= menu_item.name %></p>
+          <p class="text-sm">$<%= menu_item.price %></p>
         </div>
       </div>
+    <% end %>
 
     <h2 class="mt-4 text-lg font-bold">Main Course</h2>
       <%# .each here %>

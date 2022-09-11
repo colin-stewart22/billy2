@@ -1,6 +1,6 @@
 class MenusController < ApplicationController
   before_action :set_restaurant, only: %i[index show new create edit update destroy activated!]
-  before_action :set_menu, only: %i[show edit update destroy]
+  before_action :set_menu, only: %i[show edit update destroy activated!]
 
   def index
     @menus = Menu.all
@@ -39,6 +39,10 @@ class MenusController < ApplicationController
   end
 
   def activated!
+    @menus = Menu.all
+    @menus.each do |menu|
+      menu.update(is_active: false)
+    end
     @menu.update(is_active: true)
     redirect_to restaurant_menu_path(@restaurant, @menu)
   end

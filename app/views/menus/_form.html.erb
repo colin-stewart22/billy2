@@ -1,8 +1,10 @@
-<%= simple_form_for [@restaurant, @menu] do |f| %>
+<%= simple_form_for [restaurant, menu] do |f| %>
   <div>
     <%= f.input :name %>
   </div>
-  <div>
-    <%= f.submit @menu.id.nil? ? "Add" : "Save", class: "p-3 border" %>
+  <div class="flex justify-start items-center pt-8">
+    <div class="flex justify-center items-center h-10 rounded-lg bg-black">
+      <%= f.submit menu.id.nil? ? "Create" : "Save", class: "text-xl font-bold mx-8 text-white" %>
+    </div>
   </div>
 <% end %>

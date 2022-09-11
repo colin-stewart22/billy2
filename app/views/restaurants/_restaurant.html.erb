@@ -1,6 +1,8 @@
 <%= link_to restaurant_path(restaurant) do %>
-  <div>
-    <img src=<%= "https://source.unsplash.com/random/220x200/?restaurant-#{restaurant.name}" %> class="d-block rounded-2xl" alt="restaurant image">
-    <h1 class="text-xl text-center mt-3"><%= restaurant.name %></h1>
+  <div class="flex items-center justify-center p-8 bg-white rounded-lg">
+    <div>
+      <img src=<%= "https://source.unsplash.com/random/200x200/?restaurant-#{restaurant.name}" %> class="d-block rounded-lg" alt="restaurant image">
+      <h4 class="font-bold mt-3 text-center"><%= restaurant.name %></h4>
+    </div>
   </div>
 <% end %>

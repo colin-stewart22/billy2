@@ -1,5 +1,12 @@
-<h1>New Menu</h1>
-<div class="my-5">
-  <%= link_to "Back", restaurant_path(@restaurant), class: "p-3 border" %>
+<div class="page-container pt-8">
+  <div class="flex items-center justify-between mb-8">
+    <div class="w-48">
+      <%= link_to restaurant_path(@restaurant) do %>
+        <i class="fa-solid fa-chevron-left"></i>
+      <% end %>
+    </div>
+    <h2 class="text-xl font-bold">New Menu</h2>
+    <div class="w-48"></div>
+  </div>
+  <%= render "menus/form", restaurant: @restaurant, menu: @menu %>
 </div>
-<%= render "menus/form", restaurant: @restaurant, menu: @menu %>

@@ -6,6 +6,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
+    @referer = request.referer
   end
 
   def kitchen

@@ -8,3 +8,11 @@
     </div>
   </div>
 </div>
+
+
+    <%= simple_form_for [@restaurant, @table, @table_order, @table_customer] do |f| %>
+    <%= f.input :name %>
+    <%= f.input :is_captain, default: true %>
+    <%= f.input :is_paid, default: false %>
+    <%= f.submit %>
+    <% end %>

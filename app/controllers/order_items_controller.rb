@@ -1,6 +1,6 @@
 class OrderItemsController < ApplicationController
-  before_action :set_order_item, only: %i[update destroy prepared! served!]
-
+  before_action :set_order_item, only: %i[create update destroy prepared! served!]
+  
   def show
   end
 

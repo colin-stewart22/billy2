@@ -53,7 +53,7 @@ class TableOrdersController < ApplicationController
 
   def create
     @table_order = TableOrder.new(table_order_params)
-    @table_order.user = current_user
+    @table_order.user = User.where(is_owner: false).sample
     @table_order.table = @table
     if @table_order.save
       redirect_to new_restaurant_table_table_order_table_customer_path(@restaurant, @table, @table_order)

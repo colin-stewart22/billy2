@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
   get "/restaurants/:id/kitchen", to: "restaurants#kitchen", as: "kitchen"
-  get "order_items/:id", to: "order_items#prepared!", as: "prepared"
-  get "tables/:table_id/order_items/:id", to: "order_items#served!", as: "served"
+  get "/order_items/:id/prepared", to: "order_items#prepared!", as: "prepared"
+  get "/order_items/:id/served", to: "order_items#served!", as: "served"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

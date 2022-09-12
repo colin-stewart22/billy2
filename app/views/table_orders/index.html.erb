@@ -47,11 +47,12 @@
           <% end %>
         </div>
       </div>
-    <% end %>
-  <% else %>
-    <div class="flex justify-end items-center">
-        <%= link_to "Login", new_user_session_path %>
     </div>
-    <h1>you cannot access this page</h1>
   <% end %>
+<% else %>
+  <div class="flex justify-end items-center">
+      <%= link_to "Login", new_user_session_path %>
+  </div>
+  <h1>you cannot access this page</h1>
+<% end %>
 </div>

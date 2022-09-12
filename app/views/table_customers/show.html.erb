@@ -25,6 +25,10 @@
       </div>
     <% end %>
 
+    <div class="w-full flex justify-between p-3 mt-2 mb-16">
+      <h1 class="text-xl font-bold">Total amount</h1>
+      <h1 class="text-xl font-bold">$<%= @table_customer.amount_due %></h1>
+    </div>
     <div class="w-full flex justify-center">
       <%= link_to "Place your order", restaurant_table_table_order_table_customer_order_items_path(@restaurant, @table, @table_order, @table_customer), class: "bg-black text-white px-12 py-2 rounded-lg fixed bottom-5" %>
     </div>

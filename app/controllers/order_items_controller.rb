@@ -1,6 +1,7 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: %i[update destroy prepared! served!]
 
+
   def index
     @restaurant = Restaurant.find(params[:restaurant_id])
     @table = Table.find(params[:table_id])
@@ -8,6 +9,7 @@ class OrderItemsController < ApplicationController
     @table_customers = @table_order.table_customers
     @table_customer = TableCustomer.find(params[:table_customer_id])
   end
+
 
   def show
     @table_customer = TableCustomer.find(params[:table_customer_id])

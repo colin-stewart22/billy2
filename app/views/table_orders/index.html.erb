@@ -37,22 +37,35 @@
           </div>
         </div>
 
-        <div class="flex justify-center items-center bg-white rounded-bl-lg rounded-br-lg p-8 border-t border-black z-10">
-          <%= link_to "#" do %>
-            <% current_user.table_orders.each do |table_order| %>
+        <div class="flex justify-between items-center bg-white rounded-bl-lg rounded-br-lg p-8 border-t border-black z-10">
+          <% current_user.table_orders.each do |table_order| %>
+            <%= link_to "#" do %>
               <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
                 <h4 class="font-bold"><%= table_order.table.table_number %></h4>
               </div>
             <% end %>
           <% end %>
+
+          <div>
+            <% @table_orders.each do |table_order| %>
+              <% if table_order.is_active == false %>
+                <%= link_to "#" do %>
+                  <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
+                    <h4 class="font-bold"><%= table_order.table.table_number %></h4>
+                  </div>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
         </div>
+
       </div>
-    </div>
-  <% end %>
-<% else %>
-  <div class="flex justify-end items-center">
+    <% end %>
+
+  <% else %>
+    <div class="flex justify-end items-center mb-8">
       <%= link_to "Login", new_user_session_path %>
-  </div>
-  <h1>you cannot access this page</h1>
-<% end %>
+    </div>
+    <h1>you cannot access this page</h1>
+  <% end %>
 </div>

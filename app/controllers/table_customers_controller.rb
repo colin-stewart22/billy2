@@ -1,5 +1,5 @@
 class TableCustomersController < ApplicationController
-  before_action :set_table_customer, only: [:index, :show, :edit, :update, :destroy]
+  before_action :set_table_customer, only: [:show, :edit, :update, :destroy]
   before_action :set_restaurant, only: [:index, :show, :new, :create]
   before_action :set_table, only: [:index, :show, :new, :create]
   before_action :set_table_order, only: [:index, :show, :new, :create]
@@ -28,6 +28,23 @@ class TableCustomersController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def split_evenly
+    @table_order = TableOrder.find(params[:table_order_id])
+    number = @table_order.table_customers.count
+    splitted_bill = (@table_order.total_price / number).round(2)
+    @table_order.table_customers.each do |customer|
+      customer.update(amount_due: splitted_bill)
+    end
+  end
+
+  def split_by_items
+
+  end
+
+  def pay_all
+
   end
 
   private

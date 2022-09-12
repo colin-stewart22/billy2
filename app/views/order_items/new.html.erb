@@ -1,1 +1,9 @@
-<h1>This is the customers order items page</h1>
+<%= simple_form_for [@restaurant, @table, @table_order, @table_customer, @order_item] do |f| %>
+  <div>
+    <%= f.association :menu_item, as: :check_boxes, input_html: { multiple: true } %>
+  </div>
+  <div>
+    <%= f.submit "Add", class: "p-3 border" %>
+  </div>
+
+<% end %>

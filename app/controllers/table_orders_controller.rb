@@ -41,7 +41,7 @@ class TableOrdersController < ApplicationController
       }],
       mode: 'payment',
       success_url: 'https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
-      cancel_url: 'https://example.com/cancel',
+      cancel_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/checkout",
     )
 
     @table_order.update(checkout_session_id: session.id)

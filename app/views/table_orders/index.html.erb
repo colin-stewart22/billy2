@@ -9,29 +9,41 @@
     </div>
 
     <% current_user.table_orders.each do |table_order| %>
-      <div class="w-full bg-white rounded-lg p-8">
-        <h2 class="text-2xl font-bold mb-3">Table <%= table_order.table.table_number %></h2>
-        <div class="flex items-center mb-3">
-          <div class="w-4/12 font-bold">Food Name</div>
-          <div class="w-2/12 font-bold">Customer Name</div>
-          <div class="w-2/12 font-bold">Since Ordered</div>
-          <div class="w-2/12 font-bold">Until Ready</div>
-          <div class="w-2/12 font-bold"></div>
-        </div>
-        <div class="overflow-auto scroll-container">
-          <% table_order.order_items.select { |item| item.is_served == false}.each do |order_item| %>
-            <div class="flex mt-4" data-controller="restaurant-server">
-              <div class="w-4/12 flex items-center">
-                <%= order_item.menu_item.name %>
-                <% if order_item.is_prepared %>
-                  <span class="bg-green-500 ml-5 px-3 py-2 text-white text-sm font-semibold rounded-lg">Ready</span>
-                <% end %>
+      <div class="w-full bg-white rounded-lg">
+        <div class="p-8">
+          <h2 class="text-2xl font-bold mb-3">Table <%= table_order.table.table_number %></h2>
+          <div class="flex items-center mb-3">
+            <div class="w-4/12 font-bold">Food Name</div>
+            <div class="w-2/12 font-bold">Customer Name</div>
+            <div class="w-2/12 font-bold">Since Ordered</div>
+            <div class="w-2/12 font-bold">Until Ready</div>
+            <div class="w-2/12 font-bold"></div>
+          </div>
+          <div class="overflow-auto scroll-container">
+            <% table_order.order_items.select { |item| item.is_served == false}.each do |order_item| %>
+              <div class="flex mt-4" data-controller="restaurant-server">
+                <div class="w-4/12 flex items-center">
+                  <%= order_item.menu_item.name %>
+                  <% if order_item.is_prepared %>
+                    <span class="bg-green-500 ml-5 px-3 py-2 text-white text-sm font-semibold rounded-lg">Ready</span>
+                  <% end %>
+                </div>
+                <div class="w-2/12 flex items-center"><%= order_item.table_customer.name %></div>
+                <div class="w-2/12 flex items-center" data-restaurant-server-target="ordered"><%= ((Time.now - order_item.created_at) / 60).round %> mins</div>
+                <div class="w-2/12 flex items-center" data-restaurant-server-target="ready"><%= order_item.menu_item.prepare_time - ((Time.now - order_item.created_at) / 60).round %> mins</div>
+                <div class="w-2/12 flex items-center flex justify-end"><%= link_to "Mark as done", served_path(order_item.table, order_item), class: "bg-gray-900 px-8 py-2 text-white text-sm rounded-lg" %></div>
               </div>
-              <div class="w-2/12 flex items-center"><%= order_item.table_customer.name %></div>
-              <div class="w-2/12 flex items-center" data-restaurant-server-target="ordered"><%= ((Time.now - order_item.created_at) / 60).round %> mins</div>
-              <div class="w-2/12 flex items-center" data-restaurant-server-target="ready"><%= order_item.menu_item.prepare_time - ((Time.now - order_item.created_at) / 60).round %> mins</div>
-              <div class="w-2/12 flex items-center flex justify-end"><%= link_to "Mark as done", served_path(order_item.table, order_item), class: "bg-gray-900 px-8 py-2 text-white text-sm rounded-lg" %></div>
-            </div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="flex justify-center items-center bg-white rounded-bl-lg rounded-br-lg p-8 border-t border-black z-10">
+          <%= link_to "#" do %>
+            <% current_user.table_orders.each do |table_order| %>
+              <div class="flex justify-center items-center w-10 h-10 rounded-full border mr-3">
+                <h4 class="font-bold"><%= table_order.table.table_number %></h4>
+              </div>
+            <% end %>
           <% end %>
         </div>
       </div>

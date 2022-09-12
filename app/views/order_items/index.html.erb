@@ -43,12 +43,40 @@
       </div>
     </div>
     <hr class="mt-4">
-    <div class="flex justify-between my-4">
+    <div class="flex items-center justify-between my-4">
       <div>
-        <%= link_to "Order More", new_restaurant_table_table_order_table_customer_order_item_path(@restaurant, @table, @table_order, @table_customer), class: "bg-black text-white px-10 py-2 rounded-lg bottom-5" %>
+        <%= link_to "Order More", new_restaurant_table_table_order_table_customer_order_item_path(@restaurant, @table, @table_order, @table_customer), class: "bg-black text-white rounded-lg py-2 px-4" %>
       </div>
-      <div>
-        <%= link_to "Checkout", new_restaurant_table_table_order_table_customer_order_item_path(@restaurant, @table, @table_order, @table_customer), class: "bg-black text-white px-10 py-2 rounded-lg bottom-5" %>
+      <button type="button" class="bg-black text-white rounded-lg py-2 px-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Checkout</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content flex flex-col justify-center items-center rounded-lg py-4">
+      <h2 class="text-xl font-bold">How do you want to split?</h2>
+      <div class="w-full flex flex-wrap gap-4 justify-center items-center mt-4">
+        <div class="w-36 h-36 bg-gray-300 rounded-xl flex flex-col justify-center items-center gap-3">
+          <i class="fa-solid fa-person text-4xl"></i>
+          <h4>Pay for all</h4>
+        </div>
+        <div class="w-36 h-36 bg-gray-300 rounded-xl flex flex-col justify-center items-center gap-3">
+          <i class="fa-solid fa-people-group text-4xl"></i>
+          <h4>Split evenly</h4>
+        </div>
+        <div class="w-36 h-36 bg-gray-300 rounded-xl flex flex-col justify-center items-center gap-3">
+          <i class="fa-solid fa-pizza-slice text-4xl"></i>
+          <h4>Split by items</h4>
+        </div>
+        <div class="w-36 h-36 bg-gray-300 rounded-xl flex flex-col justify-center items-center gap-3">
+          <i class="fa-solid fa-dice text-4xl"></i>
+          <h4>Card roulette</h4>
+        </div>
       </div>
     </div>
   </div>

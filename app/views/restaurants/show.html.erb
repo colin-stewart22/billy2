@@ -1,4 +1,4 @@
-<div class="page-container pt-8">
+<div class="page-container pt-8" data-controller="nav-links">
   <div class="flex justify-between items-center">
     <div class="flex justify-start">
         <%= link_to restaurants_path do %>
@@ -11,12 +11,21 @@
 
     <div class="flex justify-center items-center">
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
+      <% if @referer && @referer.include?('menus') %>
+        <li class="nav-item" role="presentation">
+          <button class="btn btn-outline-dark" id="pills-restaurant-tab" data-bs-toggle="pill" data-bs-target="#pills-restaurant" type="button" role="tab" aria-controls="pills-restaurant" aria-selected="true">RESTAURANT INFO</button>
+        </li>
+        <li class="nav-item" role="presentation">
+          <button class="btn btn-outline-dark active" id="pills-menu-tab" data-bs-toggle="pill" data-bs-target="#pills-menu" type="button" role="tab" aria-controls="pills-menu" aria-selected="false">MENU INFO</button>
+        </li>
+        <% else %>
         <li class="nav-item" role="presentation">
           <button class="btn btn-outline-dark active" id="pills-restaurant-tab" data-bs-toggle="pill" data-bs-target="#pills-restaurant" type="button" role="tab" aria-controls="pills-restaurant" aria-selected="true">RESTAURANT INFO</button>
         </li>
         <li class="nav-item" role="presentation">
           <button class="btn btn-outline-dark" id="pills-menu-tab" data-bs-toggle="pill" data-bs-target="#pills-menu" type="button" role="tab" aria-controls="pills-menu" aria-selected="false">MENU INFO</button>
         </li>
+        <% end %>
       </ul>
     </div>
 
@@ -30,15 +39,27 @@
   </div>
 
   <div class="tab-content" id="pills-tabContent">
-    <div class="py-8 tab-pane fade show active" id="pills-restaurant" role="tabpanel" aria-labelledby="pills-restaurant-tab">
-      <%= render "restaurants/info", restaurant: @restaurant %>
-    </div>
-    <div class="py-8 tab-pane fade" id="pills-menu" role="tabpanel" aria-labelledby="pills-menu-tab">
-      <div class="flex gap-5">
-        <%= render "menu_items/index", restaurant: @restaurant, menus: @restaurant.menus %>
-        <%= render "menus/index", restaurant: @restaurant, menus: @restaurant.menus %>
+    <% if @referer && @referer.include?('menus') %>
+      <div class="py-8 tab-pane fade show" id="pills-restaurant" role="tabpanel" aria-labelledby="pills-restaurant-tab">
+        <%= render "restaurants/info", restaurant: @restaurant %>
       </div>
-    </div>
+      <div class="py-8 tab-pane fade show active" id="pills-menu" role="tabpanel" aria-labelledby="pills-menu-tab">
+        <div class="flex gap-5">
+          <%= render "menu_items/index", restaurant: @restaurant, menus: @restaurant.menus %>
+          <%= render "menus/index", restaurant: @restaurant, menus: @restaurant.menus %>
+        </div>
+      </div>
+    <% else %>
+      <div class="py-8 tab-pane fade show active" id="pills-restaurant" role="tabpanel" aria-labelledby="pills-restaurant-tab">
+        <%= render "restaurants/info", restaurant: @restaurant %>
+      </div>
+      <div class="py-8 tab-pane fade" id="pills-menu" role="tabpanel" aria-labelledby="pills-menu-tab">
+        <div class="flex gap-5">
+          <%= render "menu_items/index", restaurant: @restaurant, menus: @restaurant.menus %>
+          <%= render "menus/index", restaurant: @restaurant, menus: @restaurant.menus %>
+        </div>
+      </div>
+    <% end %>
   </div>
 
 </div>

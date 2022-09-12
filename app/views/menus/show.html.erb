@@ -23,32 +23,20 @@
       <div class="flex gap-3 mb-3">
         <h2 class="text-xl font-bold"><%= @menu.name %></h2>
         <% if @menu.is_active %>
-        <div class="bg-green-500 flex justify-center items-center text-sm text-white rounded-lg px-3 py-0.5">
-          <p>Active</p>
-        </div>
-      <% end %>
+          <div class="bg-green-500 flex justify-center items-center text-sm text-white rounded-lg px-3 py-0.5">
+            <p>Active</p>
+          </div>
+        <% end %>
       </div>
-      <% starters = @menu.menu_items.select { |item| item.category == "Starters" } %>
-      <h3 class="text-lg font-bold ml-5 mb-3">Starters</h3>
-      <%= render "menu_items/show", menu: starters %>
-      <% mains = @menu.menu_items.select { |item| item.category == "Mains" } %>
-      <h3 class="text-lg font-bold ml-5 my-3">Mains</h3>
-      <%= render "menu_items/show", menu: mains %>
-      <% breakfast = @menu.menu_items.select { |item| item.category == "Breakfast" } %>
-      <h3 class="text-lg font-bold ml-5 my-3">Breakfast</h3>
-      <%= render "menu_items/show", menu: breakfast %>
-      <% lunch = @menu.menu_items.select { |item| item.category == "Lunch" } %>
-      <h3 class="text-lg font-bold ml-5 my-3">Lunch</h3>
-      <%= render "menu_items/show", menu: lunch %>
-      <% dinner = @menu.menu_items.select { |item| item.category == "Dinner" } %>
-      <h3 class="text-lg font-bold ml-5 my-3">Dinner</h3>
-      <%= render "menu_items/show", menu: dinner %>
-      <% desserts = @menu.menu_items.select { |item| item.category == "Desserts" } %>
-      <h3 class="text-lg font-bold ml-5 my-3">Desserts</h3>
-      <%= render "menu_items/show", menu: desserts %>
-      <% drinks = @menu.menu_items.select { |item| item.category == "Drinks" } %>
-      <h3 class="text-lg font-bold ml-5 my-3">Drinks</h3>
-      <%= render "menu_items/show", menu: drinks %>
+
+      <div class="scroll-container overflow-auto">
+        <% categories = ["Starters", "Mains", "Breakfast", "Lunch", "Dinner", "Desserts", "Drinks"] %>
+        <% categories.each do |category| %>
+          <% menu = @menu.menu_items.select { |item| item.category == category } %>
+          <h3 class="text-lg font-bold ml-5 mb-3"><%= category %></h3>
+          <%= render "menu_items/show", menu: menu %>
+        <% end %>
+      </div>
     </div>
 
     <div class="flex justify-center items-center bg-white rounded-bl-lg rounded-br-lg p-8 border-t border-black z-10">
@@ -58,6 +46,5 @@
         </div>
       <% end %>
     </div>
-
   </div>
 </div>

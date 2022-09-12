@@ -4,7 +4,7 @@
 
     <div class="flex-wrap content-start overflow-auto scroll-container">
       <%# if is_active is true %>
-        <% active_menu = Menu.find_by(is_active: true) %>
+        <% active_menu = Menu.where(restaurant_id: restaurant.id).select(&:is_active).first %>
         <% unless active_menu.nil? %>
           <%= link_to restaurant_menu_path(restaurant, active_menu) do  %>
 

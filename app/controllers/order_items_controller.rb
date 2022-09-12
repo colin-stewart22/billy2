@@ -38,8 +38,10 @@ class OrderItemsController < ApplicationController
         @order_item.table_customer = @table_customer
         @order_item.menu_item = item
         @order_item.estimated_serving_time = item.prepare_time
-        new_amount = @table_customer.amount_due.to_f + item.price
-        @table_customer.update(amount_due: new_amount.round(2))
+        customer_new_amount = @table_customer.amount_due.to_f + item.price
+        table_order_new_amount = @table_order.total_price.to_f + item.price
+        @table_customer.update(amount_due: customer_new_amount.round(2))
+        @table_order.update(total_price: table_order_new_amount.round(2))
         @order_item.save!
       end
       redirect_to restaurant_table_table_order_table_customer_path(

@@ -10,11 +10,6 @@
           <h2>Activate Menu</h2>
         <% end %>
       <% end %>
-      <% if @menu.is_active %>
-        <div class="bg-green-500 flex justify-center items-center text-sm text-white rounded-lg px-3 py-0.5">
-          <p>Active</p>
-        </div>
-      <% end %>
       <div>
         <%= link_to restaurant_menu_path(@restaurant, @menu), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class:"bg-red-400 flex justify-center items-center text-sm text-white rounded-lg px-4 py-2" do %>
           <h2>Delete Menu</h2>
@@ -26,7 +21,14 @@
   <div class="w-full bg-white rounded-lg">
 
     <div class="p-8">
-      <h2 class="text-xl font-bold mb-3"><%= @menu.name %></h2>
+      <div class="flex gap-3 mb-3">
+        <h2 class="text-xl font-bold"><%= @menu.name %></h2>
+        <% if @menu.is_active %>
+        <div class="bg-green-500 flex justify-center items-center text-sm text-white rounded-lg px-3 py-0.5">
+          <p>Active</p>
+        </div>
+      <% end %>
+      </div>
       <%= render "join_menus/menu_show_items", menu: @menu %>
     </div>
 

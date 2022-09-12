@@ -15,6 +15,7 @@ class OrderItemsController < ApplicationController
 
   def new
     @restaurant = Restaurant.find(params[:restaurant_id])
+    @menu = @restaurant.menus.select(&:is_active).first
     @table = Table.find(params[:table_id])
     @table_order = TableOrder.find(params[:table_order_id])
     @table_customer = TableCustomer.find(params[:table_customer_id])

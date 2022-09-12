@@ -1,8 +1,8 @@
 class TableCustomersController < ApplicationController
   before_action :set_table_customer, only: [:index, :show, :edit, :update, :destroy]
   before_action :set_restaurant, only: [:index, :show, :new, :create]
-  before_action :set_table, only: [:index, :show, :new, :create]
-  before_action :set_table_order, only: [:index, :show, :new, :create]
+  before_action :set_table, only: [:index, :show, :new, :create, :checkout]
+  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout]
 
   def index
     @table_customers = TableCustomer.all
@@ -31,7 +31,8 @@ class TableCustomersController < ApplicationController
   end
 
   def checkout
-    @table_customer = TableCustomer.find(params[:id])
+    @restaurant = Restaurant.find(params[:id])
+    @table_customer = TableCustomer.find(params[:table_customer_id])
     # order  = Order.create!(teddy: teddy, teddy_sku: teddy.sku, amount: teddy.price, state: 'pending', user: current_user)
     table_price = 0
 
@@ -54,8 +55,8 @@ class TableCustomersController < ApplicationController
         quantity: 1,
       }],
       mode: 'payment',
-      success_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{table_customer.id}confirmation",
-      cancel_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/checkout",
+      success_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{@table_customer.id}/confirmation",
+      cancel_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{@table_customer.id}/checkout",
     )
 
     @table_customer.update(checkout_session_id: session.id)

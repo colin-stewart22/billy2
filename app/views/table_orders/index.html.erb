@@ -36,7 +36,7 @@
           <div class="w-2/12 flex items-center"><%= order_item.table_customer.name %></div>
           <div class="w-2/12 flex items-center" data-restaurant-server-target="ordered"><%= ((Time.now - order_item.created_at) / 60).round %> mins</div>
           <div class="w-2/12 flex items-center" data-restaurant-server-target="ready"><%= order_item.menu_item.prepare_time - ((Time.now - order_item.created_at) / 60).round %> mins</div>
-          <div class="w-2/12 flex items-center flex justify-end"><%= link_to "Mark as done", served_path(order_item.table, order_item), class: "bg-gray-900 px-8 py-3 text-white text-sm rounded-lg" %></div>
+          <div class="w-2/12 flex items-center flex justify-end"><%= link_to "Mark as done", served_path(order_item), class: "bg-gray-900 px-8 py-3 text-white text-sm rounded-lg" %></div>
         </div>
       <% end %>
     </div>

@@ -30,6 +30,38 @@ class TableCustomersController < ApplicationController
     end
   end
 
+  def checkout
+    @table_customer = TableCustomer.find(params[:id])
+    # order  = Order.create!(teddy: teddy, teddy_sku: teddy.sku, amount: teddy.price, state: 'pending', user: current_user)
+    table_price = 0
+
+    @table_customer.order_items.each do |order|
+      table_price += order.menu_item.price
+    end
+    @restaurant = @table_customer.table_order.restaurant
+    session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      line_items: [{
+        price_data: {
+          currency: 'usd',
+          unit_amount: table_price.to_i * 100,
+          product_data: {
+            name: 'T-shirt',
+            description: 'Comfortable cotton t-shirt',
+            images: ['https://example.com/t-shirt.png'],
+          },
+        },
+        quantity: 1,
+      }],
+      mode: 'payment',
+      success_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{table_customer.id}confirmation",
+      cancel_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/checkout",
+    )
+
+    @table_customer.update(checkout_session_id: session.id)
+    # redirect_to checkout_path(@restaurant, @table, @table_order)
+  end
+
   private
 
   def set_table_customer

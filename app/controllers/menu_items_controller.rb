@@ -1,5 +1,6 @@
 class MenuItemsController < ApplicationController
-  before_action :set_menu_item, only: %i[new edit update destroy]
+  before_action :set_restaurant, only: %i[index show new create edit update destroy]
+  before_action :set_menu_item, only: %i[edit update destroy]
 
   def index
     # We might need this not sure yet
@@ -15,11 +16,11 @@ class MenuItemsController < ApplicationController
 
   def create
     @menu_item = MenuItem.new(menu_item_params)
-    # if @menu.save
-    #   redirect_to new_restaurant_menu_path(@restaurant)
-    # else
-    #   render :new, status: :unprocessable_entity
-    # end
+    if @menu_item.save
+      redirect_to new_restaurant_menu_item_path(@restaurant)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
@@ -40,6 +41,10 @@ class MenuItemsController < ApplicationController
 
   def menu_item_params
     params.require(:menu_item).permit(:name, :category, :price, :prepare_time)
+  end
+
+  def set_restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
   end
 
   def set_menu_item

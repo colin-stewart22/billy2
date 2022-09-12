@@ -1,7 +1,9 @@
 <div class="customer-container">
   <div class="w-full h-28 bg-gray-300 flex items-end p-4">
     <div class="flex items-center gap-3">
+      <%= link_to restaurant_table_table_order_table_customer_path(@restaurant, @table, @table_order, @table_customer) do %>
       <i class="fa-solid fa-chevron-left text-xl"></i>
+      <% end %>
       <h1 class="text-3xl font-bold">Your Table</h1>
     </div>
   </div>
@@ -37,12 +39,14 @@
       </div>
       <div class="w-full flex justify-between items-center mt-3">
         <h2 class="text-xl font-bold">Total</h2>
-        <h2 class="text-xl font-bold">$<%= @subtotal + @service_charge + @tax %></h2>
+        <h2 class="text-xl font-bold">$<%= (@subtotal + @service_charge + @tax).round(2) %></h2>
       </div>
     </div>
     <hr class="mt-4">
     <div class="flex items-center justify-between my-4">
-      <button type="button" class="bg-black text-white rounded-lg py-2 px-4">Order more</button>
+      <div>
+        <%= link_to "Order More", new_restaurant_table_table_order_table_customer_order_item_path(@restaurant, @table, @table_order, @table_customer), class: "bg-black text-white rounded-lg py-2 px-4" %>
+      </div>
       <button type="button" class="bg-black text-white rounded-lg py-2 px-4" data-bs-toggle="modal" data-bs-target="#exampleModal">Checkout</button>
     </div>
   </div>

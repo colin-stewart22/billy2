@@ -7,23 +7,51 @@ class TableOrdersController < ApplicationController
   end
 
   def show
-    # @qr_code = RQRCode::QRCode.new(@table.qr_code)
-    # @svg = @qr_code.as_svg(
-    #   offset: 0,
-    #   color: '000',
-    #   shape_rendering: 'crispEdges',
-    #   standalone: true,
-    #   module_size: 2
-    # )
+    @table_orders = TableOrder.find(params[:id])
   end
 
   def new
     @table_order = TableOrder.new
   end
 
+  # def checkout
+  #   @table_order = TableOrder.find(params[:id])
+  #   @restaurant = @table_order.restaurant
+  #   @table = @table_order.table
+  #   # order  = Order.create!(teddy: teddy, teddy_sku: teddy.sku, amount: teddy.price, state: 'pending', user: current_user)
+  #   table_price = 0
+
+  #   @table_order.order_items.each do |order|
+  #    table_price += order.menu_item.price
+  #   end
+
+  #   session = Stripe::Checkout::Session.create(
+  #     payment_method_types: ['card'],
+  #     line_items: [{
+  #       price_data: {
+  #         currency: 'usd',
+  #         unit_amount: table_price.to_i * 100,
+  #         product_data: {
+  #           name: 'T-shirt',
+  #           description: 'Comfortable cotton t-shirt',
+  #           images: ['https://example.com/t-shirt.png'],
+  #         },
+  #       },
+  #       quantity: 1,
+  #     }],
+  #     mode: 'payment',
+  #     success_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/confirmation",
+  #     cancel_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/checkout",
+  #   )
+
+  #   @table_order.update(checkout_session_id: session.id)
+  #   # redirect_to checkout_path(@restaurant, @table, @table_order)
+  # end
+
+
   def create
     @table_order = TableOrder.new(table_order_params)
-    @table_order.user = current_user
+    @table_order.user = User.where(is_owner: false).sample
     @table_order.table = @table
     if @table_order.save
       redirect_to new_restaurant_table_table_order_table_customer_path(@restaurant, @table, @table_order)

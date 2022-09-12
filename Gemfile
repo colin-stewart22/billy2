@@ -81,3 +81,12 @@ gem "faker"
 
 # QR code gem
 gem 'rqrcode'
+
+# Stripe API gem
+gem 'money-rails'
+
+gem 'stripe'
+
+gem "dotenv-rails", groups: [:development, :test]
+
+gem "cloudinary"

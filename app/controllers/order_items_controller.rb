@@ -1,6 +1,7 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: %i[update destroy prepared! served!]
 
+
   def index
     @restaurant = Restaurant.find(params[:restaurant_id])
     @table = Table.find(params[:table_id])
@@ -9,12 +10,14 @@ class OrderItemsController < ApplicationController
     @table_customer = TableCustomer.find(params[:table_customer_id])
   end
 
+
   def show
     @table_customer = TableCustomer.find(params[:table_customer_id])
   end
 
   def new
     @restaurant = Restaurant.find(params[:restaurant_id])
+    @menu = @restaurant.menus.select(&:is_active).first
     @table = Table.find(params[:table_id])
     @table_order = TableOrder.find(params[:table_order_id])
     @table_customer = TableCustomer.find(params[:table_customer_id])
@@ -35,14 +38,15 @@ class OrderItemsController < ApplicationController
         @order_item.table_customer = @table_customer
         @order_item.menu_item = item
         @order_item.estimated_serving_time = item.prepare_time
+        new_amount = @table_customer.amount_due.to_f + item.price
+        @table_customer.update(amount_due: new_amount.round(2))
         @order_item.save!
       end
-      redirect_to restaurant_table_table_order_table_customer_order_item_path(
+      redirect_to restaurant_table_table_order_table_customer_path(
         @restaurant,
         @table,
         @table_order,
-        @table_customer,
-        @order_item
+        @table_customer
       )
     end
   rescue ActiveRecord::RecordInvalid

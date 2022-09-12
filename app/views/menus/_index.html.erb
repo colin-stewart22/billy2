@@ -7,15 +7,15 @@
         <% active_menu = Menu.find_by(is_active: true) %>
         <% unless active_menu.nil? %>
           <%= link_to restaurant_menu_path(restaurant, active_menu) do  %>
-              <div>
-                <div>
-                  <img src=<%= "https://source.unsplash.com/random/400x150/?restaurant-1" %> class="d-block rounded-lg" alt="restaurant image">
-                </div>
-                <div class="flex justify-between items-center">
-                  <div class="bg-green-500 text-sm text-white rounded-lg px-3 py-0.5">Active</div>
-                  <p class="text-right text-lg font-bold mt-1"><%= active_menu.name %></p>
-                </div>
-              </div>
+
+            <div>
+              <img src=<%= "https://source.unsplash.com/random/400x150/?restaurant-1" %> class="d-block rounded-lg" alt="restaurant image">
+            </div>
+            <div class="flex justify-between items-center">
+              <div class="bg-green-500 text-sm text-white rounded-lg px-3 py-0.5">Active</div>
+              <p class="text-right text-lg font-bold mt-1"><%= active_menu.name %></p>
+            </div>
+
           <% end %>
         <% end %>
       <% menus.each do |menu| %>

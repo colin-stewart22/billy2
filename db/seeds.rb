@@ -94,7 +94,7 @@ i = 1
     table = Table.create!(
       restaurant_id: restaurant.id,
       table_number: i,
-      qr_code: ""
+      qr_code: "http://127.0.0.1:3000/restaurants/#{restaurant.id}/tables/#{i}/table_orders/new"
     )
 
     puts "Create TableOrder database..."

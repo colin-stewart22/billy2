@@ -1,9 +1,9 @@
 <h1>This is the table checkout page</h1>
-<% table_price = 0 %>
+<% table_price = @table_customer.amount_due.to_f %>
 
-<% @table_customer.order_items.each do |order| %>
-  <% table_price += order.menu_item.price %>
-<% end %>
+<%# <% @table_customer.order_items.each do |order| %>
+  <%# <% table_price += order.menu_item.price %>
+<%# <% end %>
 
 <%= table_price %>
 

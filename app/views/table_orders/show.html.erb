@@ -1,6 +1,6 @@
 <div class="page-container pt-8">
 
-  <div class="flex items-center justify-between mb-4">
+  <div class="flex items-center justify-between mb-8">
     <div class="w-24">
       <%= link_to restaurant_path(@table_order.restaurant) do %>
         <i class="fa-solid fa-chevron-left"></i>
@@ -10,8 +10,7 @@
     <h2 class="text-2xl">Table <%= @table_order.table.table_number %></h2>
 
 
-    <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "flex justify-end w-24 dropdown-item" %>
-
+    <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "flex justify-end w-24" %>
   </div>
 
   <div class="w-full bg-white rounded-lg p-8">

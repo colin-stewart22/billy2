@@ -1,15 +1,14 @@
 class TableCustomersController < ApplicationController
-  before_action :set_table_customer, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, only: [:new, :create]
-  before_action :set_table, only: [:new, :create]
-  before_action :set_table_order, only: [:new, :create]
+  before_action :set_table_customer, only: [:index, :show, :edit, :update, :destroy]
+  before_action :set_restaurant, only: [:index, :show, :new, :create]
+  before_action :set_table, only: [:index, :show, :new, :create]
+  before_action :set_table_order, only: [:index, :show, :new, :create]
 
   def index
     @table_customers = TableCustomer.all
   end
 
   def show
-    @table_customer = TableCustomer.find(params[:id])
   end
 
   def new

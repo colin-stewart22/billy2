@@ -37,12 +37,11 @@ class OrderItemsController < ApplicationController
         @order_item.estimated_serving_time = item.prepare_time
         @order_item.save!
       end
-      redirect_to restaurant_table_table_order_table_customer_order_item_path(
+      redirect_to restaurant_table_table_order_table_customer_path(
         @restaurant,
         @table,
         @table_order,
-        @table_customer,
-        @order_item
+        @table_customer
       )
     end
   rescue ActiveRecord::RecordInvalid

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "/restaurants/:id/kitchen", to: "restaurants#kitchen", as: "kitchen"
   get "order_items/:id", to: "order_items#prepared!", as: "prepared"
   get "tables/:table_id/order_items/:id", to: "order_items#served!", as: "served"
+  get "restaurants/:id/tables/:table_id/table_orders/:table_order_id/checkout", to: "table_orders#checkout", as: "checkout"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

@@ -7,18 +7,45 @@ class TableOrdersController < ApplicationController
   end
 
   def show
-    # @qr_code = RQRCode::QRCode.new(@table.qr_code)
-    # @svg = @qr_code.as_svg(
-    #   offset: 0,
-    #   color: '000',
-    #   shape_rendering: 'crispEdges',
-    #   standalone: true,
-    #   module_size: 2
-    # )
+    @table_orders = TableOrder.find(params[:id])
   end
 
   def new
     @table_order = TableOrder.new
+  end
+
+  def checkout
+    @table_order = TableOrder.find(params[:id])
+    @restaurant = @table_order.restaurant
+    @table = @table_order.table
+    # order  = Order.create!(teddy: teddy, teddy_sku: teddy.sku, amount: teddy.price, state: 'pending', user: current_user)
+    table_price = 0
+
+    @table_order.order_items.each do |order|
+     table_price += order.menu_item.price
+    end
+
+    session = Stripe::Checkout::Session.create(
+      payment_method_types: ['card'],
+      line_items: [{
+        price_data: {
+          currency: 'usd',
+          unit_amount: 2000,
+          product_data: {
+            name: 'T-shirt',
+            description: 'Comfortable cotton t-shirt',
+            images: ['https://example.com/t-shirt.png'],
+          },
+        },
+        quantity: 1,
+      }],
+      mode: 'payment',
+      success_url: 'https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
+      cancel_url: 'https://example.com/cancel',
+    )
+
+    @table_order.update(checkout_session_id: session.id)
+    # redirect_to checkout_path(@restaurant, @table, @table_order)
   end
 
   def create

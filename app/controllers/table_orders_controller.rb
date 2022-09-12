@@ -48,8 +48,6 @@ class TableOrdersController < ApplicationController
   #   # redirect_to checkout_path(@restaurant, @table, @table_order)
   # end
 
-  def confirmation
-  end
 
   def create
     @table_order = TableOrder.new(table_order_params)

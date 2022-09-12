@@ -18,7 +18,7 @@ class TableCustomersController < ApplicationController
   def create
     # Needs work
     @table_customer = TableCustomer.new(table_customer_params)
-    @table_order.user = current_user
+    @table_order.user = User.where(is_owner: false).sample
     @table_customer.table_order_id = @table_order.id
 
     @table_customer.table_order = @table_order
@@ -61,6 +61,9 @@ class TableCustomersController < ApplicationController
 
     @table_customer.update(checkout_session_id: session.id)
     # redirect_to checkout_path(@restaurant, @table, @table_order)
+  end
+
+  def confirmation
   end
 
   private

@@ -28,4 +28,6 @@ Rails.application.routes.draw do
   end
   get "restaurants/:restaurant_id/menus/:id/activated", to: "menus#activated!", as: "activated"
   get "restaurants/:restaurant_id/tables/:table_id/table_orders/:table_order_id/table_customers/:table_customer_id/split_evenly", to: "table_customers#split_evenly", as: "split_evenly"
+  get "restaurants/:restaurant_id/tables/:table_id/table_orders/:table_order_id/table_customers/:table_customer_id/split_by_items", to: "table_customers#split_by_items", as: "split_by_items"
+  get "restaurants/:restaurant_id/tables/:table_id/table_orders/:table_order_id/table_customers/:table_customer_id/pay_all", to: "table_customers#pay_all", as: "pay_all"
 end

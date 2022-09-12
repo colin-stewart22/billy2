@@ -1,1 +1,3 @@
-<%= @table_order.table_customers.count %>
+<% @table_order.table_customers.each do |customer| %>
+  <%= customer.amount_due %>
+<% end %>

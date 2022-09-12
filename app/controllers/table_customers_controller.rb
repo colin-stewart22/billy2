@@ -1,8 +1,8 @@
 class TableCustomersController < ApplicationController
   before_action :set_table_customer, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, only: [:index, :show, :new, :create]
-  before_action :set_table, only: [:index, :show, :new, :create, :checkout]
-  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout]
+  before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items]
+  before_action :set_table, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
+  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
 
   def index
     @table_customers = TableCustomer.all
@@ -37,14 +37,17 @@ class TableCustomersController < ApplicationController
     @table_order.table_customers.each do |customer|
       customer.update(amount_due: splitted_bill)
     end
+    @table_order.update(payment_option: "split_evenly")
+    redirect_to restaurant_table_table_order_table_customers_path(@restaurant, @table, @table_order)
   end
 
   def split_by_items
-
+    @table_order = TableOrder.find(params[:table_order_id])
+    @table_order.update(payment_option: "split_by_items")
+    redirect_to restaurant_table_table_order_table_customers_path(@restaurant, @table, @table_order)
   end
 
   def pay_all
-  
   end
 
   def checkout

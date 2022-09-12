@@ -1,4 +1,8 @@
 class TableCustomersController < ApplicationController
+  before_action :set_table_customer, only: [:show, :edit, :update, :destroy]
+  before_action :set_restaurant, only: [:new, :create]
+  before_action :set_table, only: [:new, :create]
+  before_action :set_table_order, only: [:new, :create]
 
   def index
     @table_customers = TableCustomer.all
@@ -9,22 +13,41 @@ class TableCustomersController < ApplicationController
   end
 
   def new
-    @table_customer = TableOrder.new
+    @table_customer = TableCustomer.new
   end
 
   def create
     # Needs work
-    @table_customer = TableOrder.new(table_customer_params)
-    @table_order = Table.find(params[:table_order_id])
+    @table_customer = TableCustomer.new(table_customer_params)
+    @table_order.user = current_user
     @table_customer.table_order_id = @table_order.id
+
+    @table_customer.table_order = @table_order
+
     if @table_customer.save
-      redirect_to table_customer_path(@table_customer)
+      redirect_to new_restaurant_table_table_order_table_customer_order_item_path(@restaurant, @table, @table_order, @table_customer)
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   private
+
+  def set_table_customer
+    @table_customer = TableCustomer.find(params[:id])
+  end
+
+  def set_table_order
+    @table_order = TableOrder.find(params[:table_order_id])
+  end
+
+  def set_table
+    @table = Table.find(params[:table_id])
+  end
+
+  def set_restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
+  end
 
   def table_customer_params
     # Needs work

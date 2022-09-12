@@ -1,8 +1,8 @@
 class TableCustomersController < ApplicationController
-  before_action :set_table_customer, only: [:index, :show, :edit, :update, :destroy]
-  before_action :set_restaurant, only: [:index, :show, :new, :create]
-  before_action :set_table, only: [:index, :show, :new, :create, :checkout]
-  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout]
+  before_action :set_table_customer, only: [:show, :edit, :update, :destroy]
+  before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items]
+  before_action :set_table, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
+  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
 
   def index
     @table_customers = TableCustomer.all
@@ -30,15 +30,35 @@ class TableCustomersController < ApplicationController
     end
   end
 
+  def split_evenly
+    @table_order = TableOrder.find(params[:table_order_id])
+    number = @table_order.table_customers.count
+    splitted_bill = (@table_order.total_price / number).round(2)
+    @table_order.table_customers.each do |customer|
+      customer.update(amount_due: splitted_bill)
+    end
+    @table_order.update(payment_option: "split_evenly")
+    redirect_to restaurant_table_table_order_table_customers_path(@restaurant, @table, @table_order)
+  end
+
+  def split_by_items
+    @table_order = TableOrder.find(params[:table_order_id])
+    @table_order.update(payment_option: "split_by_items")
+    redirect_to restaurant_table_table_order_table_customers_path(@restaurant, @table, @table_order)
+  end
+
+  def pay_all
+  end
+
   def checkout
     @restaurant = Restaurant.find(params[:id])
     @table_customer = TableCustomer.find(params[:table_customer_id])
     # order  = Order.create!(teddy: teddy, teddy_sku: teddy.sku, amount: teddy.price, state: 'pending', user: current_user)
-    table_price = 0
+    table_price = @table_customer.amount_due.to_f
 
-    @table_customer.order_items.each do |order|
-      table_price += order.menu_item.price
-    end
+    # @table_customer.order_items.each do |order|
+    #   table_price += order.menu_item.price
+    # end
     @restaurant = @table_customer.table_order.restaurant
     session = Stripe::Checkout::Session.create(
       payment_method_types: ['card'],

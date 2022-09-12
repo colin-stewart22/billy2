@@ -1,5 +1,4 @@
 <div class="page-container pt-8">
-
   <div class="flex justify-between items-center">
     <div class="flex justify-start">
         <%= link_to restaurants_path do %>
@@ -9,6 +8,7 @@
           </div>
         <% end %>
     </div>
+
     <div class="flex justify-center items-center">
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
         <li class="nav-item" role="presentation">
@@ -19,6 +19,7 @@
         </li>
       </ul>
     </div>
+
     <div class="flex justify-end w-48">
       <% if user_signed_in? %>
         <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class:"rounded-xl border px-3 py-2 hover:bg-gray-500 hover:text-white" %>

@@ -1,15 +1,27 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: %i[update destroy prepared! served!]
 
-  def show
-  end
 
-  def new
-    @order_item = OrderItem.new
+  def index
     @restaurant = Restaurant.find(params[:restaurant_id])
     @table = Table.find(params[:table_id])
     @table_order = TableOrder.find(params[:table_order_id])
+    @table_customers = @table_order.table_customers
     @table_customer = TableCustomer.find(params[:table_customer_id])
+  end
+
+
+  def show
+    @table_customer = TableCustomer.find(params[:table_customer_id])
+  end
+
+  def new
+    @restaurant = Restaurant.find(params[:restaurant_id])
+    @menu = @restaurant.menus.select(&:is_active).first
+    @table = Table.find(params[:table_id])
+    @table_order = TableOrder.find(params[:table_order_id])
+    @table_customer = TableCustomer.find(params[:table_customer_id])
+    @order_item = OrderItem.new
   end
 
   def create
@@ -28,12 +40,11 @@ class OrderItemsController < ApplicationController
         @order_item.estimated_serving_time = item.prepare_time
         @order_item.save!
       end
-      redirect_to restaurant_table_table_order_table_customer_order_items_path(
+      redirect_to restaurant_table_table_order_table_customer_path(
         @restaurant,
         @table,
         @table_order,
-        @table_customer,
-        @order_item
+        @table_customer
       )
     end
   rescue ActiveRecord::RecordInvalid
@@ -74,7 +85,6 @@ class OrderItemsController < ApplicationController
 
   def render_new
     @order_item = OrderItem.new
-    @order_item.errors.add(:base, "It already exists")
     render :new, status: :unprocessable_entity
   end
 end

@@ -1,59 +1,55 @@
 <div class="customer-container">
   <div class="w-full h-28 bg-gray-300 flex items-end p-4">
     <div class="flex items-center gap-3">
+      <%= link_to restaurant_table_table_order_table_customer_path(@restaurant, @table, @table_order, @table_customer) do %>
       <i class="fa-solid fa-chevron-left text-xl"></i>
-      <h1 class="text-3xl font-bold">Sarah</h1>
+      <% end %>
+      <h1 class="text-3xl font-bold">Your Table</h1>
     </div>
   </div>
-  <div class="p-3">
-    <%# .each here %>
-    <div class="w-full flex items-center mt-3">
-      <div class="mr-5">
-        <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-1" %> class="d-block rounded-lg" alt="restaurant image">
+  <div class="px-4">
+    <% @subtotal = 0 %>
+    <% @table_customers.each do |customer| %>
+      <div class="mt-4">
+        <h1 class="text-xl font-bold"><%= customer.name %></h1>
+        <% customer.order_items.each do |order_item| %>
+          <div class="w-full flex justify-between">
+            <p><%= order_item.menu_item.name %></p>
+            <p>$<%= order_item.menu_item.price %></p>
+            <% @subtotal += order_item.menu_item.price %>
+          </div>
+        <% end %>
       </div>
-      <div class="w-6/12">
-        <p class="font-bold text-sm">This is a food item</p>
-        <p class="text mt-2">$10</p>
+    <% end %>
+    <hr class="mt-4">
+    <div class="mt-4">
+      <div class="w-full flex justify-between items-center mt-1">
+        <h3>subtotal</h3>
+        <h3>$<%= (@subtotal).round(2) %></h3>
       </div>
-      <div class="flex items-center gap-3">
-        <i class="fa-solid fa-minus text-gray-400 text-lg"></i>
-        <p class="text-xl">1</p>
-        <i class="fa-solid fa-plus text-gray-400 text-lg"></i>
+      <div class="w-full flex justify-between items-center mt-1">
+        <h3>service charge</h3>
+        <% @service_charge = (@subtotal * 0.10).round(2) %>
+        <h3>$<%= @service_charge %></h3>
       </div>
-    </div>
-
-    <div class="w-full flex items-center mt-3">
-      <div class="mr-5">
-        <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-2" %> class="d-block rounded-lg" alt="restaurant image">
+      <div class="w-full flex justify-between items-center mt-1">
+        <h3>tax</h3>
+        <% @tax = (@subtotal * 0.08).round(2) %>
+        <h3>$<%= @tax %></h3>
       </div>
-      <div class="w-6/12">
-        <p class="font-bold text-sm">This is a food item</p>
-        <p class="text mt-2">$10</p>
-      </div>
-      <div class="flex items-center gap-3">
-        <i class="fa-solid fa-minus text-gray-400 text-lg"></i>
-        <p class="text-xl">1</p>
-        <i class="fa-solid fa-plus text-gray-400 text-lg"></i>
-      </div>
-    </div>
-
-    <div class="w-full flex items-center mt-3">
-      <div class="mr-5">
-        <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-3" %> class="d-block rounded-lg" alt="restaurant image">
-      </div>
-      <div class="w-6/12">
-        <p class="font-bold text-sm">This is a food item</p>
-        <p class="text mt-2">$10</p>
-      </div>
-      <div class="flex items-center gap-3">
-        <i class="fa-solid fa-minus text-gray-400 text-lg"></i>
-        <p class="text-xl">1</p>
-        <i class="fa-solid fa-plus text-gray-400 text-lg"></i>
+      <div class="w-full flex justify-between items-center mt-3">
+        <h2 class="text-xl font-bold">Total</h2>
+        <h2 class="text-xl font-bold">$<%= (@subtotal + @service_charge + @tax).round(2) %></h2>
       </div>
     </div>
-
-    <div class="w-full flex justify-center">
-      <button class="bg-black text-white px-12 py-2 rounded-lg fixed bottom-5">Place your order</button>
+    <hr class="mt-4">
+    <div class="flex justify-between my-4">
+      <div>
+        <%= link_to "Order More", new_restaurant_table_table_order_table_customer_order_item_path(@restaurant, @table, @table_order, @table_customer), class: "bg-black text-white px-10 py-2 rounded-lg bottom-5" %>
+      </div>
+      <div>
+        <%= link_to "Checkout", new_restaurant_table_table_order_table_customer_order_item_path(@restaurant, @table, @table_order, @table_customer), class: "bg-black text-white px-10 py-2 rounded-lg bottom-5" %>
+      </div>
     </div>
   </div>
 </div>

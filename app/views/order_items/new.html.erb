@@ -1,9 +1,11 @@
+<h2 class="text-2xl text-bold my-3"><%= @menu.name %></h2>
+
 <%= simple_form_for [@restaurant, @table, @table_order, @table_customer, @order_item] do |f| %>
   <div>
-    <%= f.association :menu_item, as: :check_boxes, input_html: { multiple: true } %>
+    <%= f.association :menu_item, collection: @menu.menu_items, as: :check_boxes, input_html: { multiple: true } %>
   </div>
   <div>
-    <%= f.submit "Add", class: "p-3 border" %>
+    <%= f.submit "Add", class: "p-2 border" %>
   </div>
 
 <% end %>

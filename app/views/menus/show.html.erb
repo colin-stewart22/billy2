@@ -23,7 +23,7 @@
       <div class="flex gap-3 mb-3">
         <h2 class="text-xl font-bold"><%= @menu.name %></h2>
         <% if @menu.is_active %>
-          <div class="bg-green-500 flex justify-center items-center text-sm text-white rounded-lg px-3 py-0.5">
+          <div class="bg-green-500 flex justify-center items-center text-sm text-white rounded-lg px-3 py-1">
             <p>Active</p>
           </div>
         <% end %>
@@ -33,7 +33,7 @@
         <% categories = ["Starters", "Mains", "Breakfast", "Lunch", "Dinner", "Desserts", "Drinks"] %>
         <% categories.each do |category| %>
           <% menu = @menu.menu_items.select { |item| item.category == category } %>
-          <h3 class="text-lg font-bold ml-5 mb-3"><%= category %></h3>
+          <h3 class="text-lg font-bold mb-3 mt-8"><%= category %></h3>
           <%= render "menu_items/show", menu: menu %>
         <% end %>
       </div>

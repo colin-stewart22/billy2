@@ -67,8 +67,8 @@ class TableCustomersController < ApplicationController
           currency: 'usd',
           unit_amount: table_price.to_i * 100,
           product_data: {
-            name: 'T-shirt',
-            description: 'Comfortable cotton t-shirt',
+            name: 'Your order',
+            description: 'Food',
             images: ['https://example.com/t-shirt.png'],
           },
         },
@@ -84,6 +84,7 @@ class TableCustomersController < ApplicationController
   end
 
   def confirmation
+    @restaurant = Restaurant.find(params[:id])
   end
 
   private

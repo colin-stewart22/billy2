@@ -35,7 +35,7 @@ class MenusController < ApplicationController
 
   def destroy
     @menu.destroy
-    redirect_to restaurant_menus_path(@menu.restaurant), status: :see_other
+    redirect_to restaurant_path(@menu.restaurant), status: :see_other
   end
 
   def activated!

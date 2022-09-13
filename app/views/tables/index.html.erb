@@ -1,6 +1,6 @@
 
 
-<div class="qr-container flex flex-wrap">
+<div class="qr-container flex flex-wrap justify-between">
   <% @qr_codes.each do |k, v| %>
   <p> Table number <%= k %> </p>
   <%= v.html_safe %>

@@ -16,8 +16,9 @@ class MenuItemsController < ApplicationController
 
   def create
     @menu_item = MenuItem.new(menu_item_params)
+    @menu_item.restaurant = @restaurant
     if @menu_item.save
-      redirect_to new_restaurant_menu_item_path(@restaurant)
+      redirect_to restaurant_path(@restaurant)
     else
       render :new, status: :unprocessable_entity
     end
@@ -40,7 +41,7 @@ class MenuItemsController < ApplicationController
   private
 
   def menu_item_params
-    params.require(:menu_item).permit(:name, :category, :price, :prepare_time)
+    params.require(:menu_item).permit(:name, :category, :description, :price, :prepare_time)
   end
 
   def set_restaurant

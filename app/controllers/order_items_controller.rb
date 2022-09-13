@@ -39,7 +39,7 @@ class OrderItemsController < ApplicationController
     @table_customer.update(amount_due: customer_new_amount.round(2))
     @table_order.update(total_price: table_order_new_amount.round(2))
     @order_item.save!
-    redirect_to restaurant_table_table_order_table_customer_path(
+    redirect_to new_restaurant_table_table_order_table_customer_order_item_path(
       @restaurant,
       @table,
       @table_order,
@@ -53,8 +53,14 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
+    @order_item = OrderItem.find(params[:id])
     @order_item.destroy
-    # redirect_to host_restaurant_path(@order_item.restaurant), status: :see_other
+    redirect_to restaurant_table_table_order_table_customer_path(
+      @order_item.restaurant,
+      @order_item.table,
+      @order_item.table_order,
+      @order_item.table_customer
+    ), status: :see_other
   end
 
   def prepared!

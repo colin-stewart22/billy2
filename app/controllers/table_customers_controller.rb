@@ -69,10 +69,10 @@ class TableCustomersController < ApplicationController
           product_data: {
             name: 'T-shirt',
             description: 'Comfortable cotton t-shirt',
-            images: ['https://example.com/t-shirt.png'],
-          },
+            images: ['https://example.com/t-shirt.png']
+          }
         },
-        quantity: 1,
+        quantity: 1
       }],
       mode: 'payment',
       success_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{@table_customer.id}/confirmation",

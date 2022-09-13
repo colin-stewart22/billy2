@@ -1,6 +1,6 @@
 class TableCustomersController < ApplicationController
-  before_action :set_table_customer, only: [:show, :edit, :update, :destroy, :split_by_items]
-  before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items]
+  before_action :set_table_customer, only: [:show, :edit, :update, :destroy, :checkout]
+  before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items, :checkout]
   before_action :set_table, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
   before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
 
@@ -49,6 +49,7 @@ class TableCustomersController < ApplicationController
 
   def split_by_items
     @table_order = TableOrder.find(params[:table_order_id])
+    @table_customer = TableCustomer.find(params[:id])
     total_amount = (@table_customer.amount_due * 1.125).round(2)
     @table_customer.update(total_amount: total_amount)
     @table_order.update(payment_option: "split_by_items")
@@ -59,8 +60,6 @@ class TableCustomersController < ApplicationController
   end
 
   def checkout
-    @restaurant = Restaurant.find(params[:id])
-    @table_customer = TableCustomer.find(params[:table_customer_id])
     # order  = Order.create!(teddy: teddy, teddy_sku: teddy.sku, amount: teddy.price, state: 'pending', user: current_user)
     @table_price = @table_customer.total_amount
     @subtotal = @table_customer.amount_due.to_f

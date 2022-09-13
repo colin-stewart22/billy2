@@ -1,5 +1,5 @@
 class TableCustomersController < ApplicationController
-  before_action :set_table_customer, only: [:show, :edit, :update, :destroy, :checkout, :split_by_items]
+  before_action :set_table_customer, only: [:show, :edit, :update, :destroy, :split_by_items]
   before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items]
   before_action :set_table, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
   before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
@@ -45,7 +45,7 @@ class TableCustomersController < ApplicationController
       customer.update(total_amount: total_amount)
     end
     @table_order.update(payment_option: "split_evenly")
-    redirect_to restaurant_table_table_order_table_customers_path(@restaurant, @table, @table_order)
+    redirect_to checkout_path(@restaurant, @table, @table_order)
   end
 
   def split_by_items
@@ -54,7 +54,7 @@ class TableCustomersController < ApplicationController
     total_amount = @table_customer.amount_due + service_charge
     @table_customer.update(total_amount: total_amount)
     @table_order.update(payment_option: "split_by_items")
-    redirect_to restaurant_table_table_order_table_customers_path(@restaurant, @table, @table_order)
+    redirect_to checkout_path(@restaurant, @table, @table_order)
   end
 
   def pay_all
@@ -99,6 +99,8 @@ class TableCustomersController < ApplicationController
 
   def confirmation
     @restaurant = Restaurant.find(params[:id])
+    @table_order = TableOrder.find(params[:table_order_id])
+    @table = Table.find(params[:table_id])
     @table_order.update(is_active: false)
     @table.update(is_active: false)
   end

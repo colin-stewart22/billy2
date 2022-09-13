@@ -37,7 +37,6 @@ class OrderItemsController < ApplicationController
     customer_new_amount = @table_customer.amount_due.to_f + @menu_item.price
     table_order_new_amount = @table_order.total_price.to_f + @menu_item.price
     @table_customer.update(amount_due: customer_new_amount.round(2))
-    @table_customer.update(amount_due: customer_new_amount.round(2))
     @table_order.update(total_price: table_order_new_amount.round(2))
     @order_item.save!
     redirect_to new_restaurant_table_table_order_table_customer_order_item_path(
@@ -55,7 +54,13 @@ class OrderItemsController < ApplicationController
 
   def destroy
     @order_item = OrderItem.find(params[:id])
+    @table_customer = @order_item.table_customer
+    @table_order = @order_item.table_order
     @order_item.destroy
+    customer_new_amount = @table_customer.amount_due - @order_item.menu_item.price
+    table_order_new_amount = @table_order.total_price - @order_item.menu_item.price
+    @table_customer.update(amount_due: customer_new_amount.round(2))
+    @table_order.update(total_price: table_order_new_amount.round(2))
     redirect_to restaurant_table_table_order_table_customer_path(
       @order_item.restaurant,
       @order_item.table,

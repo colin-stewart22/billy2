@@ -24,6 +24,7 @@
           <% if menu.is_active == false %>
             <%= link_to restaurant_menu_path(restaurant, menu) do  %>
               <div>
+                <%= menu.photo.attached? %>
                 <% if menu.photo.attached? %>
                   <%= cl_image_tag menu.photo.key, height: 150, width: 400, crop: :fill %>
                 <% else %>

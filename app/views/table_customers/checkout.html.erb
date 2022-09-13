@@ -5,21 +5,35 @@
       <h1 class="text-3xl font-bold">Your Payment</h1>
     </div>
   </div>
-  <%# if table_order.payment_option == "split_evenly" %>
   <div class="p-3">
-    <h2 class="text-xl font-bold mt-4">table_customer.captain == true chose to split evenly</h2>
-    <div class="flex justify-between items-center mt-10">
-      <h3>Your Table Subtotal</h3>
-      <p>$<%= @table_order.total_price %></p>
-    </div>
-    <div class="flex justify-between items-center mt-1">
-      <h3>Number of Diners</h3>
-      <p><%= @table_order.table_customers.count %></p>
-    </div>
-    <div class="flex justify-between items-center mt-1">
-      <h3 class="font-bold">Your Portion</h3>
-      <p class="font-bold">$<%= @table_customer.amount_due %></p>
-    </div>
+    <% @table_captain = @table_order.table_customers.find{ |customer| customer.is_captain == true } %>
+    <% if @table_order.payment_option = "split_evenly" %>
+      <h2 class="text-xl font-bold mt-4"><%= @table_captain %> chose to split evenly</h2>
+      <div class="flex justify-between items-center mt-10">
+        <h3>Your Table Subtotal</h3>
+        <p>$<%= @table_order.total_price %></p>
+      </div>
+      <div class="flex justify-between items-center mt-1">
+        <h3>Number of Diners</h3>
+        <p><%= @table_order.table_customers.count %></p>
+      </div>
+      <div class="flex justify-between items-center mt-1">
+        <h3 class="font-bold">Your Portion</h3>
+        <p class="font-bold">$<%= @table_customer.amount_due %></p>
+      </div>
+    <% elsif @table_order.payment_option = "split_by_items" %>
+      <h2 class="text-xl font-bold mt-4"><%= @table_captain %> chose to split by items</h2>
+      <h3 class="text-xl mt-10">Your Items</h3>
+      <% @table_customer.order_items.each do |item| %>
+        <div class="flex justify-between items-center mt-2">
+          <h3><%= item.menu_item.name %></h3>
+          <p>$<%= item.menu_item.price %></p>
+        </div>
+      <% end %>
+    <% else %>
+      <h1>Someone is paying for the tab</h1>
+    <% end %>
+
     <h2 class="font-bold mt-12">Would you like to leave a tip?</h2>
     <div class="flex justify-between items-center mt-2">
       <div class="bg-gray-200 px-3 py-1 rounded-lg">5%</div>

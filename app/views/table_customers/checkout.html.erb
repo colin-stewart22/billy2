@@ -31,28 +31,23 @@
     <div class="mt-12">
       <div class="flex justify-between items-center mt-1">
         <h3>subtotal</h3>
-        <% @subtotal = @table_customer.amount_due %>
         <p>$<%= @subtotal %></p>
       </div>
       <div class="flex justify-between items-center mt-1">
         <h3>service charge</h3>
-        <% @service_charge = @subtotal * 0.125 %>
-        <p>$<%= @service_charge.round(2) %></p>
+        <p>$<%= @service_charge %></p>
       </div>
       <div class="flex justify-between items-center mt-1">
         <h3>tip</h3>
-        <% @tip = @subtotal * 0.0 %>
-        <p>$<%= @tip.round(2) %></p>
+        <p>$<%= @tip %></p>
       </div>
       <div class="flex justify-between items-center mt-1">
         <h3>tax</h3>
-        <% @tax = @subtotal * 0.08 %>
-        <p>$<%= @tax.round(2) %></p>
+        <p>$<%= @tax %></p>
       </div>
       <div class="flex justify-between items-center mt-4">
         <h3 class="text-xl font-bold">Total Due</h3>
-        <% @total_due = @subtotal + @service_charge + @tip + @tax %>
-        <p class="text-xl font-bold">$<%= @total_due %></p>
+        <p class="text-xl font-bold">$<%= @table_price %></p>
       </div>
     </div>
     <div class="w-full flex justify-center mt-12">
@@ -61,16 +56,13 @@
   </div>
 </div>
 
-
-<% @table_customer.update(total_price: @total_due) %>
 <h1>This is the table checkout page</h1>
-<% table_price = @total_due.to_f %>
 
 <%# <% @table_customer.order_items.each do |order| %>
   <%# <% table_price += order.menu_item.price %>
 <%# <% end %>
 
-<%= table_price %>
+<%= @table_price %>
 
 <button class="btn btn-primary" id="pay">Checkout</button>
 

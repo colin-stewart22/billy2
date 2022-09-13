@@ -37,58 +37,28 @@ owner = User.create!(
   is_owner: true
 )
 
+puts "Create Restaurant database..."
+
+restaurant = Restaurant.create!(
+  name: Faker::Restaurant.name,
+  address: "204 Brick Lane Shoreditch, London, E1 6SA, England",
+  phone_number: Faker::PhoneNumber.cell_phone_in_e164,
+  theme_color: "blue",
+  user_id: owner.id
+)
+
 i = 1
 
-4.times do
-  puts "Create Restaurant database..."
+3.times do
+  puts "Create Server database..."
 
-  restaurant = Restaurant.create!(
-    name: Faker::Restaurant.name,
-    address: "204 Brick Lane Shoreditch, London, E1 6SA, England",
-    phone_number: Faker::PhoneNumber.cell_phone_in_e164,
-    theme_color: "blue",
-    user_id: owner.id
+  server = User.create!(
+    email: "server#{i}@lewagon.com",
+    password: "lewagon",
+    first_name: "server",
+    last_name: "lewagon",
+    is_owner: false
   )
-
-  5.times do
-    puts "Create Menu database..."
-
-    menu = Menu.create!(
-      name: ["Summer", "Holiday", "Winter"].sample,
-      restaurant_id: restaurant.id
-    )
-
-    10.times do
-      puts "Create MenuItem database..."
-
-      menu_item = MenuItem.create!(
-        name: Faker::Food.dish,
-        category: ["Breakfast", "Lunch", "Dinner", "Starters", "Mains", "Desserts", "Drinks"].sample,
-        description: Faker::Food.description,
-        price: rand(1..50),
-        prepare_time: rand(5..30),
-        restaurant_id: restaurant.id
-      )
-
-      puts "Create JoinMenu database..."
-
-      JoinMenu.create!(
-        menu_id: menu.id,
-        menu_item_id: menu_item.id
-      )
-    end
-  end
-
-  5.times do
-    puts "Create Server database..."
-
-    server = User.create!(
-      email: "server#{i}@lewagon.com",
-      password: "lewagon",
-      first_name: "server",
-      last_name: "lewagon",
-      is_owner: false
-    )
 
     puts "Create Table database..."
     table = Table.create!(
@@ -97,75 +67,6 @@ i = 1
       qr_code: "http://127.0.0.1:3000/restaurants/#{restaurant.id}/tables/#{i}/table_orders/new"
     )
 
-    puts "Create TableOrder database..."
-    table_order = TableOrder.create!(
-      is_active: true,
-      total_price: 0,
-      table_id: table.id,
-      user_id: server.id
-    )
-
-    puts "Create Table_captain database..."
-    table_captain = TableCustomer.create!(
-      name: "Captain",
-      is_captain: true,
-      table_order_id: table_order.id
-    )
-
-    3.times do
-      puts "Create Table_captain OrderItem database..."
-      OrderItem.create!(
-        estimated_serving_time: (5..60).to_a.select { |num| (num % 5).zero? }.sample,
-        menu_item_id: Menu.all[i - 1].menu_items.sample.id,
-        table_customer_id: table_captain.id
-      )
-    end
-
-    puts "Create Table_customer1 database..."
-    table_customer1 = TableCustomer.create!(
-      name: "Customer1",
-      table_order_id: table_order.id
-    )
-
-    3.times do
-      puts "Create Table_customer1 OrderItem database..."
-      OrderItem.create!(
-        estimated_serving_time: (5..60).to_a.select { |num| (num % 5).zero? }.sample,
-        menu_item_id: Menu.all[i - 1].menu_items.sample.id,
-        table_customer_id: table_customer1.id
-      )
-    end
-
-    puts "Create Table_customer2 database..."
-    table_customer2 = TableCustomer.create!(
-      name: "Customer2",
-      table_order_id: table_order.id
-    )
-
-    3.times do
-      puts "Create Table_customer2 OrderItem database..."
-      OrderItem.create!(
-        estimated_serving_time: (5..60).to_a.select { |num| (num % 5).zero? }.sample,
-        menu_item_id: Menu.all[i - 1].menu_items.sample.id,
-        table_customer_id: table_customer2.id
-      )
-    end
-
-    puts "Create Table_customer3 database..."
-    table_customer3 = TableCustomer.create!(
-      name: "Customer3",
-      table_order_id: table_order.id
-    )
-
-    3.times do
-      puts "Create Table_customer3 OrderItem database..."
-      OrderItem.create!(
-        estimated_serving_time: (5..60).to_a.select { |num| (num % 5).zero? }.sample,
-        menu_item_id: Menu.all[i - 1].menu_items.sample.id,
-        table_customer_id: table_customer3.id
-      )
-    end
-
     puts "Create RestaurantServer database..."
       RestaurantServer.create!(
         restaurant_id: restaurant.id,
@@ -173,7 +74,6 @@ i = 1
       )
 
     i += 1
-  end
 end
 
 puts "Completed!"

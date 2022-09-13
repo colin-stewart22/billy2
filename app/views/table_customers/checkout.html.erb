@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="p-3">
-    <% @table_captain = @table_order.table_customers.find{ |customer| customer.is_captain == true } %>
+    <% @table_captain = @table_order.table_customers.find{ |customer| customer.is_captain == true }.name %>
     <% if @table_order.payment_option = "split_evenly" %>
       <h2 class="text-xl font-bold mt-4"><%= @table_captain %> chose to split evenly</h2>
       <div class="flex justify-between items-center mt-10">

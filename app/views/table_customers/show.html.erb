@@ -18,7 +18,9 @@
           <p class="text mt-2">$<%= item.menu_item.price %></p>
         </div>
         <div class="flex items-center gap-3">
-          <i class="fa-solid fa-minus text-gray-400 text-lg"></i>
+          <%= link_to order_item_path(item), data: { turbo_method: :delete } do %>
+            <i class="fa-solid fa-minus text-gray-400 text-lg"></i>
+          <% end %>
           <p class="text-xl">1</p>
           <i class="fa-solid fa-plus text-gray-400 text-lg"></i>
         </div>

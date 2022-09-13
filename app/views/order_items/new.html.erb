@@ -4,9 +4,7 @@
 <div class="customer-container">
   <div class="w-full h-40 bg-gray-300 flex flex-col p-3">
     <div class="flex -space-x-2 self-end overflow-auto">
-      <div class="flex justify-center items-center inline-block h-8 w-8 rounded-full border-2 border-white bg-orange-400">
-        <h1 class="text-lg font-bold"><%= @table_customer.name[0] %></h1>
-      </div>
+
       <% @table_customers.each do |customer| %>
         <% unless customer == @table_customer %>
           <div class="flex justify-center items-center inline-block h-8 w-8 rounded-full border-2 border-white bg-gray-300">
@@ -14,6 +12,10 @@
           </div>
         <% end %>
       <% end %>
+
+      <div class="flex justify-center items-center inline-block h-8 w-8 rounded-full border-2 border-white bg-orange-400">
+        <h1 class="text-lg font-bold"><%= @table_customer.name[0] %></h1>
+      </div>
     </div>
 
     <div>
@@ -68,7 +70,10 @@
     </div>
   <% end %>
   <div class="h-16"></div>
-  <div class="w-full flex justify-center">
-    <%= link_to "See your order", restaurant_table_table_order_table_customer_path(@restaurant, @table, @table_order, @table_customer), class: "bg-black text-white px-12 py-2 rounded-lg fixed bottom-5" %>
-  </div>
+
+  <% unless @table_customer.order_items.count.zero? %>
+    <div class="w-full flex justify-center">
+      <%= link_to "See your order", restaurant_table_table_order_table_customer_path(@restaurant, @table, @table_order, @table_customer), class: "bg-black text-white px-12 py-2 rounded-lg fixed bottom-5" %>
+    </div>
+  <% end %>
 </div>

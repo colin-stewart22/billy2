@@ -3,34 +3,37 @@
 
 <div class="customer-container">
   <div class="w-full h-40 bg-gray-300 flex flex-col p-3">
-      <div class="self-end">
-        <div class="flex -space-x-2">
-          <%# .each here %>
+    <div class="flex -space-x-2 self-end overflow-auto">
 
-          <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-          <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-          <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.25&w=256&h=256&q=80" alt="">
-          <img class="inline-block h-8 w-8 rounded-full ring-2 ring-white" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
+        <div class="flex justify-center items-center inline-block h-8 w-8 rounded-full border-2 border-white bg-orange-400">
+          <h1 class="text-lg font-bold"><%= @table_customer.name[0] %></h1>
         </div>
-      </div>
-
-      <div>
-        <h1 class="text-3xl font-bold mt-3"><%= active_menu.name %></h1>
-      </div>
-
-      <div class="flex items-center gap-2 mt-3 text-sm overflow-auto">
-        <div class="flex justify-center items-center px-2 py-1 active1">
-          <h5>All</h5>
-        </div>
-        <% categories.each do |category| %>
-          <% menu = @menu.menu_items.select { |item| item.category == category } %>
-          <% unless menu.empty? %>
-            <div class="flex justify-center items-center px-2 py-1">
-              <h5><%= category %></h5>
+        <% @table_customers.each do |customer| %>
+          <% unless customer == @table_customer %>
+            <div class="flex justify-center items-center inline-block h-8 w-8 rounded-full border-2 border-white bg-gray-300">
+              <h1 class="text-lg font-bold"><%= customer.name[0] %></h1>
             </div>
           <% end %>
         <% end %>
+
+    </div>
+
+    <div>
+      <h1 class="text-3xl font-bold mt-3"><%= active_menu.name %></h1>
+    </div>
+
+    <div class="flex items-center gap-2 mt-3 text-sm overflow-auto">
+      <div class="flex justify-center items-center px-2 py-1 active1">
+        <h5>All</h5>
       </div>
+      <% categories.each do |category| %>
+        <% menu = @menu.menu_items.select { |item| item.category == category } %>
+        <% unless menu.empty? %>
+          <div class="flex justify-center items-center px-2 py-1">
+            <h5><%= category %></h5>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   </div>
 

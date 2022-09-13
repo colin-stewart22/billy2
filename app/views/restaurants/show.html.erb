@@ -11,7 +11,7 @@
 
     <div class="flex justify-center items-center">
       <ul class="nav nav-pills" id="pills-tab" role="tablist">
-      <% if @referer && @referer.include?('menus') %>
+      <% if @referer && @referer.include?('menu') %>
         <li class="nav-item" role="presentation">
           <button class="btn btn-outline-dark" id="pills-restaurant-tab" data-bs-toggle="pill" data-bs-target="#pills-restaurant" type="button" role="tab" aria-controls="pills-restaurant" aria-selected="true">RESTAURANT INFO</button>
         </li>
@@ -39,7 +39,7 @@
   </div>
 
   <div class="tab-content" id="pills-tabContent">
-    <% if @referer && @referer.include?('menus') %>
+    <% if @referer && @referer.include?('menu') %>
       <div class="py-8 tab-pane fade show" id="pills-restaurant" role="tabpanel" aria-labelledby="pills-restaurant-tab">
         <%= render "restaurants/info", restaurant: @restaurant %>
       </div>

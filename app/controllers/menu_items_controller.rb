@@ -35,7 +35,7 @@ class MenuItemsController < ApplicationController
 
   def destroy
     @menu_item.destroy
-    # redirect_to host_restaurant_path(@menu.restaurant), status: :see_other
+    redirect_to restaurant_path(@menu.restaurant), status: :see_other
   end
 
   private

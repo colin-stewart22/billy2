@@ -1,3 +1,16 @@
-<h1>This is the confirmation page</h1>
-<h1 class="text-4xl">Success!!!!!!</h1>
-<p class="text-2xl">Thank you for dining with us. We hope to see you again soon</p>
+<div class="container h-screen">
+
+  <div class="tick grid place-items-center h-1/2">
+    <p class="text-3xl "><%= @restaurant.name %></P>
+    <i class="tick-icon fa-solid fa-circle-check text-7xl"></i>
+  </div>
+
+  <div class="h-1/2">
+    <div class="justify-between">
+      <h1 class="text-4xl mt-5 text-center">Payment success!</h1>
+    </div>
+    <div class="flex justify-center items-center bottom-0 my-8 mt-5">
+      <p class="text-xl text-center">Thank you for dining with us. We hope to see you again soon</p>
+    </div>
+  </div>
+</div>

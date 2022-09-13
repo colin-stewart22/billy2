@@ -1,6 +1,6 @@
 class TableCustomersController < ApplicationController
-  before_action :set_table_customer, only: [:show, :edit, :update, :destroy, :split_by_items]
-  before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items]
+  before_action :set_table_customer, only: [:show, :edit, :update, :destroy, :split_by_items, :checkout]
+  before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items, :checkout]
   before_action :set_table, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
   before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
 
@@ -33,23 +33,21 @@ class TableCustomersController < ApplicationController
   end
 
   def split_evenly
-    @table_order = TableOrder.find(params[:table_order_id])
     number = @table_order.table_customers.count
     splitted_bill = (@table_order.total_price / number).round(2)
     total_amount = (splitted_bill * 1.125).round(2)
 
     @table_order.table_customers.each do |customer|
-      customer.update(amount_due: splitted_bill)
-      customer.update(total_amount: total_amount)
+      customer.update(amount_due: splitted_bill.to_f)
+      customer.update(total_amount: total_amount.to_f)
     end
     @table_order.update(payment_option: "split_evenly")
     redirect_to checkout_path(@restaurant, @table, @table_order)
   end
 
   def split_by_items
-    @table_order = TableOrder.find(params[:table_order_id])
     total_amount = (@table_customer.amount_due * 1.125).round(2)
-    @table_customer.update(total_amount: total_amount)
+    @table_customer.update(total_amount: total_amount.to_f)
     @table_order.update(payment_option: "split_by_items")
     redirect_to checkout_path(@restaurant, @table, @table_order)
   end
@@ -58,12 +56,10 @@ class TableCustomersController < ApplicationController
   end
 
   def checkout
-    @restaurant = Restaurant.find(params[:id])
-    @table_customer = TableCustomer.find(params[:table_customer_id])
     # order  = Order.create!(teddy: teddy, teddy_sku: teddy.sku, amount: teddy.price, state: 'pending', user: current_user)
-    @table_price = @table_customer.total_amount
+    @table_price = @table_customer.total_amount.to_f
     @subtotal = @table_customer.amount_due.to_f
-    @servcie_charge = (@subtotal * 0.125).round(2)
+    @service_charge = (@subtotal * 0.125).round(2)
     @tip = (@subtotal * 0.0).round(2)
     @tax = (@subtotal - (@subtotal / 1.2)).round(2)
 
@@ -76,7 +72,7 @@ class TableCustomersController < ApplicationController
       line_items: [{
         price_data: {
           currency: 'usd',
-          unit_amount: @table_price.to_i * 100,
+          unit_amount: (@table_price * 100).to_i,
           product_data: {
             name: 'Your order',
             description: 'Food',

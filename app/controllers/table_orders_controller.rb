@@ -48,9 +48,10 @@ class TableOrdersController < ApplicationController
   #   # redirect_to checkout_path(@restaurant, @table, @table_order)
   # end
 
-
   def create
     @table_order = TableOrder.new(table_order_params)
+    @table_order.is_active = true if params[:table_order][:is_active] == "false"
+
     @table_order.user = User.where(is_owner: false).sample
     @table_order.table = @table
     if @table_order.save

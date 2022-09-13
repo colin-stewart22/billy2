@@ -17,7 +17,10 @@ class TableCustomersController < ApplicationController
 
   def create
     # Needs work
+
     @table_customer = TableCustomer.new(table_customer_params)
+    @table_customer.is_captain = true if params[:table_customer][:is_captain] == "false"
+
     @table_order.user = User.where(is_owner: false).sample
     @table_customer.table_order_id = @table_order.id
 
@@ -54,7 +57,7 @@ class TableCustomersController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
     @table_customer = TableCustomer.find(params[:table_customer_id])
     # order  = Order.create!(teddy: teddy, teddy_sku: teddy.sku, amount: teddy.price, state: 'pending', user: current_user)
-    table_price = @table_customer.amount_due.to_f
+    table_price = @table_customer.total_amount.to_f
 
     # @table_customer.order_items.each do |order|
     #   table_price += order.menu_item.price
@@ -67,12 +70,12 @@ class TableCustomersController < ApplicationController
           currency: 'usd',
           unit_amount: table_price.to_i * 100,
           product_data: {
-            name: 'T-shirt',
-            description: 'Comfortable cotton t-shirt',
+            name: 'Your order',
+            description: 'Food',
             images: ['https://example.com/t-shirt.png'],
           },
         },
-        quantity: 1,
+        quantity: 1
       }],
       mode: 'payment',
       success_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{@table_customer.id}/confirmation",
@@ -84,6 +87,7 @@ class TableCustomersController < ApplicationController
   end
 
   def confirmation
+    @restaurant = Restaurant.find(params[:id])
   end
 
   private

@@ -10,23 +10,23 @@ application.register("hello", HelloController)
 import RestaurantServerController from "./restaurant_server_controller"
 application.register("restaurant-server", RestaurantServerController)
 
-const modalSplit = document.getElementById("modal-split");
+// const modalSplit = document.getElementById("modal-split");
 
-const modalPayAll = document.getElementById("modal-pay-all");
+// const modalPayAll = document.getElementById("modal-pay-all");
 
-const buttonToPayAll = document.getElementById("button-to-pay-all");
+// const buttonToPayAll = document.getElementById("button-to-pay-all");
 
-const buttonToSplit = document.getElementById("button-to-split");
+// const buttonToSplit = document.getElementById("button-to-split");
 
-function handleToPayAllClick() {
-  modalSplit.classList.add("hidden")
-  modalPayAll.classList.remove("hidden")
-}
+// function handleToPayAllClick() {
+//   modalSplit.classList.add("hidden")
+//   modalPayAll.classList.remove("hidden")
+// }
 
-function handleToSplitClick(){
-  modalPayAll.classList.add("hidden")
-  modalSplit.classList.remove("hidden")
-}
+// function handleToSplitClick(){
+//   modalPayAll.classList.add("hidden")
+//   modalSplit.classList.remove("hidden")
+// }
 
-buttonToPayAll.addEventListener("click", handleToPayAllClick);
-buttonToSplit.addEventListener("click", handleToSplitClick);
+// buttonToPayAll.addEventListener("click", handleToPayAllClick);
+// buttonToSplit.addEventListener("click", handleToSplitClick);

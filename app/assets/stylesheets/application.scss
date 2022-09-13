@@ -29,7 +29,6 @@ body {
   width: 86%;
   margin: 0 auto;
   padding: 20px 0;
-
 }
 
 .active1 {
@@ -46,7 +45,10 @@ body {
   ),url("https://res.cloudinary.com/dmlfirids/image/upload/v1663060224/restaurant/restaurant1.jpg");;
 
   background-size: cover;
+}
 
+.bg-f4 {
+  background: #F4F4F4;
 }
 
 .tick-icon {

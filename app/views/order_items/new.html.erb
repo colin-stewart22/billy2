@@ -1,11 +1,8 @@
-<h2 class="text-2xl text-bold my-3"><%= @menu.name %></h2>
-
-<%= simple_form_for [@restaurant, @table, @table_order, @table_customer, @order_item] do |f| %>
-  <div>
-    <%= f.association :menu_item, collection: @menu.menu_items, as: :check_boxes, input_html: { multiple: true }, label: false, inline_label: false, include_blank: false, item_label_class: "bg-red-300 px-3 py-2" %>
-  </div>
-  <div>
-    <%= f.submit "Add", class: "p-2 border" %>
-  </div>
-
-<% end %>
+<div class="scroll-container overflow-auto ml-5">
+  <% categories = ["Starters", "Mains", "Breakfast", "Lunch", "Dinner", "Desserts", "Drinks"] %>
+  <% categories.each do |category| %>
+    <% menu = @menu.menu_items.select { |item| item.category == category } %>
+    <h3 class="text-lg font-bold mb-3 mt-8"><%= category %></h3>
+    <%= render "order_items/item", menu: menu %>
+  <% end %>
+</div>

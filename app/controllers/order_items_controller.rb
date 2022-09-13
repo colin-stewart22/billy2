@@ -29,28 +29,22 @@ class OrderItemsController < ApplicationController
     @table = Table.find(params[:table_id])
     @table_order = TableOrder.find(params[:table_order_id])
     @table_customer = TableCustomer.find(params[:table_customer_id])
-    @menu_items = MenuItem.where(id: params.dig(:order_item, :menu_item_id))
-    return render_new if @menu_items.empty?
-
-    ActiveRecord::Base.transaction do
-      @menu_items.each do |item|
-        @order_item = OrderItem.new(order_item_params)
-        @order_item.table_customer = @table_customer
-        @order_item.menu_item = item
-        @order_item.estimated_serving_time = item.prepare_time
-        customer_new_amount = @table_customer.amount_due.to_f + item.price
-        table_order_new_amount = @table_order.total_price.to_f + item.price
-        @table_customer.update(amount_due: customer_new_amount.round(2))
-        @table_order.update(total_price: table_order_new_amount.round(2))
-        @order_item.save!
-      end
-      redirect_to restaurant_table_table_order_table_customer_path(
-        @restaurant,
-        @table,
-        @table_order,
-        @table_customer
-      )
-    end
+    @order_item = OrderItem.new(order_item_params)
+    @order_item.table_customer = @table_customer
+    @menu_item = @order_item.menu_item
+    @order_item.estimated_serving_time = @menu_item.prepare_time
+    customer_new_amount = @table_customer.amount_due.to_f + @menu_item.price
+    table_order_new_amount = @table_order.total_price.to_f + @menu_item.price
+    @table_customer.update(amount_due: customer_new_amount.round(2))
+    @table_customer.update(amount_due: customer_new_amount.round(2))
+    @table_order.update(total_price: table_order_new_amount.round(2))
+    @order_item.save!
+    redirect_to restaurant_table_table_order_table_customer_path(
+      @restaurant,
+      @table,
+      @table_order,
+      @table_customer
+    )
   rescue ActiveRecord::RecordInvalid
     render_new
   end
@@ -80,7 +74,7 @@ class OrderItemsController < ApplicationController
   private
 
   def order_item_params
-    params.require(:order_item).permit(:note, menu_item_ids: [])
+    params.require(:order_item).permit(:note, :menu_item_id)
   end
 
   def set_order_item

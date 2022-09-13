@@ -54,7 +54,7 @@ class TableCustomersController < ApplicationController
     @restaurant = Restaurant.find(params[:id])
     @table_customer = TableCustomer.find(params[:table_customer_id])
     # order  = Order.create!(teddy: teddy, teddy_sku: teddy.sku, amount: teddy.price, state: 'pending', user: current_user)
-    table_price = @table_customer.amount_due.to_f
+    table_price = @table_customer.total_amount.to_f
 
     # @table_customer.order_items.each do |order|
     #   table_price += order.menu_item.price

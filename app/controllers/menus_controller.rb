@@ -16,6 +16,7 @@ class MenusController < ApplicationController
 
   def create
     @menu = Menu.new(menu_params)
+    @menu.is_active = true if @restaurant.menus.count.zero?
     @menu.restaurant = @restaurant
     if @menu.save
       redirect_to restaurant_menus_path(@restaurant)

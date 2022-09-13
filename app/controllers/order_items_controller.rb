@@ -20,7 +20,7 @@ class OrderItemsController < ApplicationController
     @table = Table.find(params[:table_id])
     @table_order = TableOrder.find(params[:table_order_id])
     @table_customer = TableCustomer.find(params[:table_customer_id])
-    @table_customers = TableCustomer.all
+    @table_customers = TableCustomer.where(table_order: @table_order)
     @order_item = OrderItem.new
   end
 

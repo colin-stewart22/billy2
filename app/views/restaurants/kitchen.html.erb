@@ -1,7 +1,7 @@
 <div class="flex flex-wrap justify-around p-3">
-  <% @restaurant.order_items.select { |item| item.is_prepared == false }.each do |item| %>
+  <% @food_tickets.each do |food_ticket| %>
     <div style="width:25%" class="border py-1 px-3 mr-1 mb-3">
-      <%= render "order_items/show", item: item %>
+      <%= render "order_items/show", item: food_ticket %>
     </div>
   <% end %>
 </div>

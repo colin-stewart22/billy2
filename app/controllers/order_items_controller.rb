@@ -22,6 +22,28 @@ class OrderItemsController < ApplicationController
     @table_customer = TableCustomer.find(params[:table_customer_id])
     @table_customers = TableCustomer.all
     @order_item = OrderItem.new
+
+    # @menu_items = @menu.menu_items.select { |item| item.category == category }
+
+    if params[:category].present?
+      if params[:category] == "Breakfast"
+        @menu_items = @menu.menu_items.where(category: "Breakfast")
+      elsif params[:category] == "Lunch"
+        @menu_items = @menu.menu_items.where(category: "Lunch")
+      elsif params[:category] == "Dinner"
+        @menu_items = @menu.menu_items.where(category: "Dinner")
+      elsif params[:category] == "Starters"
+        @menu_items = @menu.menu_items.where(category: "Starters")
+      elsif params[:category] == "Mains"
+        @menu_items = @menu.menu_items.where(category: "Mains")
+      elsif params[:category] == "Desserts"
+        @menu_items = @menu.menu_items.where(category: "Desserts")
+      elsif params[:category] == "Drinks"
+        @menu_items = @menu.menu_items.where(category: "Drinks")
+      end
+    else
+      @menu_items = @menu.menu_items.all
+    end
   end
 
   def create

@@ -3,6 +3,9 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="order-item-modal"
 export default class extends Controller {
   connect() {
+
+    console.log("Hello World");
+
     const modalSplit = document.getElementById("modal-split");
 
     const modalPayAll = document.getElementById("modal-pay-all");

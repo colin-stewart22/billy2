@@ -11,7 +11,11 @@ class TableOrdersController < ApplicationController
   end
 
   def new
-    @table_order = TableOrder.new
+    if @table.table_order.any?(&:is_active)
+      redirect_to new_restaurant_table_table_order_table_customer_path(@restaurant, @table, @table_order)
+    else
+      @table_order = TableOrder.new
+    end
   end
 
   # def checkout
@@ -50,11 +54,13 @@ class TableOrdersController < ApplicationController
 
   def create
     @table_order = TableOrder.new(table_order_params)
-    @table_order.is_active = true if params[:table_order][:is_active] == "false"
+    @table_order.is_active = true
+    # @table_order.is_active = true if params[:table_order][:is_active] == "false"
 
     @table_order.user = User.where(is_owner: false).sample
     @table_order.table = @table
     if @table_order.save
+      @table.update(is_active: true)
       redirect_to new_restaurant_table_table_order_table_customer_path(@restaurant, @table, @table_order)
     else
       render :new, status: :unprocessable_entity

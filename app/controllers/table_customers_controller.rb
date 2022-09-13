@@ -17,7 +17,10 @@ class TableCustomersController < ApplicationController
 
   def create
     # Needs work
+
     @table_customer = TableCustomer.new(table_customer_params)
+    @table_customer.is_captain = true if params[:table_customer][:is_captain] == "false"
+
     @table_order.user = User.where(is_owner: false).sample
     @table_customer.table_order_id = @table_order.id
 

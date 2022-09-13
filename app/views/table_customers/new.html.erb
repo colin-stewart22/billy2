@@ -12,7 +12,9 @@
 
     <%= simple_form_for [@restaurant, @table, @table_order, @table_customer] do |f| %>
     <%= f.input :name %>
-    <%= f.input :is_captain, default: true %>
+    <%  if @table_order.table_customers.empty? %>
+    <%=   f.input :is_captain, as: :hidden, default: true %>
+    <%  end %>
     <%= f.input :is_paid, default: false %>
     <%= f.submit %>
     <% end %>

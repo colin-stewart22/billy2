@@ -41,7 +41,7 @@ class OrderItemsController < ApplicationController
         @menu_items = @menu.menu_items.where(category: "Drinks")
       end
     else
-      @menu_items = @menu.menu_items.all
+      @menu_items = @menu.menu_items
     end
   end
 

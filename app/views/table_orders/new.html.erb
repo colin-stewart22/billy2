@@ -1,7 +1,7 @@
 <div class="landing-background w-screen h-screen">
   <div class="customer-container h-full flex flex-col  justify-between">
     <div class="w-full h-10"></div>
-    <h2 class="flex w-full justify-center items-center text-2xl font-bold">Restaurant Name</h2>
+    <h2 class="flex w-full justify-center items-center text-2xl font-bold"><%= @restaurant.name %></h2>
 
     <%= simple_form_for [@restaurant, @table, @table_order] do |f| %>
       <%= f.input :is_active, as: :hidden, default: true %>

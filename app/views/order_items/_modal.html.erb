@@ -20,7 +20,7 @@
       <div>
         <%= simple_form_for [@restaurant, @table, @table_order, @table_customer, @order_item] do |f| %>
           <div>
-            <%= f.input :menu_item, input_html: { value: item.id }, as: :hidden %>
+            <%= f.input :menu_item_id, input_html: { value: item.id } %>
           </div>
           <div class="mt-3">
             <%= f.input :note, as: :text, label: false, placeholder: "add note", input_html: { style: "width: 250px; height: 100px" } %>

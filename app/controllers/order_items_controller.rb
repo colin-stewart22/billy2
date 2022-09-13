@@ -52,6 +52,7 @@ class OrderItemsController < ApplicationController
     @table_order = TableOrder.find(params[:table_order_id])
     @table_customer = TableCustomer.find(params[:table_customer_id])
     @order_item = OrderItem.new(order_item_params)
+    raise
     @order_item.table_customer = @table_customer
     @menu_item = @order_item.menu_item
     @order_item.estimated_serving_time = @menu_item.prepare_time

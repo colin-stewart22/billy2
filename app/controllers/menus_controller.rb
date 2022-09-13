@@ -19,7 +19,7 @@ class MenusController < ApplicationController
     @menu.is_active = true if @restaurant.menus.count.zero?
     @menu.restaurant = @restaurant
     if @menu.save
-      redirect_to restaurant_menus_path(@restaurant)
+      redirect_to restaurant_path(@restaurant)
     else
       render :new, status: :unprocessable_entity
     end
@@ -51,7 +51,7 @@ class MenusController < ApplicationController
   private
 
   def menu_params
-    params.require(:menu).permit(:name)
+    params.require(:menu).permit(:name, :photo)
   end
 
   def set_restaurant

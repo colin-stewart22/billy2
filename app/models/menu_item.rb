@@ -1,6 +1,7 @@
 class MenuItem < ApplicationRecord
   has_many :join_menus
   has_many :menus, through: :join_menus
+  has_one_attached :photo
   belongs_to :restaurant
 
   validates :name, presence: true

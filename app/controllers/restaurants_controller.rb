@@ -10,7 +10,7 @@ class RestaurantsController < ApplicationController
   end
 
   def kitchen
-    @food_tickets = @restaurant.order_items.select { |item| item.is_prepared == false }.sort_by(&:id)
+    @food_tickets = @restaurant.order_items.select { |item| item.is_ordered == true && item.is_prepared == false }.sort_by(&:id)
   end
 
   def new

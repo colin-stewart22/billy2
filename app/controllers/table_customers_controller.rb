@@ -91,7 +91,7 @@ class TableCustomersController < ApplicationController
   end
 
   def confirmation
-    @restaurant = Restaurant.find(params[:id])
+    @restaurant = Restaurant.find(params[:restaurant_id])
     @table_order = TableOrder.find(params[:table_order_id])
     @table = Table.find(params[:table_id])
     @table_order.update(is_active: false)

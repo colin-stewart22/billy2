@@ -1,5 +1,5 @@
 <% menu.each do |item| %>
-  <div class="flex items-center mt-3" type="button" data-bs-toggle="modal" data-bs-target=<%= "#exampleModal#{item.name}" %>>
+  <div class="flex items-center mt-3" type="button" data-bs-toggle="modal" data-bs-target=<%= "#exampleModal#{item.id}" %>>
     <div class="mr-5">
       <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-#{item.name}" %> class="d-block rounded-lg" alt="restaurant image">
     </div>

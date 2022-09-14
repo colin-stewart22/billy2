@@ -1,9 +1,14 @@
 class TableOrdersController < ApplicationController
   before_action :set_table_order, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, only: [:new, :create]
+  before_action :set_restaurant, only: [:server, :new, :create]
   before_action :set_table, only: [:new, :create]
+
   def index
     @table_orders = TableOrder.all
+  end
+
+  def server
+    @table_orders = TableOrder.where(user_id: params[:user_id])
   end
 
   def show

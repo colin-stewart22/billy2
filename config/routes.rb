@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "restaurants#index"
   get "/restaurants/:id/kitchen", to: "restaurants#kitchen", as: "kitchen"
+  get "/restaurants/:restaurant_id/users/:user_id/table_orders", to: "table_orders#server", as: "server"
   get "/order_items/:id/prepared", to: "order_items#prepared!", as: "prepared"
   get "/order_items/:id/served", to: "order_items#served!", as: "served"
   get "/table_customers/:id/ordered", to: "table_customers#ordered!", as: "ordered"

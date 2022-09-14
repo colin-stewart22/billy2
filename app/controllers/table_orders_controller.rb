@@ -1,9 +1,14 @@
 class TableOrdersController < ApplicationController
   before_action :set_table_order, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, only: [:new, :create]
+  before_action :set_restaurant, only: [:server, :new, :create]
   before_action :set_table, only: [:new, :create]
+
   def index
     @table_orders = TableOrder.all
+  end
+
+  def server
+    @table_orders = TableOrder.where(user_id: params[:user_id])
   end
 
   def show
@@ -58,7 +63,7 @@ class TableOrdersController < ApplicationController
     @table_order.is_active = true
     # @table_order.is_active = true if params[:table_order][:is_active] == "false"
 
-    @table_order.user = User.where(is_owner: false).sample
+    @table_order.user = User.find_by(first_name: "Mario")
     @table_order.table = @table
     if @table_order.save
       @table.update(is_active: true)

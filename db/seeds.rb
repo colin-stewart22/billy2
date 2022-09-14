@@ -27,12 +27,12 @@ Restaurant.destroy_all
 puts "Destroy User database..."
 User.destroy_all
 
-puts "Create owner database..."
+puts "Create Owner database..."
 
 owner = User.create!(
-  email: "owner@lewagon.com",
+  email: "Owner@lewagon.com",
   password: "lewagon",
-  first_name: "owner",
+  first_name: "Owner",
   last_name: "lewagon",
   is_owner: true
 )
@@ -47,33 +47,63 @@ restaurant = Restaurant.create!(
   user_id: owner.id
 )
 
+puts "Create Mario database..."
+
+mario = User.create!(
+  email: "mario@lewagon.com",
+  password: "lewagon",
+  first_name: "Mario",
+  last_name: "lewagon",
+  is_owner: false
+)
+
+RestaurantServer.create!(
+  restaurant_id: restaurant.id,
+  user_id: mario.id
+)
+
+puts "Create Luca database..."
+
+luca = User.create!(
+  email: "luca@lewagon.com",
+  password: "lewagon",
+  first_name: "Luca",
+  last_name: "lewagon",
+  is_owner: false
+)
+
+RestaurantServer.create!(
+  restaurant_id: restaurant.id,
+  user_id: luca.id
+)
+
+puts "Create Sara database..."
+
+sara = User.create!(
+  email: "sara@lewagon.com",
+  password: "lewagon",
+  first_name: "Sara",
+  last_name: "lewagon",
+  is_owner: false
+)
+
+RestaurantServer.create!(
+  restaurant_id: restaurant.id,
+  user_id: sara.id
+)
+
+puts "Create 3 Table database..."
+
 i = 1
 
 3.times do
-  puts "Create Server database..."
-
-  server = User.create!(
-    email: "server#{i}@lewagon.com",
-    password: "lewagon",
-    first_name: "server",
-    last_name: "lewagon",
-    is_owner: false
+  Table.create!(
+    restaurant_id: restaurant.id,
+    table_number: i,
+    qr_code: "http://127.0.0.1:3000/restaurants/#{restaurant.id}/tables/#{i}/table_orders/new"
   )
 
-    puts "Create Table database..."
-    table = Table.create!(
-      restaurant_id: restaurant.id,
-      table_number: i,
-      qr_code: "http://127.0.0.1:3000/restaurants/#{restaurant.id}/tables/#{i}/table_orders/new"
-    )
-
-    puts "Create RestaurantServer database..."
-      RestaurantServer.create!(
-        restaurant_id: restaurant.id,
-        user_id: server.id
-      )
-
-    i += 1
+  i += 1
 end
 
 puts "Completed!"

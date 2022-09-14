@@ -43,7 +43,11 @@
     </div>
 
     <div class="w-full flex justify-center">
-      <%= link_to "Place your order", ordered_path(@table_customer), class: "bg-black text-white px-12 py-2 rounded-lg fixed bottom-5" %>
+      <% if basket_items.count.zero? %>
+        <%= link_to "Back to Table order", restaurant_table_table_order_table_customer_order_items_path(@restaurant, @table, @table_order, @table_customer), class: "bg-black text-white px-12 py-2 rounded-lg fixed bottom-5" %>
+      <% else %>
+        <%= link_to "Place your order", ordered_path(@table_customer), class: "bg-black text-white px-12 py-2 rounded-lg fixed bottom-5" %>
+      <% end %>
     </div>
   </div>
 </div>

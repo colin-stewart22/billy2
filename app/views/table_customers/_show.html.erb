@@ -27,7 +27,11 @@
     <% active_menu.menu_items.each do |menu_item| %>
       <div class="w-full flex items-center mt-2">
         <div class="mr-5">
-          <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-#{menu_item.name}" %> class="d-block rounded-lg" alt="restaurant image">
+          <% if item.photo.attached? %>
+            <%= cl_image_tag item.photo.key, height: 150, width: 150, crop: :fill, class: "d-block rounded-lg" %>
+          <% else %>
+            <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-#{menu_item.name}" %> class="d-block rounded-lg" alt="restaurant image">
+          <% end %>
         </div>
         <div>
           <p class="font-bold text-sm"><%= menu_item.name %></p>

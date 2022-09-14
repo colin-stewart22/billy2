@@ -1,7 +1,9 @@
-<div class="flex flex-wrap justify-around p-3">
-  <% @food_tickets.each do |food_ticket| %>
-    <div style="width:25%" class="border py-1 px-3 mr-1 mb-3">
-      <%= render "order_items/show", item: food_ticket %>
-    </div>
-  <% end %>
+<div class="page-container">
+  <div class="flex flex-wrap justify-around">
+    <% @food_tickets.each do |food_ticket| %>
+      <div class="w-80 p-8 m-3 bg-white rounded-lg">
+        <%= render "order_items/show", item: food_ticket %>
+      </div>
+    <% end %>
+  </div>
 </div>

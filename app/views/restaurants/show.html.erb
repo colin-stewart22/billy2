@@ -1,6 +1,6 @@
 <div class="page-container pt-8" data-controller="nav-links">
   <div class="flex justify-between items-center">
-    <div class="flex justify-start w-48 bg-orange-300">
+    <div class="flex justify-start w-48">
         <%= link_to restaurants_path do %>
           <div class="flex items-center gap-3">
             <i class="fa-solid fa-chevron-left"></i>
@@ -29,7 +29,7 @@
       </ul>
     </div>
 
-    <div class="flex justify-end w-48 bg-orange-300">
+    <div class="flex justify-end w-48">
       <%= link_to destroy_user_session_path, data: {turbo_method: :delete} do %>
         <div class="flex justify-center items-center h-8 rounded-lg border-t border-b border-l border-r border-black p-3 hover:bg-black hover:text-white">
           <h4><%= "Logout" %></h4>

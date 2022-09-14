@@ -8,6 +8,7 @@ class Restaurant < ApplicationRecord
   has_many :order_items, through: :table_customers
   has_many :restaurant_servers
   has_many :users, through: :restaurant_servers
+  has_one_attached :photo
 
   validates :name, presence: true
   validates :address, presence: true

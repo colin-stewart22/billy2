@@ -7,9 +7,12 @@
         <% active_menu = Menu.where(restaurant_id: restaurant.id).select(&:is_active).first %>
         <% unless active_menu.nil? %>
           <%= link_to restaurant_menu_path(restaurant, active_menu) do  %>
-
             <div>
-              <img src=<%= "https://source.unsplash.com/random/400x150/?restaurant-1" %> class="d-block rounded-lg" alt="restaurant image">
+              <% if active_menu.photo.attached? %>
+                <%= cl_image_tag active_menu.photo.key, height: 150, width: 400, crop: :fill, class: "d-block rounded-lg"%>
+              <% else %>
+                <img src=<%= "https://source.unsplash.com/random/400x150/?restaurant-1" %> class="d-block rounded-lg" alt="restaurant image">
+              <% end %>
             </div>
             <div class="flex justify-between items-center">
               <div class="bg-green-500 text-sm text-white rounded-lg px-3 py-0.5">Active</div>
@@ -24,7 +27,6 @@
           <% if menu.is_active == false %>
             <%= link_to restaurant_menu_path(restaurant, menu) do  %>
               <div>
-                <%= menu.photo.attached? %>
                 <% if menu.photo.attached? %>
                   <%= cl_image_tag menu.photo.key, height: 150, width: 400, crop: :fill %>
                 <% else %>

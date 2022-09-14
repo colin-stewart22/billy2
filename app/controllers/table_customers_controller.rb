@@ -34,7 +34,7 @@ class TableCustomersController < ApplicationController
 
   def split_evenly
     number = @table_order.table_customers.count
-    splitted_bill = (@table_order.total_price / number).round(2)
+    splitted_bill = (@table_order.total_price.to_f / number).round(2)
     total_amount = (splitted_bill * 1.125).round(2)
 
     @table_order.table_customers.each do |customer|
@@ -46,7 +46,7 @@ class TableCustomersController < ApplicationController
   end
 
   def split_by_items
-    total_amount = (@table_customer.amount_due * 1.125).round(2)
+    total_amount = (@table_customer.amount_due.to_f * 1.125).round(2)
     @table_customer.update(total_amount: total_amount.to_f)
     @table_order.update(payment_option: "split_by_items")
     redirect_to checkout_path(@restaurant, @table, @table_order)

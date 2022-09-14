@@ -138,7 +138,7 @@ class TableCustomersController < ApplicationController
       @table_customer.restaurant,
       @table_customer.table,
       @table_customer.table_order,
-      @table_customer,
+      @table_customer
     )
   end
 

@@ -37,6 +37,14 @@ owner = User.create!(
   is_owner: true
 )
 
+mario = User.create!(
+  email: "mario@lewagon.com",
+  password: "lewagon",
+  first_name: "mario",
+  last_name: "lewagon",
+  is_owner: false
+)
+
 puts "Create Restaurant database..."
 
 restaurant = Restaurant.create!(
@@ -45,6 +53,11 @@ restaurant = Restaurant.create!(
   phone_number: Faker::PhoneNumber.cell_phone_in_e164,
   theme_color: "blue",
   user_id: owner.id
+)
+
+RestaurantServer.create!(
+  restaurant_id: restaurant.id,
+  user_id: mario.id
 )
 
 i = 1

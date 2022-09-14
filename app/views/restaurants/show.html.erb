@@ -1,10 +1,10 @@
 <div class="page-container pt-8" data-controller="nav-links">
   <div class="flex justify-between items-center">
-    <div class="flex justify-start">
+    <div class="flex justify-start w-48">
         <%= link_to restaurants_path do %>
           <div class="flex items-center gap-3">
             <i class="fa-solid fa-chevron-left"></i>
-            <h2 class="text-2xl font-bold">My Restaurants</h2>
+            <h2 class="text-xl font-bold">My Restaurants</h2>
           </div>
         <% end %>
     </div>
@@ -30,10 +30,10 @@
     </div>
 
     <div class="flex justify-end w-48">
-      <% if user_signed_in? %>
-        <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class:"rounded-xl border px-3 py-2 hover:bg-gray-500 hover:text-white" %>
-      <% else %>
-        <%= link_to "Login", new_user_session_path, class:"rounded-xl border px-3 py-2 hover:bg-gray-500 hover:text-white" %>
+      <%= link_to destroy_user_session_path, data: {turbo_method: :delete} do %>
+        <div class="flex justify-center items-center h-8 rounded-lg border-t border-b border-l border-r border-black p-3 hover:bg-black hover:text-white">
+          <h4><%= "Logout" %></h4>
+        </div>
       <% end %>
     </div>
   </div>

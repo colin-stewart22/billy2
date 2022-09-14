@@ -45,9 +45,11 @@
             <h4 class="font-bold"><%= table.table_number %></h4>
           </div>
         <% else %>
-          <div class="flex justify-center items-center w-10 h-10 rounded-full border-2 border-black mr-3 hover:bg-black hover:text-white">
-            <h4 class="font-bold"><%= link_to table.table_number, restaurant_table_table_order_path(restaurant, table, table_order) %></h4>
-          </div>
+          <%= link_to restaurant_table_table_order_path(restaurant, table, table_order) do %>
+            <div class="flex justify-center items-center w-10 h-10 rounded-full border-t border-b border-l border-r border-black mr-3 hover:bg-black hover:text-white">
+              <h4 class="font-bold"><%= table.table_number %></h4>
+            </div>
+          <% end %>
         <% end %>
 
       <% end %>

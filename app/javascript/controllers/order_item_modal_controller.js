@@ -70,6 +70,17 @@ export default class extends Controller {
           highlightTag(randomTag)
         }, 100);
       }, times * 100);
+
+      setTimeout(() => {
+        buttonClick();
+      }, 4500)
+
+    }
+
+    function buttonClick() {
+      const cardSelected = document.getElementsByClassName("highlight")[0];
+      cardSelected.click()
+      console.log(cardSelected)
     }
 
     function pickRandomTag() {

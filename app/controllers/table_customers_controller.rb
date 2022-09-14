@@ -1,8 +1,8 @@
 class TableCustomersController < ApplicationController
   before_action :set_table_customer, only: [:show, :edit, :update, :destroy, :split_by_items, :checkout]
-  before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items, :checkout]
-  before_action :set_table, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
-  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
+  before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items, :checkout, :pay_all, :card_roulette]
+  before_action :set_table, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items, :pay_all, :card_roulette]
+  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items, :pay_all, :card_roulette]
 
   def index
     @table_customers = TableCustomer.all
@@ -53,6 +53,19 @@ class TableCustomersController < ApplicationController
   end
 
   def pay_all
+    payment_customer = TableCustomer.find(params[:id])
+    table_amount = (@table_order.total_price * 1.125).round(2)
+    payment_customer.update(total_amount: table_amount)
+    @table_order.update(payment_option: "pay_all")
+    redirect_to checkout_path(@restaurant, @table, @table_order)
+  end
+
+  def card_roulette
+    payment_customer = TableCustomer.find(params[:id])
+    table_amount = (@table_order.total_price * 1.125).round(2)
+    payment_customer.update(total_amount: table_amount)
+    @table_order.update(payment_option: "card_roulette")
+    redirect_to checkout_path(@restaurant, @table, @table_order)
   end
 
   def checkout

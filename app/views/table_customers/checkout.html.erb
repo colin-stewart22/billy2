@@ -7,7 +7,7 @@
   </div>
   <div class="p-3">
     <% @table_captain = @table_order.table_customers.find{ |customer| customer.is_captain == true }.name %>
-    <% if @table_order.payment_option = "split_evenly" %>
+    <% if @table_order.payment_option == "split_evenly" %>
       <h2 class="text-xl font-bold mt-4"><%= @table_captain %> chose to split evenly</h2>
       <div class="flex justify-between items-center mt-10">
         <h3>Your Table Subtotal</h3>
@@ -21,7 +21,7 @@
         <h3 class="font-bold">Your Portion</h3>
         <p class="font-bold">$<%= @table_customer.amount_due %></p>
       </div>
-    <% elsif @table_order.payment_option = "split_by_items" %>
+    <% elsif @table_order.payment_option == "split_by_items" %>
       <h2 class="text-xl font-bold mt-4"><%= @table_captain %> chose to split by items</h2>
       <h3 class="text-xl mt-10">Your Items</h3>
       <% @table_customer.order_items.each do |item| %>
@@ -30,8 +30,14 @@
           <p>$<%= item.menu_item.price %></p>
         </div>
       <% end %>
-    <% else %>
-      <h1>Someone is paying for the tab</h1>
+    <% elsif @table_order.payment_option == "card_roulette" %>
+      <h2 class="text-xl font-bold mt-4">Congrats,<%= @payment_customer.name %>! You won credit card roulette. You must now pay the tab.</h2>
+    <% elsif @table_order.payment_option == "pay_all" %>
+      <% if @table_captain == @payment_customer %>
+        <h2 class="text-xl font-bold mt-4"><%= @payment_customer.name %>, you are paying the tab.</h2>
+      <% else %>
+        <h2 class="text-xl font-bold mt-4"><%= @payment_customer.name %>, you were selected by <%= @table_captain %> to pay the tab.</h2>
+      <% end %>
     <% end %>
 
     <h2 class="font-bold mt-12">Would you like to leave a tip?</h2>
@@ -77,5 +83,5 @@
         sessionId: '<%= @table_customer.checkout_session_id %>'
       });
     });
-  </script> -->
+  </script>
 </div>

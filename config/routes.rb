@@ -32,4 +32,5 @@ Rails.application.routes.draw do
   get "restaurants/:restaurant_id/tables/:table_id/table_orders/:table_order_id/table_customers/:id/split_evenly", to: "table_customers#split_evenly", as: "split_evenly"
   get "restaurants/:restaurant_id/tables/:table_id/table_orders/:table_order_id/table_customers/:id/split_by_items", to: "table_customers#split_by_items", as: "split_by_items"
   get "restaurants/:restaurant_id/tables/:table_id/table_orders/:table_order_id/table_customers/:id/pay_all", to: "table_customers#pay_all", as: "pay_all"
+  get "restaurants/:restaurant_id/tables/:table_id/table_orders/:table_order_id/table_customers/:id/card_roulette", to: "table_customers#card_roulette", as: "card_roulette"
 end

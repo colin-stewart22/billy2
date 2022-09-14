@@ -1,8 +1,8 @@
 class TableCustomersController < ApplicationController
-  before_action :set_table_customer, only: [:show, :edit, :update, :destroy, :split_by_items, :checkout, :ordered!]
-  before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items, :checkout]
-  before_action :set_table, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
-  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items]
+  before_action :set_table_customer, only: [:show, :edit, :update, :destroy,:split_evenly, :split_by_items, :checkout, :pay_all, :card_roulette, :ordered!]
+  before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items, :checkout, :pay_all, :card_roulette]
+  before_action :set_table, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items, :pay_all, :card_roulette]
+  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items, :pay_all, :card_roulette]
 
   def index
     @table_customers = TableCustomer.all
@@ -34,7 +34,7 @@ class TableCustomersController < ApplicationController
 
   def split_evenly
     number = @table_order.table_customers.count
-    splitted_bill = (@table_order.total_price / number).round(2)
+    splitted_bill = (@table_order.total_price.to_f / number).round(2)
     total_amount = (splitted_bill * 1.125).round(2)
 
     @table_order.table_customers.each do |customer|
@@ -42,21 +42,53 @@ class TableCustomersController < ApplicationController
       customer.update(total_amount: total_amount.to_f)
     end
     @table_order.update(payment_option: "split_evenly")
-    redirect_to checkout_path(@restaurant, @table, @table_order)
+    redirect_to checkout_path(@restaurant, @table, @table_order, @table_customer)
   end
 
   def split_by_items
-    total_amount = (@table_customer.amount_due * 1.125).round(2)
+    total_amount = (@table_customer.amount_due.to_f * 1.125).round(2)
     @table_customer.update(total_amount: total_amount.to_f)
     @table_order.update(payment_option: "split_by_items")
-    redirect_to checkout_path(@restaurant, @table, @table_order)
+    redirect_to checkout_path(@restaurant, @table, @table_order, @table_customer)
   end
 
   def pay_all
+    @payment_customer = TableCustomer.find(params[:payment_customer_id])
+    table_amount = (@table_order.total_price * 1.125).round(2)
+    @table_order.table_customers.each do |customer|
+      customer.update(amount_due: 0.to_f)
+      customer.update(total_amount: 0.to_f)
+    end
+    @payment_customer.update(amount_due: @table_order.total_price)
+    @payment_customer.update(total_amount: table_amount)
+    @table_order.update(payment_option: "pay_all")
+    if @table_customer == @payment_customer
+      redirect_to checkout_path(@restaurant, @table, @table_order, @payment_customer)
+    else
+      redirect_to confirmation_path()
+    end
+  end
+
+  def card_roulette
+    @payment_customer = TableCustomer.find(params[:payment_customer_id])
+    table_amount = (@table_order.total_price * 1.125).round(2)
+    @table_order.table_customers.each do |customer|
+      customer.update(amount_due: 0.to_f)
+      customer.update(total_amount: 0.to_f)
+    end
+    @payment_customer.update(amount_due: @table_order.total_price)
+    @payment_customer.update(total_amount: table_amount)
+    @table_order.update(payment_option: "card_roulette")
+    if @table_customer == @payment_customer
+      redirect_to checkout_path(@restaurant, @table, @table_order, @payment_customer)
+    else
+      redirect_to confirmation_path()
+    end
   end
 
   def checkout
     # order  = Order.create!(teddy: teddy, teddy_sku: teddy.sku, amount: teddy.price, state: 'pending', user: current_user)
+    @payment_customer = TableCustomer.find(params[:id])
     @table_price = @table_customer.total_amount.to_f
     @subtotal = @table_customer.amount_due.to_f
     @service_charge = (@subtotal * 0.125).round(2)

@@ -6,7 +6,11 @@
       <% restaurant.menu_items.each do |item| %>
         <div class="w-6/12 flex items-center mt-4" type="button" data-bs-toggle="modal" data-bs-target=<%= "#exampleModal#{item.name}" %>>
           <div class="mr-5">
-            <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-#{item.name}" %> class="d-block rounded-lg" alt="menu item image">
+            <% if item.photo.attached? %>
+              <%= cl_image_tag item.photo.key, height: 75, width: 75, crop: :fill, class: "d-block rounded-lg" %>
+            <% else %>
+              <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-#{item.name}" %> class="d-block rounded-lg" alt="restaurant image">
+            <% end %>
           </div>
           <div>
             <p class="font-bold text-sm"><%= item.name %></p>

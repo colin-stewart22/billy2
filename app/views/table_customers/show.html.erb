@@ -7,8 +7,10 @@
       <h1 class="text-3xl font-bold"><%= @table_customer.name %></h1>
     </div>
   </div>
+
   <div class="p-3">
-    <% @table_customer.order_items.each do |item| %>
+    <% basket_items = @table_customer.order_items.where(is_ordered: false) %>
+    <% basket_items.each do |item| %>
       <div class="w-full flex items-center mt-3">
         <div class="mr-5">
           <% if item.menu_item.photo.attached? %>
@@ -35,8 +37,9 @@
       <h1 class="text-xl font-bold">Total amount</h1>
       <h1 class="text-xl font-bold">$<%= @table_customer.amount_due %></h1>
     </div>
+
     <div class="w-full flex justify-center">
-      <%= link_to "Place your order", restaurant_table_table_order_table_customer_order_items_path(@restaurant, @table, @table_order, @table_customer), class: "bg-black text-white px-12 py-2 rounded-lg fixed bottom-5" %>
+      <%= link_to "Place your order", ordered_path(@table_customer), class: "bg-black text-white px-12 py-2 rounded-lg fixed bottom-5" %>
     </div>
   </div>
 </div>

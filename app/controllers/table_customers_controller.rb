@@ -1,5 +1,5 @@
 class TableCustomersController < ApplicationController
-  before_action :set_table_customer, only: [:show, :edit, :update, :destroy,:split_evenly, :split_by_items, :checkout, :pay_all, :card_roulette]
+  before_action :set_table_customer, only: [:show, :edit, :update, :destroy,:split_evenly, :split_by_items, :checkout, :pay_all, :card_roulette, :ordered!]
   before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items, :checkout, :pay_all, :card_roulette]
   before_action :set_table, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items, :pay_all, :card_roulette]
   before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items, :pay_all, :card_roulette]
@@ -128,6 +128,18 @@ class TableCustomersController < ApplicationController
     @table = Table.find(params[:table_id])
     @table_order.update(is_active: false)
     @table.update(is_active: false)
+  end
+
+  def ordered!
+    @table_customer.order_items.where(is_ordered: false).each do |item|
+      item.update(is_ordered: true)
+    end
+    redirect_to restaurant_table_table_order_table_customer_order_items_path(
+      @table_customer.restaurant,
+      @table_customer.table,
+      @table_customer.table_order,
+      @table_customer,
+    )
   end
 
   private

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "/restaurants/:id/kitchen", to: "restaurants#kitchen", as: "kitchen"
   get "/order_items/:id/prepared", to: "order_items#prepared!", as: "prepared"
   get "/order_items/:id/served", to: "order_items#served!", as: "served"
+  get "/table_customers/:id/ordered", to: "table_customers#ordered!", as: "ordered"
   # get "restaurants/:id/tables/:table_id/table_orders/:table_order_id/checkout", to: "table_orders#checkout", as: "checkout"
   get "restaurants/:restaurant_id/tables/:table_id/table_orders/:table_order_id/table_customers/:id/checkout", to: "table_customers#checkout", as: "checkout"
   get "restaurants/:restaurant_id/tables/:table_id/table_orders/:table_order_id/table_customers/:id/confirmation", to: "table_customers#confirmation", as: "confirmation"

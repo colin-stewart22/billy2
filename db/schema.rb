@@ -110,9 +110,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_14_115349) do
     t.string "name"
     t.boolean "is_captain", default: false
     t.boolean "is_paid", default: false
-    t.float "amount_due"
-    t.float "tip_amount"
-    t.float "total_amount"
+    t.integer "amount_due"
+    t.integer "tip_amount"
+    t.integer "total_amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "table_order_id", null: false
@@ -122,7 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_14_115349) do
 
   create_table "table_orders", force: :cascade do |t|
     t.boolean "is_active", default: false
-    t.float "total_price"
+    t.integer "total_price"
     t.string "payment_option"
     t.string "group_url"
     t.bigint "table_id", null: false

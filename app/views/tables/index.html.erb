@@ -1,12 +1,14 @@
 
-
-<div class="qr-container flex flex-wrap justify-between">
-  <% @qr_codes.each do |k, v| %>
-  <p> Table number <%= k %> </p>
-  <%= v.html_safe %>
-  <% end %>
+<div class="p-10">
+  <div class="flex flex-wrap gap-48">
+    <% @qr_codes.each do |table_number, qr_code| %>
+      <div class="flex flex-col justify-center items-center gap-5">
+        <p class="text-3xl font-bold"> Table number <%= table_number %> </p>
+        <p><%= qr_code.html_safe %></p>
+      </div>
+    <% end %>
+  </div>
 </div>
-
 
 
 

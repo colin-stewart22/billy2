@@ -81,7 +81,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_14_115349) do
     t.datetime "updated_at", null: false
     t.string "note"
     t.boolean "is_prepared", default: false
-    t.boolean "is_orderd", default: false
     t.boolean "is_ordered", default: false
     t.index ["menu_item_id"], name: "index_order_items_on_menu_item_id"
     t.index ["table_customer_id"], name: "index_order_items_on_table_customer_id"

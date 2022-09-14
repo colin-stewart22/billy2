@@ -59,7 +59,7 @@
   <div class="modal-dialog modal-dialog-centered">
 
     <div class="modal-content rounded-xl">
-
+      <!-- Payment Split Options Modal -->
       <div class="flex flex-col justify-center items-center rounded-lg py-4" id="modal-split">
         <h2 class="text-xl font-bold">How do you want to split?</h2>
         <div class="w-full flex flex-wrap gap-4 justify-center items-center mt-4">
@@ -79,13 +79,14 @@
                 <h4>Split by items</h4>
               </div>
             <% end %>
-          <div class="w-36 h-36 bg-gray-300 rounded-xl flex flex-col justify-center items-center gap-3">
+          <div class="w-36 h-36 bg-gray-300 rounded-xl flex flex-col justify-center items-center gap-3" id="button-to-card-roulette">
             <i class="fa-solid fa-dice text-4xl"></i>
             <h4>Card roulette</h4>
           </div>
         </div>
       </div>
 
+      <!-- Pay All Selection Modal -->
       <div class="flex flex-col justify-center items-center rounded-lg py-4 hidden" id="modal-pay-all">
         <h2 class="text-xl font-bold">Who would like to pay?</h2>
         <% @table_customers.each do |customer| %>
@@ -94,6 +95,20 @@
           </div>
         <% end %>
         <button class="bg-black text-white px-8 py-2 mt-4 rounded-lg" id="button-to-split">Back</button>
+      </div>
+
+      <!-- Card Roulette Modal -->
+      <div class="flex flex-col justify-center items-center rounded-lg py-4 hidden" id="modal-card-roulette">
+        <h2 class="text-xl font-bold">Click the button to see who pays</h2>
+        <% @table_customers.each do |customer| %>
+          <div class="w-10/12 p-3 rounded-xl mt-3 tag">
+            <p><%= customer.name %></p>
+          </div>
+        <% end %>
+        <div class="flex gap-5">
+          <button class="bg-black text-white px-8 py-2 mt-4 rounded-lg" id="button-to-split2">Back</button>
+          <button class="bg-orange-400 text-white px-8 py-2 mt-4 rounded-lg" id="button-to-select-card">Gamble</button>
+        </div>
       </div>
 
     </div>

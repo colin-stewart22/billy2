@@ -12,6 +12,7 @@ class TableOrdersController < ApplicationController
 
   def new
     if @table.table_orders.any?(&:is_active)
+      @table_order = TableOrder.find_by(is_active: true)
       redirect_to new_restaurant_table_table_order_table_customer_path(@restaurant, @table, @table_order)
     else
       @table_order = TableOrder.new

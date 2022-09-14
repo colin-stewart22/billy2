@@ -1,5 +1,5 @@
 <div class="modal fade" id=<%= "exampleModal#{item.id}" %> tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
+  <div class="modal-dialog modal-dialog-centered px-2">
     <div class="modal-content flex flex-col justify-center items-center rounded-lg px-8 pt-8 pb-12">
       <div class="w-full">
         <button type="button" class="text-gray-400" data-bs-dismiss="modal">
@@ -21,6 +21,7 @@
       <div>
         <p class="text-center mt-2"><%= item.description %></p>
       </div>
+
       <div>
         <%= simple_form_for [@restaurant, @table, @table_order, @table_customer, @order_item] do |f| %>
           <div>

@@ -58,7 +58,7 @@ class TableOrdersController < ApplicationController
     @table_order.is_active = true
     # @table_order.is_active = true if params[:table_order][:is_active] == "false"
 
-    @table_order.user = User.where(is_owner: false).sample
+    @table_order.user = User.find_by(first_name: "Mario")
     @table_order.table = @table
     if @table_order.save
       @table.update(is_active: true)

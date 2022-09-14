@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :join_menus, only: :destroy
   resources :order_items, only: :destroy
-  resources :restaurants, except: :index do
+  resources :restaurants do
     resources :restaurant_servers
     resources :menu_items
     resources :menus do

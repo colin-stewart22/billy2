@@ -12,7 +12,7 @@ class TablesController < ApplicationController
         color: '000',
         shape_rendering: 'crispEdges',
         standalone: true,
-        module_size: 2
+        module_size: 5
       )
       @qr_codes["#{table.table_number}"] = @svg
     end

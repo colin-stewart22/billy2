@@ -17,7 +17,7 @@
       <div class="w-7/12 mt-3">
         <h5 class="text-center text-xl font-bold" id="exampleModalLabel"><%= item.name %></h5>
         <p class="text-center mt-2"><%= item.description %></p>
-        <p class="text-center text-xl font-bold mt-2">$<%= item.price %></p>
+        <p class="text-center text-xl font-bold mt-2"><%= number_to_currency(item.price.to_f) %></p>
       </div>
       <button type="button" class="bg-black px-5 py-2 text-white rounded-lg mt-3" data-bs-dismiss="modal">Save</button>
       <%= link_to join_menu_path(item.join_menus.where(menu_id: @menu.id).first.id), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do %>

@@ -55,13 +55,17 @@ class TableCustomersController < ApplicationController
   def pay_all
     @payment_customer = TableCustomer.find(params[:payment_customer_id])
     table_amount = (@table_order.total_price * 1.125).round(2)
-    @table_order.table_customers.each do |customer|
-      customer.update(amount_due: 0.to_f)
-      customer.update(total_amount: 0.to_f)
-    end
     @payment_customer.update(amount_due: @table_order.total_price)
     @payment_customer.update(total_amount: table_amount)
     @table_order.update(payment_option: "pay_all")
+    @other_customers = @table_order.table_customers.select { |customer| customer.id != @payment_customer.id }
+    unless @other_customers.nil?
+      @other_customers.each do |customer|
+        customer.update(amount_due: 0.to_f)
+        customer.update(total_amount: 0.to_f)
+      end
+    end
+
     if @table_customer == @payment_customer
       redirect_to checkout_path(@restaurant, @table, @table_order, @payment_customer)
     else
@@ -72,13 +76,17 @@ class TableCustomersController < ApplicationController
   def card_roulette
     @payment_customer = TableCustomer.find(params[:payment_customer_id])
     table_amount = (@table_order.total_price * 1.125).round(2)
-    @table_order.table_customers.each do |customer|
-      customer.update(amount_due: 0.to_f)
-      customer.update(total_amount: 0.to_f)
-    end
     @payment_customer.update(amount_due: @table_order.total_price.to_f)
     @payment_customer.update(total_amount: table_amount.to_f)
     @table_order.update(payment_option: "card_roulette")
+    @other_customers = @table_order.table_customers.select { |customer| customer.id != @payment_customer.id }
+    unless @other_customers.nil?
+      @other_customers.each do |customer|
+        customer.update(amount_due: 0.to_f)
+        customer.update(total_amount: 0.to_f)
+      end
+    end
+
     if @table_customer == @payment_customer
       redirect_to checkout_path(@restaurant, @table, @table_order, @payment_customer)
     else
@@ -114,8 +122,8 @@ class TableCustomersController < ApplicationController
         quantity: 1
       }],
       mode: 'payment',
-      success_url: "http://billy-961.com/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{@table_customer.id}/confirmation",
-      cancel_url: "http://billy-961.com/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{@table_customer.id}/checkout",
+      success_url: "http://www.billy-961.com/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{@table_customer.id}/confirmation",
+      cancel_url: "http://www.billy-961.com/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{@table_customer.id}/checkout",
     )
 
     @table_customer.update(checkout_session_id: session.id)

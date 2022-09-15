@@ -2,7 +2,11 @@
   <% @menu.menu_items.each do |item| %>
     <div class="w-1/2 flex items-center justify-start mt-4" type="button" data-bs-toggle="modal" data-bs-target=<%= "#exampleModal#{item.id}" %>>
       <div class="mr-5">
-        <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-#{item.name}" %> class="d-block rounded-lg" alt="restaurant image">
+        <% if item.photo.attached? %>
+          <%= cl_image_tag item.photo.key, height: 75, width: 75, crop: :fill, class: "d-block rounded-lg" %>
+        <% else %>
+          <img src=<%= "https://source.unsplash.com/random/75x75/?restaurant-#{item.name}" %> class="d-block rounded-lg" alt="restaurant image">
+        <% end %>
       </div>
 
       <div>

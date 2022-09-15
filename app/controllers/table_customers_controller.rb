@@ -2,7 +2,7 @@ class TableCustomersController < ApplicationController
   before_action :set_table_customer, only: [:show, :edit, :update, :destroy,:split_evenly, :split_by_items, :checkout, :pay_all, :card_roulette, :ordered!, :confirmation]
   before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items, :checkout, :pay_all, :card_roulette]
   before_action :set_table, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items, :pay_all, :card_roulette]
-  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items, :pay_all, :card_roulette, :ordered!]
+  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items, :pay_all, :card_roulette]
 
   def index
     @table_customers = TableCustomer.all
@@ -131,9 +131,9 @@ class TableCustomersController < ApplicationController
   end
 
   def ordered!
+    @table_order = @table_customer.table_order
     @table_customer.order_items.where(is_ordered: false).each do |item|
       item.update(is_ordered: true)
-
       customer_new_amount = @table_customer.amount_due.to_f + item.menu_item.price
       table_order_new_amount = @table_order.total_price.to_f + item.menu_item.price
       @table_customer.update(amount_due: customer_new_amount.round(2))

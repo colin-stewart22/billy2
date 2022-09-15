@@ -14,7 +14,7 @@
   <%= simple_form_for [@restaurant, @table] do |f| %>
   <%= f.input :table_number %>
   <%# Remember to interpolate restaurant id in qr_code URL later %>
-  <%= f.input :qr_code, input_html: {value: "http://billy-961.com/restaurants/#{@restaurant.id}/tables/#{@table_number}/table_orders/new" } %>
+  <%= f.input :qr_code, input_html: { value: "http://www.billy-961.com/restaurants/#{@restaurant.id}/tables/#{@table_number}/table_orders/new" } %>
   <div class="flex justify-start items-center pt-8">
     <div class="flex justify-center items-center h-10 rounded-lg bg-black">
       <%= f.submit "Create", class: "text-xl mx-8 text-white" %>

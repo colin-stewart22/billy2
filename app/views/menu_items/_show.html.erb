@@ -11,7 +11,7 @@
 
       <div>
         <p class="font-bold text-sm"><%= item.name %></p>
-        <p class="text-sm">$<%= item.price %></p>
+        <p class="text-sm"><%= number_to_currency(item.price.to_f) %></p>
       </div>
     </div>
 

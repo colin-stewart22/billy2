@@ -76,8 +76,8 @@ class TableCustomersController < ApplicationController
       customer.update(amount_due: 0.to_f)
       customer.update(total_amount: 0.to_f)
     end
-    @payment_customer.update(amount_due: @table_order.total_price)
-    @payment_customer.update(total_amount: table_amount)
+    @payment_customer.update(amount_due: @table_order.total_price.to_f)
+    @payment_customer.update(total_amount: table_amount.to_f)
     @table_order.update(payment_option: "card_roulette")
     if @table_customer == @payment_customer
       redirect_to checkout_path(@restaurant, @table, @table_order, @payment_customer)
@@ -114,8 +114,8 @@ class TableCustomersController < ApplicationController
         quantity: 1
       }],
       mode: 'payment',
-      success_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{@table_customer.id}/confirmation",
-      cancel_url: "http://127.0.0.1:3000/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{@table_customer.id}/checkout",
+      success_url: "http://billy-961.com/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{@table_customer.id}/confirmation",
+      cancel_url: "http://billy-961.com/restaurants/#{@restaurant.id}/tables/#{@table.id}/table_orders/#{@table_order.id}/table_customers/#{@table_customer.id}/checkout",
     )
 
     @table_customer.update(checkout_session_id: session.id)

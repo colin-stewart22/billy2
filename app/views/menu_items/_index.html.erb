@@ -4,7 +4,7 @@
 
     <div class="flex flex-wrap content-start overflow-auto scroll-container">
       <% restaurant.menu_items.each do |item| %>
-        <div class="w-6/12 flex items-center mt-4" type="button" data-bs-toggle="modal" data-bs-target=<%= "#exampleModal#{item.name}" %>>
+        <div class="w-6/12 flex items-center mt-4" type="button" data-bs-toggle="modal" data-bs-target=<%= "#exampleModal#{item.id}" %>>
           <div class="mr-5">
             <% if item.photo.attached? %>
               <%= cl_image_tag item.photo.key, height: 75, width: 75, crop: :fill, class: "d-block rounded-lg" %>

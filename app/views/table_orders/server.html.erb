@@ -1,6 +1,6 @@
 <div class="page-container pt-8">
 
-  <% if user_signed_in? %>
+  <% if user_signed_in?%>
 
     <div class="flex justify-between items-center mb-8">
       <div class="w-24">
@@ -15,15 +15,16 @@
     <div class="w-full bg-white rounded-lg">
       <% current_user.table_orders.each do |table_order| %>
         <div class="p-8">
-          <h2 class="text-2xl font-bold mb-3">Table <%= table_order.table.table_number %></h2>
-          <div class="flex items-center mb-3">
-            <div class="w-4/12 font-bold">Food Name</div>
-            <div class="w-2/12 font-bold">Customer Name</div>
-            <div class="w-2/12 font-bold">Since Ordered</div>
-            <div class="w-2/12 font-bold">Until Ready</div>
-            <div class="w-2/12 font-bold"></div>
-          </div>
-
+          <% if table_order.is_active %>
+            <h2 class="text-2xl font-bold mb-3">Table <%= table_order.table.table_number %></h2>
+            <div class="flex items-center mb-3">
+              <div class="w-4/12 font-bold">Food Name</div>
+              <div class="w-2/12 font-bold">Customer Name</div>
+              <div class="w-2/12 font-bold">Since Ordered</div>
+              <div class="w-2/12 font-bold">Until Ready</div>
+              <div class="w-2/12 font-bold"></div>
+            </div>
+          <% end %>
           <% table_order.order_items.select { |item| item.is_served == false}.each do |order_item| %>
             <div class="flex mt-4" data-controller="restaurant-server">
               <div class="w-4/12 flex items-center">

@@ -16,7 +16,7 @@
 
       <div class="w-7/12 mt-3">
         <h5 class="text-center text-xl font-bold" id="exampleModalLabel"><%= item.name %></h5>
-        <p class="text-center text-xl font-bold mt-2">$<%= item.price %></p>
+        <p class="text-center text-xl font-bold mt-2"><%= number_to_currency(item.price.to_f) %></p>
       </div>
       <div>
         <p class="text-center mt-2"><%= item.description %></p>

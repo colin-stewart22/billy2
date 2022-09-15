@@ -1,6 +1,6 @@
 class TablesController < ApplicationController
   before_action :set_table, only: [:show, :edit, :update, :destroy]
-  before_action :set_restaurant, only: [:new, :create]
+  before_action :set_restaurant, only: [:index, :new, :create]
 
   def index
     @tables = Table.all

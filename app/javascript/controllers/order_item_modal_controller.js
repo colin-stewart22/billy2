@@ -71,9 +71,9 @@ export default class extends Controller {
         }, 100);
       }, times * 100);
 
-      setTimeout(() => {
-        buttonClick();
-      }, 4500)
+      // setTimeout(() => {
+      //   buttonClick();
+      // }, 4500)
 
     }
 

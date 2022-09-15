@@ -21,7 +21,7 @@
         </div>
         <div class="w-6/12">
           <p class="font-bold text-sm"><%= item.menu_item.name %></p>
-          <p class="text mt-2">$<%= item.menu_item.price %></p>
+          <p class="text mt-2"><%= number_to_currency(item.menu_item.price.to_f) %></p>
         </div>
         <div class="flex items-center gap-3">
           <%= link_to order_item_path(item), data: { turbo_method: :delete } do %>
@@ -39,7 +39,7 @@
       <% basket_items.each do |item| %>
         <% sum += item.menu_item.price %>
       <% end %>
-      <h1 class="text-xl font-bold">$<%= sum %></h1>
+      <h1 class="text-xl font-bold"><%= number_to_currency(sum.to_f) %></h1>
     </div>
 
     <div class="w-full flex justify-center">

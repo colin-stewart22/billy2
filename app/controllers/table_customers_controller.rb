@@ -76,8 +76,8 @@ class TableCustomersController < ApplicationController
       customer.update(amount_due: 0.to_f)
       customer.update(total_amount: 0.to_f)
     end
-    @payment_customer.update(amount_due: @table_order.total_price)
-    @payment_customer.update(total_amount: table_amount)
+    @payment_customer.update(amount_due: @table_order.total_price.to_f)
+    @payment_customer.update(total_amount: table_amount.to_f)
     @table_order.update(payment_option: "card_roulette")
     if @table_customer == @payment_customer
       redirect_to checkout_path(@restaurant, @table, @table_order, @payment_customer)

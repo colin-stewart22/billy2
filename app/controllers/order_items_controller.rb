@@ -95,7 +95,7 @@ class OrderItemsController < ApplicationController
 
   def served!
     @order_item.update(is_served: true)
-    redirect_to restaurant_table_table_orders_path(@order_item.restaurant, @order_item.table)
+    redirect_to server_path(@order_item.restaurant, @order_item.user)
   end
 
   def bool_to_ready(value)

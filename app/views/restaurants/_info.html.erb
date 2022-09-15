@@ -1,7 +1,7 @@
 <div class="flex justify-between">
   <div class="my-auto w-4/12">
     <% if restaurant.photo.attached? %>
-      <%= cl_image_tag restaurant.photo.key, width: 336, height: 336, class: "d-block rounded-lg" %>
+      <%= cl_image_tag restaurant.photo.key, width: 336, height: 336, crop: :fill, class: "d-block rounded-lg" %>
     <% else %>
       <img src="https://res.cloudinary.com/dmlfirids/image/upload/v1663060224/restaurant/restaurant1.jpg", style="width: 336px; height:336px" class="d-block rounded-lg" alt="restaurant image">
     <% end %>

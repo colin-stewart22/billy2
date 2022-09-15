@@ -28,10 +28,10 @@
           <% table_order.order_items.select { |item| item.is_served == false}.each do |order_item| %>
             <div class="flex mt-4" data-controller="restaurant-server">
               <div class="w-4/12 flex items-center">
-                <%= order_item.menu_item.name %>
                 <% if order_item.is_prepared %>
-                  <span class="bg-green-500 ml-5 px-3 py-2 text-white text-sm font-semibold rounded-lg">Ready</span>
+                  <span class="bg-green-500 mr-3 px-3 py-2 text-white text-sm font-semibold rounded-lg">Ready</span>
                 <% end %>
+                <%= order_item.menu_item.name %>
               </div>
               <div class="w-2/12 flex items-center"><%= order_item.table_customer.name %></div>
               <div class="w-2/12 flex items-center" data-restaurant-server-target="ordered"><%= ((Time.now - order_item.created_at) / 60).round %> mins</div>

@@ -2,7 +2,7 @@ class TableCustomersController < ApplicationController
   before_action :set_table_customer, only: [:show, :edit, :update, :destroy,:split_evenly, :split_by_items, :checkout, :pay_all, :card_roulette, :ordered!, :confirmation]
   before_action :set_restaurant, only: [:index, :show, :new, :create, :split_evenly, :split_by_items, :checkout, :pay_all, :card_roulette]
   before_action :set_table, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items, :pay_all, :card_roulette]
-  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items, :pay_all, :card_roulette]
+  before_action :set_table_order, only: [:index, :show, :new, :create, :checkout, :split_evenly, :split_by_items, :pay_all, :card_roulette, :ordered!]
 
   def index
     @table_customers = TableCustomer.all

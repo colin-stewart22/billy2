@@ -34,7 +34,9 @@
 <div class="mt-8 flex justify-between w-full bg-white rounded-lg">
 
   <div class="w-full m-8">
-    <h2 class="text-xl font-bold">Tables</h2>
+    <%= link_to restaurant_tables_path(restaurant) do %>
+      <h2 class="text-xl font-bold">Tables</h2>
+    <% end %>
 
     <div class=" mt-3 flex flex-col flex-wrap h-24 w-full justify-between content-start overflow-auto">
       <% restaurant.tables.each do |table| %>

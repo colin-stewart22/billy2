@@ -100,7 +100,7 @@ i = 1
   Table.create!(
     restaurant_id: restaurant.id,
     table_number: i,
-    qr_code: "http://127.0.0.1:3000/restaurants/#{restaurant.id}/tables/#{i}/table_orders/new"
+    qr_code: "http://billy-961.com/restaurants/#{restaurant.id}/tables/#{i}/table_orders/new"
   )
 
   i += 1

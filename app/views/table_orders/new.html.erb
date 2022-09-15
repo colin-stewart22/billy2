@@ -5,9 +5,7 @@
 
     <%= simple_form_for [@restaurant, @table, @table_order] do |f| %>
       <%= f.input :is_active, as: :hidden, default: true %>
-      <div class="flex w-full justify-center items-center h-10 rounded-lg bg-black">
-        <%= f.submit "Create Order", class: "text-lg font-bold text-white" %>
-      </div>
+      <%= f.submit "Create Order", class: "flex w-full justify-center items-center h-10 rounded-lg bg-black text-lg font-bold text-white" %>
     <%  end %>
   </div>
 </div>

@@ -133,7 +133,13 @@ class TableCustomersController < ApplicationController
   def ordered!
     @table_customer.order_items.where(is_ordered: false).each do |item|
       item.update(is_ordered: true)
+
+      customer_new_amount = @table_customer.amount_due.to_f + item.price
+      table_order_new_amount = @table_order.total_price.to_f + item.price
+      @table_customer.update(amount_due: customer_new_amount.round(2))
+      @table_order.update(total_price: table_order_new_amount.round(2))
     end
+
     redirect_to restaurant_table_table_order_table_customer_order_items_path(
       @table_customer.restaurant,
       @table_customer.table,

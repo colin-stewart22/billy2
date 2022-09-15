@@ -58,11 +58,6 @@ class OrderItemsController < ApplicationController
 
     @order_item.save!
 
-    customer_new_amount = @table_customer.amount_due.to_f + @menu_item.price
-    table_order_new_amount = @table_order.total_price.to_f + @menu_item.price
-    @table_customer.update(amount_due: customer_new_amount.round(2))
-    @table_order.update(total_price: table_order_new_amount.round(2))
-
     redirect_to new_restaurant_table_table_order_table_customer_order_item_path(
       @restaurant,
       @table,

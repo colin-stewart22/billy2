@@ -4,7 +4,7 @@
       <i class="fa-solid fa-chevron-left"></i>
     <% end %>
 
-    <div class="w-72 flex justify-end gap-3">
+    <div class="flex justify-end gap-3">
       <% if @menu.is_active == false %>
         <%= link_to activated_path(@restaurant, @menu), class:"bg-green-500 flex justify-center items-center text-sm text-white rounded-lg px-4 py-2" do %>
           <h2>Activate Menu</h2>
